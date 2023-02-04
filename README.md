@@ -2,7 +2,7 @@
 
 ## NPM
 
-### Lancer server
+### Lancer serveur
 npm run serve
 
 ### Installer Babylon

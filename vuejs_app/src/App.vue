@@ -1,5 +1,7 @@
 <template>
-  <BabylonScene/>
+  <div id="app"><BabylonScene /></div>
+  <!-- Pour mettre la boutique à droite on pourait faire un un bouton qui affiche ou cache une div ici :
+    <div class="store"></div> --> 
 </template>
 
 <script lang="ts">
@@ -15,12 +17,23 @@ export default defineComponent({
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+* {
+  padding: 0;
+  margin: 0;
 }
+
+#app {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  background: white;
+  background-size: cover;
+  background-position: center;
+  box-sizing: border-box;
+  padding: 2rem;
+}
+
 </style>

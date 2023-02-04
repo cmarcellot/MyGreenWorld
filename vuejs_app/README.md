@@ -1,14 +1,21 @@
 # vuejs_app
 
-## Project setup
-```
-npm install
-```
+## NPM
 
-### Compiles and hot-reloads for development
-```
+### Lancer serveur
+-Dans vuejs_app (cd .\vuejs_app\)
 npm run serve
-```
+-Si cela ne fonctionne pas une solution consiste faire : "npm i" avant
+
+### Installer Babylon
+npm i @babylonjs/core
+npm i @babylonjs/loaders
+
+### Installer Vue 3
+npm i -g @vue/cli
+
+### Version actuelle Vue
+vue --version
 
 ### Compiles and minifies for production
 ```

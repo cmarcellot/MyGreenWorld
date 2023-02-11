@@ -1,17 +1,19 @@
 <template>
   <div id="app"><BabylonScene /></div>
-  <!-- Pour mettre la boutique à droite on pourait faire un un bouton qui affiche ou cache une div ici :
-    <div class="store"></div> --> 
+  <!-- Pour mettre la boutique à droite on pourait faire un un bouton qui affiche ou cache une div ici : --> 
+  <div id="store"><MenuBoutique /></div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
 import BabylonScene from './components/BabylonScene.vue';
+import MenuBoutique from './components/MenuBoutique.vue';
 
 export default defineComponent({
   name: 'App',
   components: {
-    BabylonScene
+    BabylonScene,
+    MenuBoutique
 }
 });
 </script>
@@ -33,7 +35,14 @@ export default defineComponent({
   background-size: cover;
   background-position: center;
   box-sizing: border-box;
-  padding: 2rem;
+}
+
+#store {
+  width: 30%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  background-color: #111;
 }
 
 </style>

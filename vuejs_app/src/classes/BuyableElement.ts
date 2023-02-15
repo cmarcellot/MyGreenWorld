@@ -20,6 +20,7 @@ export class BuyableElement {
     price : float;
     gainPerSec : float;
     ecoBonus : int;
+    
 
 // Constructor of the class's objects with 
 /**

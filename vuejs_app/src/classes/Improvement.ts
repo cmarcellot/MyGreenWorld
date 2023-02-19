@@ -1,6 +1,6 @@
 import { float, int } from "@babylonjs/core";
  import {BuyableElement} from "././BuyableElement";
- /**  this class represents all our improvements, it exdents the class BuyableElement 
+ /**  this class represents all our improvements, it extends the class BuyableElement 
  * Attributes
  * 
 elementId : given id in the database

@@ -8,7 +8,7 @@ import {Energy } from "./Energy";
  * name : the city's name given by the player
  * cashQuantity : the cash possessed 
  * ecoPourcentage : pourcentage representing the ecological situation of the city
- * gainPerCliick : the gain per click  provided by the city's buyable elements
+ * gainPerClick : the gain per click  provided by the city's buyable elements
  * gainPerSec : the gain per second provided by the city's buyable elements
  * improvements : a list of improvements bought by the player
  * commerces : a list of commerces bought by the player
@@ -31,7 +31,7 @@ export class City {
  * name : the city's name given by the player
  * cashQuantity : the cash possessed 
  * ecoPourcentage : pourcentage representing the ecological situation of the city
- * gainPerCliick : the gain per click  provided by the city's buyable elements
+ * gainPerClick : the gain per click  provided by the city's buyable elements
  * gainPerSec : the gain per second provided by the city's buyable elements
  * improvements : a list of improvements bought by the player
  * commerces : a list of commerces bought by the player

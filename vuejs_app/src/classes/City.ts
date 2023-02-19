@@ -11,6 +11,7 @@ import {Energy } from "./Energy";
  * gainPerClick : the gain per click  provided by the city's buyable elements
  * gainPerSec : the gain per second provided by the city's buyable elements
  * improvements : a list of improvements bought by the player
+ * livings : a list of livings bought by the player
  * commerces : a list of commerces bought by the player
  * energies : a list of commerces bought by the player
 */
@@ -33,6 +34,7 @@ export class City {
  * ecoPourcentage : pourcentage representing the ecological situation of the city
  * gainPerClick : the gain per click  provided by the city's buyable elements
  * gainPerSec : the gain per second provided by the city's buyable elements
+ * livings : a list of livings bought by the player
  * improvements : a list of improvements bought by the player
  * commerces : a list of commerces bought by the player
  * energies : a list of commerces bought by the player

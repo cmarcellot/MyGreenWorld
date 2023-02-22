@@ -1,7 +1,10 @@
 <template>
   <div id="app"><BabylonScene /></div>
-  <!-- Pour mettre la boutique à droite on pourait faire un un bouton qui affiche ou cache une div ici : --> 
+
+  <!-- To put the store in the right side we can make a button that shows or hides a div here :
+    <div class="store"></div> --> 
   <div id="store"><MenuBoutique /></div>
+
 </template>
 
 <script lang="ts">

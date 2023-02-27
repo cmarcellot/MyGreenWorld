@@ -1,22 +1,20 @@
 <template>
   <div id="app"><BabylonScene /></div>
-
   <!-- To put the store in the right side we can make a button that shows or hides a div here :
     <div class="store"></div> --> 
-  <div id="store"><MenuBoutique /></div>
-
+  <div id="store"><StoreMenu /></div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
 import BabylonScene from './components/BabylonScene.vue';
-import MenuBoutique from './components/MenuBoutique.vue';
+import StoreMenu from './components/StoreMenu.vue';
 
 export default defineComponent({
   name: 'App',
   components: {
     BabylonScene,
-    MenuBoutique
+    StoreMenu
 }
 });
 </script>

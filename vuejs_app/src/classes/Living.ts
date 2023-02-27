@@ -21,8 +21,8 @@ export class Living extends BuyableElement {
     boughtNumber: number of livings bought by the player
     */
 
-    constructor(boughtNumber : int,elementId: string, name : string ,desc : string, price : float, gainPerSec : float, ecoBonus : int ){
-        super(elementId,name, desc, price, gainPerSec,ecoBonus);
+    constructor(boughtNumber : int, elementId: string, name : string, desc : string, price : float, gainPerSec : float, ecoBonus : int ){
+        super(elementId, name, desc, price, gainPerSec, ecoBonus);
         this.boughtNumber=boughtNumber;
     }
 

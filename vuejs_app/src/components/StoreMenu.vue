@@ -1,113 +1,51 @@
 <template>
     <nav class="side-nav">
       <div class="wrapper">
+
         <div class="three-dots-container">
           <div class="dot d1"></div>
           <div class="dot d2"></div>
           <div class="dot d3"></div>
         </div>
+
         <div class="nav nav-bloc" @click="toggleContent1">
           <p class="title-item">HABITATIONS ET COMMERCES</p>  
         </div>
-        <div id="content-1" class="nav nav-item" v-show="showContent1">
-          <p  class="title-bloc">{{ nomB }}</p>
+        <div v-for="(living, index) in sortedLivingsCommerces()" :key="index" class="nav nav-item" v-show="showContent1">
+          <p class="title-bloc">{{ living.name }}</p>
           <div class="container">
-            <img class="image" src="../../public/images/greenCity.jpg" alt="Image de la maison">
+            <img class="image" src="../../public/images/greenCity.jpg" alt="Image de la maison" />
             <div class="text-container">
-              <p class="description">{{ desc1 }}</p>
-              <hr class="separator">
-              <p class="price">{{ prix1 }}€</p>
-              <hr class="separator">
-              <p class="gainPerSec">{{ gainParSec1 }}/sec</p>
-              <hr class="separator">
-              <p class="bonusEco">{{ bonusEco1 }}%</p>
+              <p class="description">{{ living.desc }}</p>
+              <hr class="separator" />
+              <p class="price"> Prix: {{ living.price }} €</p>
+              <hr class="separator" />
+              <p class="gainPerSec">Gains: {{ living.gainPerSec }}/sec</p>
+              <hr class="separator" />
+              <p class="bonusEco">Écologie: {{ living.ecoBonus }} %</p>
             </div>
           </div>
         </div>
-        <div id="content-1" class="nav nav-item" v-show="showContent1">
-          <p  class="title-bloc">{{ nomM }}</p>
-          <div class="container">
-            <img class="image" src="../../public/images/greenCityTree.jpg" alt="Image de la maison">
-            <div class="text-container">
-              <p class="description">{{ desc2 }}</p>
-              <hr class="separator">
-              <p class="price">{{ prix2 }}€</p>
-              <hr class="separator">
-              <p class="gainPerSec">{{ gainParSec2 }}/sec</p>
-              <hr class="separator">
-              <p class="bonusEco">{{ bonusEco2 }}%</p>
-            </div>
-          </div>
-        </div>
-        <div id="content-1" class="nav nav-item" v-show="showContent1">
-          <p  class="title-bloc">{{ nomB }}</p>
-          <div class="container">
-            <img class="image" src="../../public/images/greenCity.jpg" alt="Image de la maison">
-            <div class="text-container">
-              <p class="description">{{ desc1 }}</p>
-              <hr class="separator">
-              <p class="price">{{ prix1 }}€</p>
-              <hr class="separator">
-              <p class="gainPerSec">{{ gainParSec1 }}/sec</p>
-              <hr class="separator">
-              <p class="bonusEco">{{ bonusEco1 }}%</p>
-            </div>
-          </div>
-        </div>
-        <div id="content-1" class="nav nav-item" v-show="showContent1">
-          <p  class="title-bloc">{{ nomB }}</p>
-          <div class="container">
-            <img class="image" src="../../public/images/greenCity.jpg" alt="Image de la maison">
-            <div class="text-container">
-              <p class="description">{{ desc1 }}</p>
-              <hr class="separator">
-              <p class="price">{{ prix1 }}€</p>
-              <hr class="separator">
-              <p class="gainPerSec">{{ gainParSec1 }}/sec</p>
-              <hr class="separator">
-              <p class="bonusEco">{{ bonusEco1 }}%</p>
-            </div>
-          </div>
-        </div>
-        <div id="content-1" class="nav nav-item" v-show="showContent1">
-          <p  class="title-bloc">{{ nomB }}</p>
-          <div class="container">
-            <img class="image" src="../../public/images/greenCity.jpg" alt="Image de la maison">
-            <div class="text-container">
-              <p class="description">{{ desc1 }}</p>
-              <hr class="separator">
-              <p class="price">{{ prix1 }}€</p>
-              <hr class="separator">
-              <p class="gainPerSec">{{ gainParSec1 }}/sec</p>
-              <hr class="separator">
-              <p class="bonusEco">{{ bonusEco1 }}%</p>
-            </div>
-          </div>
-        </div>
-        <div id="content-1" class="nav nav-item" v-show="showContent1">
-          <p  class="title-bloc">{{ nomB }}</p>
-          <div class="container">
-            <img class="image" src="../../public/images/greenCity.jpg" alt="Image de la maison">
-            <div class="text-container">
-              <p class="description">{{ desc1 }}</p>
-              <hr class="separator">
-              <p class="price">{{ prix1 }}€</p>
-              <hr class="separator">
-              <p class="gainPerSec">{{ gainParSec1 }}/sec</p>
-              <hr class="separator">
-              <p class="bonusEco">{{ bonusEco1 }}%</p>
-            </div>
-          </div>
-        </div>
+
         <div class="nav nav-bloc" @click="toggleContent2">
           <p class="title-item">CENTRALES ÉLECTRIQUES</p>      
         </div>
-        <div id="content-1" class="nav nav-item" v-show="showContent2">
-          <p  class="title-bloc">Centrale à charbon</p>  
+        <div v-for="(central, index) in sortedEnergies()" :key="index" class="nav nav-item" v-show="showContent2">
+          <p class="title-bloc">{{ central.name }}</p>
+          <div class="container">
+            <img class="image" src="../../public/images/greenCityTree.jpg" alt="Image de la centrale" />
+            <div class="text-container">
+              <p class="description">{{ central.desc }}</p>
+              <hr class="separator" />
+              <p class="price"> Prix: {{ central.price }} €</p>
+              <hr class="separator" />
+              <p class="gainPerSec">Gains: {{ central.gainPerSec }}/sec</p>
+              <hr class="separator" />
+              <p class="bonusEco">Écologie: {{ central.ecoBonus }} %</p>
+            </div>
+          </div>
         </div>
-        <div id="content-1" class="nav nav-item" v-show="showContent2">
-          <p  class="title-bloc">Centrale nucléaire</p>  
-        </div>
+
         <div class="nav nav-bloc" @click="toggleContent3">
           <p class="title-item">AMÉLIORATIONS</p>      
         </div>
@@ -122,42 +60,84 @@
 </template>
   
 <script lang="ts">
-  import { defineComponent } from 'vue';
+import { defineComponent } from 'vue';
+import { Living } from '@/classes/Living';
+import { Commerce } from '@/classes/Commerce';
+import { Energy } from '@/classes/Energy';
+import jsonData from '@/assets/storage.json';
   
   export default defineComponent({
-  name: 'StoreMenu',
-  data() {
-    return {
-      showContent1: false,
-      showContent2: false,
-      showContent3: false,
-      // Exemple de données de le bungalow et de la maison simple
-      // A récupérer par la suite via les objets dans une liste 
-      // (exemple: for sur listeHabitations.nom , listeHabitations.desc, listeHabitations.prix, listeHabitations.gainParSec, listeHabitations.bonusEco)
-      nomB: "Bungalow",
-      desc1: "Un bungalow pour 4 personnes",
-      prix1: 50,
-      gainParSec1: 0.1,
-      bonusEco1: -1,
-      nomM: "Maison simple",
-      desc2: "Une maison pour 4 personnes",
-      prix2: 500,
-      gainParSec2: 1,
-      bonusEco2: -5,
-    };
-  },
-  methods: {
-    toggleContent1() {
-      this.showContent1 = !this.showContent1;
+    name: 'StoreMenu',
+    data() {
+      return {
+        showContent1: false,
+        showContent2: false,
+        showContent3: false,
+
+        livings: [] as Living[],
+        commerces: [] as Commerce[],
+        energies: [] as Energy[],
+      };
     },
-    toggleContent2() {
-      this.showContent2 = !this.showContent2;
+    methods: {
+      // Toggle the display of the content
+      toggleContent1() {
+        this.showContent1 = !this.showContent1;
+      },
+      toggleContent2() {
+        this.showContent2 = !this.showContent2;
+      },
+      toggleContent3() {
+        this.showContent3 = !this.showContent3;
+      },
+
+      // Sort the list of livings and commerces by price
+      sortedLivingsCommerces() {
+        const liste = this.livings.concat(this.commerces);
+        return liste.sort((a, b) => a.price - b.price);
+      },
+      sortedEnergies() {
+        return this.energies.sort((a, b) => a.price - b.price);
+      },
     },
-    toggleContent3() {
-      this.showContent3 = !this.showContent3;
-    },
-  },
-});
+    created(){
+      // Create objects from json data
+      for (const living of jsonData.livings) {
+        this.livings.push(new Living(
+          0, 
+          living.id.toString(), 
+          living.name, 
+          living.description, 
+          living.price, 
+          living.gainPerSec, 
+          living.ecoBonus
+        ));
+      }
+
+      for (const commerce of jsonData.commerces) {
+        this.commerces.push(new Commerce(
+          0,
+          commerce.id.toString(),
+          commerce.name,
+          commerce.description,
+          commerce.price,
+          commerce.gainPerSec,
+          commerce.ecoBonus
+        ));
+      }
+
+      for (const energy of jsonData.energies) {
+        this.energies.push(new Energy(
+          energy.id.toString(),
+          energy.name,
+          energy.description,
+          energy.price,
+          energy.gainPerSec,
+          energy.ecoBonus));
+      }
+    }
+    
+  });
 </script>
   
 <!-- Add "scoped" attribute to limit CSS to this component only -->

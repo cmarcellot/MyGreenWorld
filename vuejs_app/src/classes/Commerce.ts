@@ -23,17 +23,15 @@ export class Commerce extends BuyableElement {
     boughtNumber: number of commerces bought by the player
     */
 
-    constructor(elementId: string, name : string ,desc : string, price : float, gainPerSec : float, ecoBonus : int,boughtNumber : int ){
+    constructor(boughtNumber : int, elementId: string, name : string, desc : string, price : float, gainPerSec : float, ecoBonus : int){
         super(elementId,name, desc, price, gainPerSec,ecoBonus);
         this.boughtNumber=boughtNumber;
     }
 
-getNextPrice () :  void {
+    getNextPrice () :  void {
 
-    //
-}
-
-    
+        //
+    }
 
 }
 

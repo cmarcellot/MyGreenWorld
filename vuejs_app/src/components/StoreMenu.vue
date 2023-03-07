@@ -1,5 +1,5 @@
 <template>
-    <nav class="side-nav">
+    <nav class="side-nav col-lg-3">
       <div class="wrapper">
         <div class="three-dots-container">
           <div class="dot d1"></div>

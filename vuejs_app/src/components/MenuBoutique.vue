@@ -179,6 +179,7 @@
 .side-nav {
   position: fixed;
   height: 100vh;
+  width: 5;
   /* Pour que le menu soit à droite */
   right: 0;
   top: 0;

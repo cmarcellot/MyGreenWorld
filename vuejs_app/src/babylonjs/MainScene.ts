@@ -1,4 +1,5 @@
-import { Scene, Engine, FreeCamera, Vector3, HemisphericLight, MeshBuilder, SceneLoader} from '@babylonjs/core';
+import { Scene, Engine, FreeCamera, Vector3, HemisphericLight, 
+    MeshBuilder, SceneLoader, Viewport} from '@babylonjs/core';
 import { CustomLoadingScreen } from "./CustomLoadingScreen";
 // On importe les loaders pour pouvoir charger des modèles
 //import "@babylonjs/loaders";
@@ -40,7 +41,8 @@ export class MainScene {
     // Exemple de méthode pour créer une scène
     createScene(): Scene {
         const scene = new Scene(this.engine);
-        const camera = new FreeCamera("camera", new Vector3(0, 1, -5), this.scene);
+        const camera = new FreeCamera("camera", 
+        new Vector3(0, 1, -5), this.scene);
         camera.attachControl();
 
         const hemiLight = new HemisphericLight("hemiLight", new Vector3(0, 1, 0), this.scene);
@@ -51,7 +53,18 @@ export class MainScene {
 
         const ball = MeshBuilder.CreateSphere("ball",{diameter: 1}, this.scene);
 
-        ball.position = new Vector3(0,1,0);
+        ball.position = new Vector3(0,1,0); 
+
+        this.engine.resize();
+        const width = this.engine.getRenderWidth();
+        const height = this.engine.getRenderHeight();
+        scene.activeCamera!.viewport = new Viewport(
+            (1 - width / window.innerWidth) / 2,
+            (1 - height / window.innerHeight) / 2,
+            width / window.innerWidth,
+            height / window.innerHeight
+        );
+
         
         return scene;
     }
@@ -81,4 +94,6 @@ export class MainScene {
         // On cache la barre de chargement
         this.engine.hideLoadingUI();
     }
+
+    
 }

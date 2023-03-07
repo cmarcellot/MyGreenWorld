@@ -1,7 +1,8 @@
 <template>
   <div id="app"><BabylonScene /></div>
-  <!-- Pour mettre la boutique à droite on pourait faire un un bouton qui affiche ou cache une div ici : --> 
-  <div id="store"><MenuBoutique /></div>
+  <!-- To put the store in the right side we can make a button that shows or hides a div here :
+    <div class="store"></div> --> 
+  <div id="store"><StoreMenu /></div>
   <div id="cash" >
     <ProgCash/>
   </div>
@@ -13,17 +14,17 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import BabylonScene from './components/BabylonScene.vue';
-import MenuBoutique from './components/MenuBoutique.vue';
 import ProgEcology from './components/ProgEcology.vue';
 import ProgCash from './components/ProgCash.vue';
+import StoreMenu from './components/StoreMenu.vue';
 
 export default defineComponent({
   name: 'App',
   components: {
     BabylonScene,
-    MenuBoutique,
     ProgEcology,
-    ProgCash
+    ProgCash,
+    StoreMenu
 }
 });
 </script>

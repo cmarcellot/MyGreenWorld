@@ -10,7 +10,9 @@
   "dependencies": {
     "@babylonjs/core": "^5.45.0",
     "@babylonjs/loaders": "^5.45.0",
-    "vue": "^3.2.13",
+    "bootstrap": "^5.2.3",
+    "bootstrap-vue": "^2.23.1",
+    "vue": "^3.2.47",
     "vuejs-progress-bar": "^1.2.8"
   },
   "devDependencies": {

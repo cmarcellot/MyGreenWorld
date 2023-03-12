@@ -3,6 +3,7 @@
   <!-- To put the store in the right side we can make a button that shows or hides a div here :
     <div class="store"></div> --> 
   <div id="store"><StoreMenu /></div>
+  <!-- prog means progressiv -->
   <div id="cash" >
     <ProgCash/>
   </div>
@@ -60,14 +61,6 @@ export default defineComponent({
   
 }
 
-#barre {
-
-  position: fixed;
-  right: 0;
-  top : 50%;
-  width: 20%;
-
-}
 
 #cash {
 

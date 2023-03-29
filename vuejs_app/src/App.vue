@@ -3,17 +3,28 @@
   <!-- To put the store in the right side we can make a button that shows or hides a div here :
     <div class="store"></div> --> 
   <div id="store"><StoreMenu /></div>
+  <!-- prog means progressiv -->
+  <div id="cash" >
+    <ProgCash/>
+  </div>
+  <div id="ecology ">
+    <ProgEcology/>
+  </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
 import BabylonScene from './components/BabylonScene.vue';
+import ProgEcology from './components/ProgEcology.vue';
+import ProgCash from './components/ProgCash.vue';
 import StoreMenu from './components/StoreMenu.vue';
 
 export default defineComponent({
   name: 'App',
   components: {
     BabylonScene,
+    ProgEcology,
+    ProgCash,
     StoreMenu
 }
 });
@@ -36,6 +47,8 @@ export default defineComponent({
   background-size: cover;
   background-position: center;
   box-sizing: border-box;
+  
+
 }
 
 #store {
@@ -44,6 +57,29 @@ export default defineComponent({
   display: flex;
   flex-direction: row;
   background-color: #111;
+  position: left;
+  
+}
+
+
+#cash {
+
+  position: fixed;
+    right: 50%;
+    top : 10%;
+    left: 57%;
+    color: aliceblue;
+
+}
+
+#ecology {
+  
+  position: relative;
+    right: 100%;
+    top : 10%;
+    left: 50%;
+    color: blueviolet;
+
 }
 
 </style>

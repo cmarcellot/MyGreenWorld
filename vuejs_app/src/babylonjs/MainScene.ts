@@ -1,5 +1,7 @@
-import { Scene, Engine, FreeCamera, Vector3, HemisphericLight, MeshBuilder, SceneLoader, StandardMaterial, Texture, NodeMaterial, Axis, Space} from '@babylonjs/core';
+import { Color3,ActionManager,Scene, Engine, ExecuteCodeAction,FreeCamera, Vector3, HemisphericLight, MeshBuilder, SceneLoader, StandardMaterial, Texture, NodeMaterial, Axis, Space} from '@babylonjs/core';
 import { CustomLoadingScreen } from "./CustomLoadingScreen";
+import "@babylonjs/loaders";
+// import 'babylonjs-loaders';
 // We import the loaders to be able to load models
 //import "@babylonjs/loaders";
 
@@ -63,10 +65,33 @@ export class MainScene {
         const hemiLight = new HemisphericLight("hemiLight", new Vector3(0, 1, 0), this.scene);
         hemiLight.intensity = 0.5;
 
-        // Create a ball
-        const ball = MeshBuilder.CreateSphere("ball",{diameter: 1}, this.scene);
-        ball.position = new Vector3(0,1,0);
-        ball.checkCollisions = true;
+  
+        let clickCount = 0;
+        // Import of the tree
+        const mesh = SceneLoader.ImportMesh("","./Objets/","tree.glb",this.scene,(newMeshes)=> {
+            const mesh = newMeshes[0];
+            mesh.position = new Vector3(0,1,0);
+            // reducing the tree size
+            mesh.scaling = new Vector3(1/150, 1/150,1/150);
+            clickCount++;
+            console.log(clickCount);
+            // making the tree clickable
+            mesh.name  = "tree";
+       
+            mesh.actionManager = new ActionManager(this.scene);
+
+            const retour = mesh.actionManager.registerAction(new ExecuteCodeAction(ActionManager.OnPickUpTrigger, function () {
+                
+                // Code à exécuter lorsque le mesh est cliqué
+                clickCount++;
+                console.log("Mesh cliqué !" + clickCount + " fois !");
+            }));
+            console.log(retour);
+          
+        });
+        
+        
+        
 
         // Create a ground with collisions
         const ground = MeshBuilder.CreateGround("ground", {width: this.groundSize, height: this.groundSize}, this.scene);

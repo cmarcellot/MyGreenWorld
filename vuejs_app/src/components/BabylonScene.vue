@@ -39,11 +39,14 @@ export default defineComponent({
 <style scoped>
 main {
   width: 100%;
+  right: 10%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  position: relative;
+  position:fixed;
+  
+  
 }
 #loader {
   width: 100%;

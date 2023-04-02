@@ -1,4 +1,4 @@
-import { Scene, Engine, FreeCamera, Vector3, HemisphericLight, MeshBuilder, SceneLoader, StandardMaterial, Texture, NodeMaterial, Axis, Space} from '@babylonjs/core';
+import { Scene, Engine, FreeCamera, Vector3, HemisphericLight, MeshBuilder, SceneLoader, StandardMaterial, Texture, NodeMaterial, Axis, Space,Viewport} from '@babylonjs/core';
 import { CustomLoadingScreen } from "./CustomLoadingScreen";
 // We import the loaders to be able to load models
 //import "@babylonjs/loaders";
@@ -65,6 +65,17 @@ export class MainScene {
 
         // Create a ball
         const ball = MeshBuilder.CreateSphere("ball",{diameter: 1}, this.scene);
+
+        this.engine.resize();
+        const width = this.engine.getRenderWidth();
+        const height = this.engine.getRenderHeight();
+        scene.activeCamera!.viewport = new Viewport(
+            (1 - width / window.innerWidth) / 2,
+            (1 - height / window.innerHeight) / 2,
+            width / window.innerWidth,
+            height / window.innerHeight
+        );
+
         ball.position = new Vector3(0,1,0);
         ball.checkCollisions = true;
 
@@ -104,6 +115,7 @@ export class MainScene {
         this.engine.hideLoadingUI();
     }
 
+    
     // Base texture for a grass effect
     CreateGroundMaterial(): StandardMaterial {
         const groundMat = new StandardMaterial("groundMat", this.scene);

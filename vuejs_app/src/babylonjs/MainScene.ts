@@ -64,30 +64,28 @@ export class MainScene {
         // Create a light to illuminate the scene
         const hemiLight = new HemisphericLight("hemiLight", new Vector3(0, 1, 0), this.scene);
         hemiLight.intensity = 0.5;
-
-  
+        
+        // TREE
         let clickCount = 0;
         // Import of the tree
-        const mesh = SceneLoader.ImportMesh("","./Objets/","tree.glb",this.scene,(newMeshes)=> {
+        SceneLoader.ImportMesh("","./Objets/","tree.glb",this.scene,(newMeshes)=> {
             const mesh = newMeshes[0];
             mesh.position = new Vector3(0,1,0);
+            mesh.isPickable = true;
             // reducing the tree size
             mesh.scaling = new Vector3(1/150, 1/150,1/150);
-            clickCount++;
-            console.log(clickCount);
             // making the tree clickable
             mesh.name  = "tree";
-       
-            mesh.actionManager = new ActionManager(this.scene);
 
-            const retour = mesh.actionManager.registerAction(new ExecuteCodeAction(ActionManager.OnPickUpTrigger, function () {
-                
-                // Code à exécuter lorsque le mesh est cliqué
-                clickCount++;
-                console.log("Mesh cliqué !" + clickCount + " fois !");
-            }));
-            console.log(retour);
-          
+            scene.onPointerDown = function (evt, pickResult) {
+                // We try to pick an object
+                if (pickResult && pickResult.hit && pickResult.pickedMesh) {
+                    if(pickResult.pickedMesh.name == "Object_4" || pickResult.pickedMesh.name == "Object_5" ){
+                        clickCount++;
+                        console.log("Mesh cliqué !" + clickCount + " fois !");
+                    }
+                }
+            };
         });
         
         

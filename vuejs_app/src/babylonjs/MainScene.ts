@@ -1,7 +1,7 @@
 import { Scene, Engine, FreeCamera, Vector3, HemisphericLight, MeshBuilder, SceneLoader, StandardMaterial, Texture, NodeMaterial, Axis, Space,Viewport} from '@babylonjs/core';
 import { CustomLoadingScreen } from "./CustomLoadingScreen";
 // We import the loaders to be able to load models
-//import "@babylonjs/loaders";
+import "@babylonjs/loaders";
 
 export class MainScene {
 
@@ -29,20 +29,10 @@ export class MainScene {
         this.engine.displayLoadingUI();
 
         //Init the ground size
-        this.groundSize = 150;
+        this.groundSize = 300;
 
         // We create the scene
         this.scene = this.createScene();
-
-        // We hide the loading screen
-        this.engine.hideLoadingUI();
-        // If we have a model to load, we can launch the loading here
-        //this.CreateEnvironment();
-
-        // We launch the scene rendering in the engine render loop
-        this.engine.runRenderLoop(() => {
-            this.scene.render();
-        });
     }
 
     ///////////METHODS////////////
@@ -53,7 +43,7 @@ export class MainScene {
         const camera = new FreeCamera("camera", new Vector3(5, 10, -5), this.scene);
         camera.attachControl();
         // The speed of the camera in the scene
-        camera.speed = 0.5;
+        camera.speed = 1.5;
         // Activate collisions for the camera
         camera.checkCollisions = true;
         // Set the ellipsoid around the camera (your player's size)
@@ -62,9 +52,6 @@ export class MainScene {
         // Create a light to illuminate the scene
         const hemiLight = new HemisphericLight("hemiLight", new Vector3(0, 1, 0), this.scene);
         hemiLight.intensity = 0.5;
-
-        // Create a ball
-        const ball = MeshBuilder.CreateSphere("ball",{diameter: 1}, this.scene);
 
         this.engine.resize();
         const width = this.engine.getRenderWidth();
@@ -76,45 +63,17 @@ export class MainScene {
             height / window.innerHeight
         );
 
-        ball.position = new Vector3(0,1,0);
-        ball.checkCollisions = true;
-
         // Create a ground with collisions
         const ground = MeshBuilder.CreateGround("ground", {width: this.groundSize, height: this.groundSize}, this.scene);
         ground .checkCollisions = true;
         ground.material = this.CreateGroundMaterial();
 
         this.CreateGrass();
+
+        this.LoadModels();
         
         return scene;
     }
-
-    // Not used because no model to load yet
-    // Exemple of method to load a model
-    async CreateEnvironment(): Promise<void> {
-        // Add meshes if we want to retrieve the loaded objects
-        //const { meshes } = await SceneLoader.ImportMeshAsync(
-        await SceneLoader.ImportMeshAsync(
-          "",
-          "./models/",
-          "map.glb",
-          this.scene,
-          // We can pass a callback function to follow the loading
-          (evt) => {
-              let loadedPercent = 0;
-              if (evt.lengthComputable) {
-                  loadedPercent = Math.ceil(evt.loaded * 100 / evt.total);
-              } else {
-                  loadedPercent = Math.ceil((evt.loaded / (1024 * 1024)));
-              }
-              // We update the loading bar
-              this.loadingScreen.updateLoadStatus(loadedPercent);
-          }
-        );
-        // We hide the loading screen
-        this.engine.hideLoadingUI();
-    }
-
     
     // Base texture for a grass effect
     CreateGroundMaterial(): StandardMaterial {
@@ -164,4 +123,105 @@ export class MainScene {
             instance.rotate(Axis.Y, Math.random() * Math.PI * 2, Space.LOCAL);
         }
     }
+
+    // Load all the models
+    LoadModels(): void {
+        // List of all the models to load
+        const modelNames = [
+            "SmallStore.glb",
+            "DIYStore.glb",
+            "ClothingStore.glb",
+            "FastFood.glb",
+            "Hotel.glb",
+            "Supermarket.glb",
+            "CarStore.glb",
+            "BigStore.glb",
+        ];
+    
+        // Path to the models
+        const modelDir = "./models/store/";
+    
+        // Progress bar
+        let progress = 0;
+        const increment = 100 / modelNames.length;
+    
+        // create a function to load a model
+        const loadModel = async (modelName: string): Promise<void> => {
+            const result = await SceneLoader.ImportMeshAsync("", modelDir, modelName, this.scene);
+            const mainMesh = result.meshes[0];
+    
+            switch (modelName) {
+                case "SmallStore.glb":
+                    mainMesh.position = new Vector3(80, 0.1, -30);
+                    mainMesh.scaling = new Vector3(0.25, 0.25, 0.25);
+                    mainMesh.rotation = new Vector3(0, 0, 0);
+                    mainMesh.scaling.x *= -1;
+                    break;
+    
+                case "DIYStore.glb":
+                    mainMesh.position = new Vector3(-40, 0.1, 75);
+                    mainMesh.scaling = new Vector3(0.5, 0.5, 0.5);
+                    mainMesh.rotation = new Vector3(0, 0, 0);
+                    mainMesh.scaling.x *= -1;
+                    break;
+                case "ClothingStore.glb":
+                    mainMesh.position = new Vector3(-85,0.1,-25);
+                    mainMesh.scaling = new Vector3(0.5,0.5,0.5);
+                    mainMesh.rotation = new Vector3(0, 0, 0);
+                    mainMesh.scaling.x *= -1;
+                    break;
+                case "FastFood.glb":
+                    mainMesh.position = new Vector3(-30,3,-75);
+                    mainMesh.scaling = new Vector3(3,3,3);
+                    mainMesh.rotation = new Vector3(0, 0, 0);
+                    mainMesh.scaling.x *= -1;
+                    break;
+                case "Hotel.glb":
+                    mainMesh.position = new Vector3(20,0.1,-100);
+                    mainMesh.scaling = new Vector3(2,2,2);
+                    mainMesh.rotation = new Vector3(0, 0, 0);
+                    mainMesh.scaling.x *= -1;
+                    break;
+                case "Supermarket.glb":
+                    mainMesh.position = new Vector3(-105,0.1,30);
+                    mainMesh.scaling = new Vector3(0.5,0.5,0.5);
+                    mainMesh.rotation = new Vector3(0,Math.PI*1.5,0);
+                    mainMesh.scaling.x *= -1;
+                    break;
+                case "CarStore.glb":
+                    mainMesh.position = new Vector3(20,0.1,100);
+                    mainMesh.scaling = new Vector3(0.5,0.5,0.5);
+                    mainMesh.rotation = new Vector3(0,Math.PI/2,0);
+                    mainMesh.scaling.x *= -1;
+                    break;
+                case "BigStore.glb":
+                    mainMesh.position = new Vector3(100,2.5,30);
+                    mainMesh.scaling = new Vector3(1.2,1.2,1.2);
+                    mainMesh.rotation = new Vector3(0, 0, 0);
+                    mainMesh.scaling.x *= -1;
+                    break;
+            }
+    
+            // Update the progress bar
+            progress += increment;
+            this.loadingScreen.updateLoadStatus(progress);
+    
+            // When all the models are loaded, we hide the loading screen
+            if (progress === 100) {
+                // We hide the loading screen
+                this.engine.hideLoadingUI();
+    
+                // We launch the scene rendering in the engine render loop
+                this.engine.runRenderLoop(() => {
+                    this.scene.render();
+                });
+            }
+        };
+    
+        // We load all the models
+        modelNames.forEach((modelName) => {
+            loadModel(modelName);
+        });
+    }
+
 }

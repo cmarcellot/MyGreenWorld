@@ -29,7 +29,7 @@ export class MainScene {
         this.engine.displayLoadingUI();
 
         //Init the ground size
-        this.groundSize = 300;
+        this.groundSize = 450;
 
         // We create the scene
         this.scene = this.createScene();
@@ -128,6 +128,14 @@ export class MainScene {
     LoadModels(): void {
         // List of all the models to load
         const modelNames = [
+            "CaravanBuilding.glb",
+            "CottageBuilding.glb",
+            "HouseBuilding.glb",
+            "ModernBuilding_1.glb",
+            "ModernBuilding_2.glb",
+            "ModernHouseBuilding.glb",
+            "PalaceBuilding.glb",
+            "SkyscraperBuilding.glb",
             "SmallStore.glb",
             "DIYStore.glb",
             "ClothingStore.glb",
@@ -139,7 +147,7 @@ export class MainScene {
         ];
     
         // Path to the models
-        const modelDir = "./models/store/";
+        const modelDir = "./models/";
     
         // Progress bar
         let progress = 0;
@@ -151,6 +159,55 @@ export class MainScene {
             const mainMesh = result.meshes[0];
     
             switch (modelName) {
+                case "CaravanBuilding.glb":
+                    mainMesh.position = new Vector3(25, 0.1, -40);
+                    mainMesh.scaling = new Vector3(0.25, 0.25, 0.25);
+                    mainMesh.rotation = new Vector3(0, 0, 0);
+                    mainMesh.scaling.x *= -1;
+                    break;
+    
+                case "CottageBuilding.glb":
+                    mainMesh.position = new Vector3(-80, 0.1, 125);
+                    mainMesh.scaling = new Vector3(2, 2, 2);
+                    mainMesh.rotation = new Vector3(0, 0, 0);
+                    mainMesh.scaling.x *= -1;
+                    break;
+                case "HouseBuilding.glb":
+                    mainMesh.position = new Vector3(-120,0.1,-75);
+                    mainMesh.scaling = new Vector3(0.1,0.1,0.1);
+                    mainMesh.rotation = new Vector3(0, 0, 0);
+                    mainMesh.scaling.x *= -1;
+                    break;
+                case "ModernBuilding_1.glb":
+                    mainMesh.position = new Vector3(-700,-0.55,-200);
+                    mainMesh.scaling = new Vector3(5,5,5);
+                    mainMesh.rotation = new Vector3(0, 0, 0);
+                    mainMesh.scaling.x *= -1;
+                    break;
+                case "ModernBuilding_2.glb":
+                    mainMesh.position = new Vector3(-675,-0.55,-225);
+                    mainMesh.scaling = new Vector3(5,5,5);
+                    mainMesh.rotation = new Vector3(0, 0, 0);
+                    mainMesh.scaling.x *= -1;
+                    break;
+                case "ModernHouseBuilding.glb":
+                    mainMesh.position = new Vector3(-150,-0.1,85);
+                    mainMesh.scaling = new Vector3(3,3,3);
+                    mainMesh.rotation = new Vector3(0,0,0);
+                    mainMesh.scaling.x *= -1;
+                    break;
+                case "PalaceBuilding.glb":
+                    mainMesh.position = new Vector3(75,0.1,150);
+                    mainMesh.scaling = new Vector3(1.5,1.5,1.5);
+                    mainMesh.rotation = new Vector3(0,0,0);
+                    mainMesh.scaling.x *= -1;
+                    break;
+                case "SkyscraperBuilding.glb":
+                    mainMesh.position = new Vector3(100,0,-150);
+                    mainMesh.scaling = new Vector3(0.7,0.7,0.7);
+                    mainMesh.rotation = new Vector3(0, 0, 0);
+                    mainMesh.scaling.x *= -1;
+                    break;
                 case "SmallStore.glb":
                     mainMesh.position = new Vector3(80, 0.1, -30);
                     mainMesh.scaling = new Vector3(0.25, 0.25, 0.25);

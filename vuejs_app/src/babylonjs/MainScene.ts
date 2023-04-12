@@ -1,4 +1,4 @@
-import { Scene, Engine, FreeCamera, Vector3, HemisphericLight, MeshBuilder, SceneLoader, StandardMaterial, Texture, NodeMaterial, Axis, Space,Viewport} from '@babylonjs/core';
+import { Scene, Engine, FreeCamera, Vector3, HemisphericLight, MeshBuilder, SceneLoader, StandardMaterial, Texture, NodeMaterial, Axis, Space, Viewport, CubeTexture} from '@babylonjs/core';
 import { CustomLoadingScreen } from "./CustomLoadingScreen";
 // We import the loaders to be able to load models
 import "@babylonjs/loaders";
@@ -70,6 +70,11 @@ export class MainScene {
 
         this.CreateGrass();
 
+        const envTex = CubeTexture.CreateFromPrefilteredData("./environments/blue_sky.env", scene);
+        scene.environmentTexture = envTex;
+        scene.createDefaultSkybox(envTex, true);
+        scene.environmentIntensity = 0.75;
+
         this.LoadModels();
         
         return scene;
@@ -122,6 +127,15 @@ export class MainScene {
             instance.position.y = 0.25;
             instance.rotate(Axis.Y, Math.random() * Math.PI * 2, Space.LOCAL);
         }
+    }
+
+    // Add environment
+    AddEnvironment(): void {
+        // Create a skybox
+        const envTex = CubeTexture.CreateFromPrefilteredData("./environments/blue_sky.env", this.scene);
+        this.scene.environmentTexture = envTex;
+        this.scene.createDefaultSkybox(envTex, true);
+        this.scene.environmentIntensity = 0.75;
     }
 
     // Load all the models

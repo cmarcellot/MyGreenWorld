@@ -39,10 +39,13 @@ export class MainScene {
         // If we have a model to load, we can launch the loading here
         //this.CreateEnvironment();
 
+        
         // We launch the scene rendering in the engine render loop
         this.engine.runRenderLoop(() => {
             this.scene.render();
         });
+
+        
     }
 
     ///////////METHODS////////////

@@ -43,12 +43,9 @@ export default defineComponent({
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  background: white;
   background-size: cover;
   background-position: center;
   box-sizing: border-box;
-  
-
 }
 
 #store {
@@ -66,7 +63,7 @@ export default defineComponent({
 
   position: fixed;
     right: 50%;
-    top : 10%;
+    top : 20%;
     left: 57%;
     color: aliceblue;
 

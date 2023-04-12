@@ -7,7 +7,6 @@
         </div>
         <p class="loadingText" id="percentLoaded">25%</p>
       </div>
-      <p>My Green World</p>
       <canvas></canvas>
     </main>
 </template>
@@ -44,10 +43,12 @@ main {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  position:fixed;
-  
-  
+  position:absolute;
+  margin-top: 10%s;
 }
+
+
+
 #loader {
   width: 100%;
   height: 100%;
@@ -105,9 +106,10 @@ p {
   font-size: 2rem;
 }
 canvas {
-  width: 90%;
-  height: 90%;
+  width:97%;
+  height: 97%;
   border: none;
   outline: none;
+  
 }
 </style>

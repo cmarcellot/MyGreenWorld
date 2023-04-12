@@ -46,14 +46,14 @@ export default {
 .child {
     position: fixed;
     right: 0;
-    top : 10%;
+    top : 5%;
     left: 5%;
     color: rgb(255, 255, 255);
 }
 .loading-bar {
     position: fixed;
     right: 0%;
-    top : 10%;
+    top : 5%;
     left: 8%;
     width : 100px;
     height: 20px;

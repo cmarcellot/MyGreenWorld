@@ -70,6 +70,7 @@ export class MainScene {
 
         this.CreateGrass();
 
+        // Create a skybox
         const envTex = CubeTexture.CreateFromPrefilteredData("./environments/blue_sky.env", scene);
         scene.environmentTexture = envTex;
         scene.createDefaultSkybox(envTex, true);

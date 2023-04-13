@@ -69,6 +69,29 @@ export class MainScene {
         ground.material = this.CreateGroundMaterial();
 
         this.CreateGrass();
+          // TREE
+          let clickCount = 0;
+          // Import of the tree
+          SceneLoader.ImportMesh("","./Objets/","tree.glb",this.scene,(newMeshes)=> {
+              const mesh = newMeshes[0];
+              mesh.position = new Vector3(0,1,0);
+              mesh.isPickable = true;
+              // reducing the tree size
+              mesh.scaling = new Vector3(1/150, 1/150,1/150);
+              // making the tree clickable
+              mesh.name  = "tree";
+  
+              scene.onPointerDown = function (evt, pickResult) {
+                  // We try to pick an object
+                  if (pickResult && pickResult.hit && pickResult.pickedMesh) {
+                      if(pickResult.pickedMesh.name == "Object_4" || pickResult.pickedMesh.name == "Object_5" ){
+                          clickCount++;
+                          console.log("Mesh cliqué !" + clickCount + " fois !");
+                      }
+                  }
+              };
+          });
+          
 
         this.LoadModels();
         

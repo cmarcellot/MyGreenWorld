@@ -40,14 +40,14 @@ export class MainScene {
     // Scene creation
     createScene(): Scene {
         const scene = new Scene(this.engine);
-        const camera = new FreeCamera("camera", new Vector3(5, 10, -5), this.scene);
+        const camera = new FreeCamera("camera", new Vector3(10, 10, -5), this.scene);
         camera.attachControl();
         // The speed of the camera in the scene
         camera.speed = 1.5;
         // Activate collisions for the camera
         camera.checkCollisions = true;
         // Set the ellipsoid around the camera (your player's size)
-        camera.ellipsoid = new Vector3(1, 1.5, 1);
+        camera.ellipsoid = new Vector3(5, 1.75, 5);
 
         // Create a light to illuminate the scene
         const hemiLight = new HemisphericLight("hemiLight", new Vector3(0, 1, 0), this.scene);
@@ -69,28 +69,32 @@ export class MainScene {
         ground.material = this.CreateGroundMaterial();
 
         this.CreateGrass();
-          // TREE
-          let clickCount = 0;
-          // Import of the tree
-          SceneLoader.ImportMesh("","./Objets/","tree.glb",this.scene,(newMeshes)=> {
-              const mesh = newMeshes[0];
-              mesh.position = new Vector3(0,1,0);
-              mesh.isPickable = true;
-              // reducing the tree size
-              mesh.scaling = new Vector3(1/150, 1/150,1/150);
-              // making the tree clickable
-              mesh.name  = "tree";
+        // TREE
+        let clickCount = 0;
+        // Import of the tree
+        SceneLoader.ImportMesh("","./models/","tree.glb",this.scene,(newMeshes)=> {
+            
+            newMeshes.map((mesh) => {
+                mesh.checkCollisions = true;
+            });
+            const mesh = newMeshes[0];
+            mesh.position = new Vector3(0,0.5,0);
+            mesh.isPickable = true;
+            // reducing the tree size
+            mesh.scaling = new Vector3(3/150, 3/150, 3/150);
+            // making the tree clickable
+            mesh.name  = "tree";
   
-              scene.onPointerDown = function (evt, pickResult) {
-                  // We try to pick an object
-                  if (pickResult && pickResult.hit && pickResult.pickedMesh) {
-                      if(pickResult.pickedMesh.name == "Object_4" || pickResult.pickedMesh.name == "Object_5" ){
-                          clickCount++;
-                          console.log("Mesh cliqué !" + clickCount + " fois !");
-                      }
-                  }
-              };
-          });
+            scene.onPointerDown = function (evt, pickResult) {
+                // We try to pick an object
+                if (pickResult && pickResult.hit && pickResult.pickedMesh) {
+                    if(pickResult.pickedMesh.name == "Object_4" || pickResult.pickedMesh.name == "Object_5" ){
+                        clickCount++;
+                        console.log("Mesh cliqué !" + clickCount + " fois !");
+                    }
+                }
+            };
+        });
           
 
         this.LoadModels();
@@ -180,6 +184,9 @@ export class MainScene {
         const loadModel = async (modelName: string): Promise<void> => {
             const result = await SceneLoader.ImportMeshAsync("", modelDir, modelName, this.scene);
             const mainMesh = result.meshes[0];
+            result.meshes.map((mesh) => {
+                mesh.checkCollisions = true;
+            });
     
             switch (modelName) {
                 case "CaravanBuilding.glb":

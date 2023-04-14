@@ -1,4 +1,4 @@
-import { Scene, Engine, FreeCamera, Vector3, HemisphericLight, MeshBuilder, SceneLoader, StandardMaterial, Texture, NodeMaterial, Axis, Space,Viewport} from '@babylonjs/core';
+import { Scene, Engine, FreeCamera, Vector3, HemisphericLight, MeshBuilder, SceneLoader, StandardMaterial, Color3, Mesh, Texture, NodeMaterial, Axis, Space,Viewport} from '@babylonjs/core';
 import { CustomLoadingScreen } from "./CustomLoadingScreen";
 // We import the loaders to be able to load models
 import "@babylonjs/loaders";
@@ -11,6 +11,10 @@ export class MainScene {
     engine: Engine;
     loadingScreen: CustomLoadingScreen
     groundSize!: number
+    armRight!: Mesh;
+    armLeft!: Mesh;
+    handRight!: Mesh;
+    handLeft!: Mesh;
 
     ///////////CONSTRUCTOR////////////
 
@@ -40,7 +44,7 @@ export class MainScene {
     // Scene creation
     createScene(): Scene {
         const scene = new Scene(this.engine);
-        const camera = new FreeCamera("camera", new Vector3(10, 10, -5), this.scene);
+        const camera = new FreeCamera("camera", new Vector3(40, 5, 0), this.scene);
         camera.attachControl();
         // The speed of the camera in the scene
         camera.speed = 1.5;
@@ -48,6 +52,8 @@ export class MainScene {
         camera.checkCollisions = true;
         // Set the ellipsoid around the camera (your player's size)
         camera.ellipsoid = new Vector3(5, 1.75, 5);
+        camera.rotation.y = -(Math.PI / 2);
+        camera.minZ = 0.5;
 
         // Create a light to illuminate the scene
         const hemiLight = new HemisphericLight("hemiLight", new Vector3(0, 1, 0), this.scene);
@@ -68,8 +74,35 @@ export class MainScene {
         ground .checkCollisions = true;
         ground.material = this.CreateGroundMaterial();
 
+        let supermanMode = false;
+        window.addEventListener("keydown", (event) => {
+            // Reset the camera position when pressing the "R" key
+            if (event.keyCode === 82) {
+                camera.position = new Vector3(40, 5, 0);
+                camera.rotation.y = -(Math.PI / 2);
+            }
+            // supermanMode when pressing the "S" key
+            if (event.keyCode === 83) {
+                if(supermanMode){
+                    camera.speed = 1.5;
+                    this.armRight.isVisible = false;
+                    this.armLeft.isVisible = false;
+                    this.handRight.isVisible = false;
+                    this.handLeft.isVisible = false;
+                    supermanMode = false;
+                }else{
+                    camera.speed = 7.5;
+                    this.armRight.isVisible = true;
+                    this.armLeft.isVisible = true;
+                    this.handRight.isVisible = true;
+                    this.handLeft.isVisible = true;
+                    supermanMode = true;
+                }
+            }
+        });        
+
         this.CreateGrass();
-        // TREE
+
         let clickCount = 0;
         // Import of the tree
         SceneLoader.ImportMesh("","./models/","tree.glb",this.scene,(newMeshes)=> {
@@ -78,7 +111,7 @@ export class MainScene {
                 mesh.checkCollisions = true;
             });
             const mesh = newMeshes[0];
-            mesh.position = new Vector3(0,0.5,0);
+            mesh.position = new Vector3(0,0,0);
             mesh.isPickable = true;
             // reducing the tree size
             mesh.scaling = new Vector3(3/150, 3/150, 3/150);
@@ -96,8 +129,9 @@ export class MainScene {
             };
         });
           
-
         this.LoadModels();
+
+        this.CreateArms(camera);
         
         return scene;
     }
@@ -310,5 +344,43 @@ export class MainScene {
             loadModel(modelName);
         });
     }
+
+    CreateArms(camera : FreeCamera): void {
+        // Attach arms to camera
+        this.armRight = MeshBuilder.CreateBox("armRight", {width: 0.3, height: 0.3, depth: 7}, this.scene);
+        this.armRight.position = new Vector3(0.5, -0.5, -1);
+        this.armRight.rotation.y = Math.PI / 12;
+        this.armLeft = MeshBuilder.CreateBox("armLeft", {width: 0.3, height: 0.3, depth: 7}, this.scene);
+        this.armLeft.position = new Vector3(-0.5, -0.5, -1);
+        this.armLeft.rotation.y = -Math.PI / 12;
+        this.handRight = MeshBuilder.CreateSphere("handRight", {diameter: 0.5}, this.scene);
+        this.handRight.position = new Vector3(0, 0, 4);
+        this.handLeft = MeshBuilder.CreateSphere("handLeft", {diameter: 0.5}, this.scene);
+        this.handLeft.position = new Vector3(0, 0, 4);
+
+        // Parent arms and hands to camera
+        const cameraArm = new Mesh("cameraArm", this.scene);
+        cameraArm.parent = camera;
+        this.armRight.parent = cameraArm;
+        this.armLeft.parent = cameraArm;
+        this.handRight.parent = this.armRight;
+        this.handLeft.parent = this.armLeft;
+
+        // Add materials
+        const armMaterial = new StandardMaterial("armMaterial", this.scene);
+        armMaterial.diffuseColor = Color3.FromHexString("#0C59AA"); // bleu
+        this.armRight.material = armMaterial;
+        this.armLeft.material = armMaterial;
+        const handMaterial = new StandardMaterial("handMaterial", this.scene);
+        handMaterial.diffuseColor = Color3.FromHexString("#E4E4D6") // beige
+        this.handRight.material = handMaterial;
+        this.handLeft.material = handMaterial;
+
+        //hidden arms
+        this.armRight.isVisible = false;
+        this.armLeft.isVisible = false;
+        this.handRight.isVisible = false;
+        this.handLeft.isVisible = false;
+   }
 
 }

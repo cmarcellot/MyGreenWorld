@@ -39,12 +39,9 @@ export class City {
  * commerces : a list of commerces bought by the player
  * energies : a list of commerces bought by the player
  */
-    constructor(
-        name : string,
-        cashQuantity: float,
-        ecoPourcentage:float,
-        gainPerClick:float,
-        gainPerSec:float){
+    constructor(name : string, cashQuantity: float, ecoPourcentage:float,
+         gainPerClick:float, gainPerSec:float)
+    {
         this.name = name;
         this.cashQuantity=cashQuantity;
         this.ecoPourcentage=ecoPourcentage;

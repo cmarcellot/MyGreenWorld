@@ -25,7 +25,8 @@
               <p class="bonusEco">Écologie: {{ living.ecoBonus }} %</p>
             </div>
           </div>
-          <button v-on:click="buy(living.price, living.ecoBonus, living.gainPerSec, living.boughtNumber, living.elementId)"> Acheter </button>
+          <button class="btn"
+          v-on:click="buy(living.price, living.ecoBonus, living.gainPerSec, living.boughtNumber, living.elementId)" > Acheter </button>
         </div>
 
         <div class="nav nav-bloc" @click="toggleContent2">
@@ -45,7 +46,8 @@
               <p class="bonusEco">Écologie: {{ central.ecoBonus }} %</p>
             </div>
           </div>
-          <button v-on:click="buyEnergy(central.price, central.ecoBonus, central.gainPerSec)"> Acheter </button>
+          <button class="btn"
+           v-on:click="buyEnergy(central.price, central.ecoBonus, central.gainPerSec)"> Acheter </button>
         </div>
 
         <div class="nav nav-bloc" @click="toggleContent3">
@@ -314,5 +316,18 @@ import { float } from '@babylonjs/core/types';
   height: 1px;
   background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
 }
+
+.btn {
+  border-radius: 20px;
+  padding: 10px 15px;
+  background-color: white;
+  color: #444;
+  border:rgb(250, 250, 250);
+  cursor: pointer;
+  position: relative;
+  top: 10px;
+  font-weight:400;
+}
+
 </style>
   

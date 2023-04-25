@@ -55,4 +55,10 @@ export class City {
         this.commerces=[];
         this.energies =[];
     }
+    
+    
+    incrementCashQuantity() {
+        this.cashQuantity = this.cashQuantity + this.gainPerClick;
+    }
+
 }

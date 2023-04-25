@@ -5,7 +5,7 @@
   <div id="store"><StoreMenu /></div>
   <!-- prog means progressiv -->
   <div id="cash" >
-    <ProgCash/>
+    <ProgCash :value = "city.cashQuantity" />
   </div>
   <div id="ecology ">
     <ProgEcology/>
@@ -18,15 +18,22 @@ import BabylonScene from './components/BabylonScene.vue';
 import ProgEcology from './components/ProgEcology.vue';
 import ProgCash from './components/ProgCash.vue';
 import StoreMenu from './components/StoreMenu.vue';
+import {City} from './classes/City';
 
 export default defineComponent({
   name: 'App',
+  
   components: {
     BabylonScene,
     ProgEcology,
     ProgCash,
     StoreMenu
-}
+  },
+  data() {
+    return {
+      city: new City("test",0, 100, 1, 0),
+    }
+  },
 });
 </script>
 

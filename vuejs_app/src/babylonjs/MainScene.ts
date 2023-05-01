@@ -43,13 +43,17 @@ export class MainScene {
         // If we have a model to load, we can launch the loading here
         //this.CreateEnvironment();
 
+        //resize the scene 
+        window.addEventListener('resize', () =>{
+            this.engine.resize();
+        });
+
+        this.engine.resize();
         
         // We launch the scene rendering in the engine render loop
         this.engine.runRenderLoop(() => {
             this.scene.render();
-        });
-
-        
+        });   
     }
 
     ///////////METHODS////////////
@@ -112,8 +116,9 @@ export class MainScene {
                     supermanMode = true;
                 }
             }
-        });        
-
+        });
+        
+    
         this.CreateGrass();
 
         let clickCount = 0;
@@ -171,6 +176,7 @@ export class MainScene {
 
         return groundMat;
     }
+
 
     // Node material for a grass effect
     CreateGrass(): void {
@@ -410,5 +416,6 @@ export class MainScene {
         this.handRight.isVisible = false;
         this.handLeft.isVisible = false;
    }
+   
 
 }

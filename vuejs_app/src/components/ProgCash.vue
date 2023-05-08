@@ -1,18 +1,25 @@
 <template>
     <div class="container">
-      <b-progress height="20px" :value="value" show-progress class="mb-2">{{ value }}</b-progress>
+       
+        <b-progress height="20px" :value="value" show-progress class="mb-2"> 
+             {{value}} </b-progress>
+
     </div>
-  </template>
-  
-  <script lang="ts">
-  
-  export default {
+</template>
+
+<script>
+import Bootstrap from 'bootstrap-vue';
+
+export default {
+   
     name: 'ProgCash',
     props :[
         "value"
-    ]
-  };
-  </script>
+    ],
+   
+
+}
+</script>
 
 <style lang="scss" scoped>
 .container {

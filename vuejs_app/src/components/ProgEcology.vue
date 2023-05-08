@@ -1,8 +1,8 @@
 <template>
     <div class="container">
-        <div class="child"> {{ percent }}%</div>
+        <div class="child"> {{ value }}%</div>
         <div class="loading-bar">
-            <div class="percentage" :style="{'width': percentage + '%'}">
+            <div class="percentage" :style="{'width': value + '%'}">
 
             </div>
         </div>
@@ -14,12 +14,10 @@
 export default {
     
     name: 'ProgEcology',
-    data: () => {
-        return {
-            percentage : 0
-        }
-    },
-
+    props :[
+        "value"
+    ],
+   
     computed : {
         percent() {
 

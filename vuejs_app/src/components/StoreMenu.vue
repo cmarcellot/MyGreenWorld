@@ -26,7 +26,7 @@
             </div>
           </div>
           <button class="btn"
-          v-on:click="buy(living.price, living.ecoBonus, living.gainPerSec, living.boughtNumber, living.elementId)" > Acheter </button>
+          v-on:click="BuyLiving(city, living)" > Acheter </button>
         </div>
 
         <div class="nav nav-bloc" @click="toggleContent2">
@@ -47,7 +47,7 @@
             </div>
           </div>
           <button class="btn"
-           v-on:click="buyEnergy(central.price, central.ecoBonus, central.gainPerSec)"> Acheter </button>
+          v-on:click="BuyEnergy(city, central)" > Acheter </button>
         </div>
 
         <div class="nav nav-bloc" @click="toggleContent3">
@@ -74,6 +74,9 @@ import { float } from '@babylonjs/core/types';
   
   export default defineComponent({
     name: 'StoreMenu',
+    props :[
+    "city"
+  ],
     data() {
       return {
         showContent1: false,
@@ -85,7 +88,7 @@ import { float } from '@babylonjs/core/types';
         energies: [] as Energy[],
 
         //créer city pour tester
-        City : new City ("test",150,100,5,2.5),
+        //City : new City ("test",150,100,5,2.5),
       
       };
     },
@@ -111,41 +114,35 @@ import { float } from '@babylonjs/core/types';
       },
 
  //Compare the cashQuantity and the price 
-      buy(price : float, gainPerSec : number, ecoBonus : number, boughtNumber : number, elementId : string) {
-      if (this.City.cashQuantity > price) {
-        //console.log('initial' + this.City.cashQuantity);
-        this.City.cashQuantity -= price;
-        console.log('Produit acheté avec succès !');
-        console.log('modif' + this.City.cashQuantity);
-       // console.log('initial' + this.City.ecoPourcentage+ ' et ' + this.City.gainPerSec)
-        this.City.ecoPourcentage += ecoBonus;
-        this.City.gainPerSec += gainPerSec;
-        boughtNumber += 1;
+      BuyLiving(city : City, living: Living) {
       
-      } 
-      
-      else {
-        console.log("Vous n'avez pas assez d'argent pour acheter le produit.");
-        }
-      },
-
-
-      buyEnergy(price : float, gainPerSec : number, ecoBonus : number) {
-      if (this.City.cashQuantity > price) {
-        console.log('initial' + this.City.cashQuantity);
-        this.City.cashQuantity -= price;
-        console.log('Produit acheté avec succès !');
-        console.log('modif' + this.City.cashQuantity);
-        console.log('initial' + this.City.ecoPourcentage+ ' et ' + this.City.gainPerSec)
-        console.log(this.City.ecoPourcentage += ecoBonus);
-        console.log(this.City.gainPerSec += gainPerSec);
+        city.buyLiv(living);
         
-      } 
-      
-      else {
-        console.log("Vous n'avez pas assez d'argent pour acheter le produit.");
-        }
       },
+
+      BuyEnergy(city : City, energy : Energy){
+
+        city.buyEco(energy);
+
+      }
+
+
+      // buyEnergy(price : float, gainPerSec : number, ecoBonus : number) {
+      // if (this.City.cashQuantity > price) {
+      //   console.log('initial' + this.City.cashQuantity);
+      //   this.City.cashQuantity -= price;
+      //   console.log('Produit acheté avec succès !');
+      //   console.log('modif' + this.City.cashQuantity);
+      //   console.log('initial' + this.City.ecoPourcentage+ ' et ' + this.City.gainPerSec)
+      //   console.log(this.City.ecoPourcentage += ecoBonus);
+      //   console.log(this.City.gainPerSec += gainPerSec);
+        
+      // } 
+      
+      // else {
+      //   console.log("Vous n'avez pas assez d'argent pour acheter le produit.");
+      //   }
+      // },
 
     },
     created(){

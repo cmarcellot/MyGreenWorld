@@ -25,7 +25,7 @@ export default {
 .container {
     position: fixed;
     right: 100%;
-    top : 10%;
+    top : 5%;
     left: 60%;
     width : 100px;
     height: 20px;
@@ -47,10 +47,11 @@ export default {
         background-image: linear-gradient(135deg,rgba($color: (#000000), $alpha: .15)25%, transparent 50%, 
         rgba($color: (#000000), $alpha: .15) 75%, transparent 75%, transparent );
         animation: animate-stripes 3s linear infinite ;
-
+        text-align: center;
        
     }
 }
+
 
 @keyframes animate-stripes {
     0% {background-position: 0 0; }

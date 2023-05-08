@@ -26,7 +26,7 @@
             </div>
           </div>
           <button class="btn"
-          v-on:click="BuyLiving(city, living)" > Acheter </button>
+          v-on:click="BuyLiving(city, living)" :class="{ 'disabled': city.cashQuantity < living.price }"> Acheter </button>
         </div>
 
         <div class="nav nav-bloc" @click="toggleContent2">
@@ -47,7 +47,7 @@
             </div>
           </div>
           <button class="btn"
-          v-on:click="BuyEnergy(city, central)" > Acheter </button>
+          v-on:click="BuyEnergy(city, central)" :class="{ 'disabled': city.cashQuantity < central.price }"> Acheter </button>
         </div>
 
         <div class="nav nav-bloc" @click="toggleContent3">
@@ -67,7 +67,7 @@
             </div>
           </div>
           <button class="btn"
-           v-on:click="buyEnergy(improvement.price, improvement.ecoBonus, improvement.gainPerSec)"> Acheter </button>
+          v-on:click="BuyImprov(city, improvement)" :class="{ 'disabled': city.cashQuantity < improvement.price }"> Acheter </button>
         </div>
       </div>
     </nav>
@@ -97,10 +97,7 @@ import { Improvement } from '@/classes/Improvement';
         livings: [] as Living[],
         commerces: [] as Commerce[],
         energies: [] as Energy[],
-        improvements: [] as Improvement[],
-
-        //créer city pour tester
-        City : new City ("test",150,100,5,2.5),      
+        improvements: [] as Improvement[],   
 
       };
     },
@@ -139,6 +136,12 @@ import { Improvement } from '@/classes/Improvement';
       BuyEnergy(city : City, energy : Energy){
 
         city.buyEco(energy);
+
+      },
+
+      BuyImprov (city : City, improvement : Improvement) {
+
+        city.buyImprov(improvement);
 
       }
 
@@ -352,6 +355,12 @@ import { Improvement } from '@/classes/Improvement';
   position: relative;
   top: 10px;
   font-weight:400;
+}
+
+.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
 }
 
 </style>

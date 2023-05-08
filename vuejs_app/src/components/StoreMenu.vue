@@ -53,11 +53,21 @@
         <div class="nav nav-bloc" @click="toggleContent3">
           <p class="title-item">AMÉLIORATIONS</p>      
         </div>
-        <div id="content-1" class="nav nav-item" v-show="showContent3">
-          <p  class="title-bloc">Chauffage écologique</p>  
-        </div>
-        <div id="content-1" class="nav nav-item" v-show="showContent3">
-          <p  class="title-bloc">Luminaires automotiques</p>  
+        <div v-for="(improvement, index) in sortedImprovements()" :key="index" class="nav nav-item" v-show="showContent3">
+          <p class="title-bloc">{{ improvement.name }}</p>
+          <div class="container">
+            <div class="text-container">
+              <p class="description">{{ improvement.desc }}</p>
+              <hr class="separator" />
+              <p class="price"> Prix: {{ improvement.price }} €</p>
+              <hr class="separator" />
+              <p class="gainPerSec">Gains: {{ improvement.gainPerSec }}/sec</p>
+              <hr class="separator" />
+              <p class="bonusEco">Écologie: {{ improvement.ecoBonus }} %</p>
+            </div>
+          </div>
+          <button class="btn"
+           v-on:click="buyEnergy(improvement.price, improvement.ecoBonus, improvement.gainPerSec)"> Acheter </button>
         </div>
       </div>
     </nav>
@@ -71,6 +81,7 @@ import { Energy } from '@/classes/Energy';
 import jsonData from '@/assets/storage.json';
 import { City } from '@/classes/City';
 import { float } from '@babylonjs/core/types';
+import { Improvement } from '@/classes/Improvement';
   
   export default defineComponent({
     name: 'StoreMenu',
@@ -86,10 +97,11 @@ import { float } from '@babylonjs/core/types';
         livings: [] as Living[],
         commerces: [] as Commerce[],
         energies: [] as Energy[],
+        improvements: [] as Improvement[],
 
         //créer city pour tester
-        //City : new City ("test",150,100,5,2.5),
-      
+        City : new City ("test",150,100,5,2.5),      
+
       };
     },
     methods: {
@@ -101,6 +113,7 @@ import { float } from '@babylonjs/core/types';
         this.showContent2 = !this.showContent2;
       },
       toggleContent3() {
+        console.log(this.improvements);
         this.showContent3 = !this.showContent3;
       },
 
@@ -111,6 +124,9 @@ import { float } from '@babylonjs/core/types';
       },
       sortedEnergies() {
         return this.energies.sort((a, b) => a.price - b.price);
+      },
+      sortedImprovements() {
+        return this.improvements.sort((a, b) => a.price - b.price);
       },
 
  //Compare the cashQuantity and the price 
@@ -180,8 +196,20 @@ import { float } from '@babylonjs/core/types';
           energy.gainPerSec,
           energy.ecoBonus));
       }
+
+      for (const improvement of jsonData.improvements) {
+        this.improvements.push(new Improvement(
+          improvement.id.toString(),
+          improvement.name,
+          improvement.desc,
+          improvement.price,
+          improvement.gainPerSec,
+          improvement.ecoBonus,
+          improvement.gainPerClick,
+          false,
+          0));
+      }
     }
-    
   });
 </script>
   

@@ -1,11 +1,11 @@
 <template>
-  <div id="app"><BabylonScene /></div>
+  <div id="app"><BabylonScene :city ="city" /></div>
   <!-- To put the store in the right side we can make a button that shows or hides a div here :
     <div class="store"></div> --> 
   <div id="store"><StoreMenu /></div>
   <!-- prog means progressiv -->
   <div id="cash" >
-    <ProgCash/>
+    <ProgCash :value = "city.cashQuantity" />
   </div>
   <div id="ecology ">
     <ProgEcology/>
@@ -18,15 +18,22 @@ import BabylonScene from './components/BabylonScene.vue';
 import ProgEcology from './components/ProgEcology.vue';
 import ProgCash from './components/ProgCash.vue';
 import StoreMenu from './components/StoreMenu.vue';
+import {City} from './classes/City';
 
 export default defineComponent({
   name: 'App',
+  
   components: {
     BabylonScene,
     ProgEcology,
     ProgCash,
     StoreMenu
-}
+  },
+  data() {
+    return {
+      city: new City("test",0, 100, 1, 0),
+    }
+  },
 });
 </script>
 

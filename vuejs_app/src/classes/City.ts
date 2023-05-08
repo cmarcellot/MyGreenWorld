@@ -59,7 +59,7 @@ export class City {
     }
 
     buyLiv(living : Living) {
-        if (this.cashQuantity > living.price) {
+        if (this.cashQuantity >= living.price) {
           this.cashQuantity -= living.price;
           console.log('Produit acheté avec succès !');
           console.log('modif' + this.cashQuantity);
@@ -75,7 +75,7 @@ export class City {
         }
 
     buyEco(energy : Energy) {
-        if (this.cashQuantity > energy.price) {
+        if (this.cashQuantity >= energy.price) {
             this.cashQuantity -= energy.price;
             console.log('Produit acheté avec succès !');
             console.log('modif' + this.cashQuantity);

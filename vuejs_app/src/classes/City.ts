@@ -89,4 +89,21 @@ export class City {
             }
     }
 
+    buyImprov(improvement : Improvement) {
+
+        if (this.cashQuantity >= improvement.price) {
+            this.cashQuantity -= improvement.price;
+            console.log('Produit acheté avec succès !');
+            console.log('modif' + this.cashQuantity);
+            this.ecoPourcentage += improvement.ecoBonus;
+            this.gainPerSec += improvement.gainPerSec;
+            this.energies.push(improvement); 
+          } 
+          
+          else {
+            console.log("Vous n'avez pas assez d'argent pour acheter le produit.");
+            }
+
+    }
+
 }

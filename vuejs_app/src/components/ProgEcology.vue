@@ -1,16 +1,14 @@
 <template>
     <div class="container">
-        <div class="child"> {{ value }}%</div>
-        <div class="loading-bar">
-            <div class="percentage" :style="{'width': value + '%'}">
+       
+       <b-progress height="20px" :value="value" show-progress class="mb-2"> 
+           {{ value % 1 === 0 ? value : value.toFixed(1) }}  % </b-progress>
 
-            </div>
-        </div>
-
-    </div>
+   </div>
 </template>
 
 <script>
+import Bootstrap from 'bootstrap-vue';
 export default {
     
     name: 'ProgEcology',
@@ -41,18 +39,11 @@ export default {
 
 <style lang="scss" scoped>
 
-.child {
+.container {
     position: fixed;
-    right: 0;
-    top : 10%;
-    left: 5%;
-    color: rgb(255, 255, 255);
-}
-.loading-bar {
-    position: fixed;
-    right: 0%;
-    top : 10%;
-    left: 8%;
+    right: 100%;
+    top : 5%;
+    left: 10%;
     width : 100px;
     height: 20px;
     border-radius: 15px;
@@ -61,19 +52,21 @@ export default {
     box-shadow: inset 0 1px 2px rgba($color: (#000), $alpha: .4),
     0 -1px 1px #000000, 0 1px 0 #000000;
     
-    
-    .percentage {
+    .mb-2 {
         position: absolute;
         top: 1px; left:1px ; right: 1px;
         display: block;
         height: 100%;
-        width: 50%;
+        width: 100%;
         border-radius: 15px;
-        background-color: #1c8112 ;
+        background-color: #764b0b ;
         background-size: 30px 30px;
         background-image: linear-gradient(135deg,rgba($color: (#000000), $alpha: .15)25%, transparent 50%, 
         rgba($color: (#000000), $alpha: .15) 75%, transparent 75%, transparent );
         animation: animate-stripes 3s linear infinite ;
+        text-align: center;
+        color: aliceblue;
+       
     }
 }
 

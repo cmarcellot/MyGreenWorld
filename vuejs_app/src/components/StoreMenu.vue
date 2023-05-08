@@ -3,9 +3,9 @@
       <div class="wrapper">
 
         <div class="three-dots-container">
-          <div class="dot d1"></div>
-          <div class="dot d2"></div>
-          <div class="dot d3"></div>
+          <div class="d1"> MY </div>
+          <div class="d2"> GREEN </div>
+          <div class="d3"> WORLD </div>
         </div>
 
         <div class="nav nav-bloc" @click="toggleContent1">
@@ -243,9 +243,27 @@ import { Improvement } from '@/classes/Improvement';
   border-radius: 50%;
   background: #000;
 }
-.d1 {background: darkgreen;}
-.d2 {background: green;}
-.d3 {background: lightgreen;}
+.d1 {
+  color : darkgreen;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 20px;
+
+
+}
+.d2 {
+  color: green;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 20px;
+
+
+}
+.d3 {
+  color: lightgreen;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 20px;
+
+
+}
 
 /* New positioning context */
 .side-nav {

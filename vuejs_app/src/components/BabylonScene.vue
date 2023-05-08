@@ -7,7 +7,6 @@
         </div>
         <p class="loadingText" id="percentLoaded">25%</p>
       </div>
-      <p>My Green World</p>
       <canvas></canvas>
     </main>
 </template>
@@ -43,7 +42,7 @@ export default defineComponent({
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 main {
-  width: 100%;
+  width: 110%;
   right: 10%;
   display: flex;
   flex-direction: column;
@@ -110,8 +109,8 @@ p {
   font-size: 2rem;
 }
 canvas {
-  width: 90%;
-  height: 90%;
+  width: 100%;
+  height: 100%;
   border: none;
   outline: none;
 }

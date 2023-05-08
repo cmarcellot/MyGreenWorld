@@ -56,7 +56,6 @@
         <div v-for="(improvement, index) in sortedImprovements()" :key="index" class="nav nav-item" v-show="showContent3">
           <p class="title-bloc">{{ improvement.name }}</p>
           <div class="container">
-            <img class="image" src="../../public/images/greenCityTree.jpg" alt="Image de la centrale" />
             <div class="text-container">
               <p class="description">{{ improvement.desc }}</p>
               <hr class="separator" />
@@ -123,7 +122,6 @@ import { Improvement } from '@/classes/Improvement';
         return this.energies.sort((a, b) => a.price - b.price);
       },
       sortedImprovements() {
-        console.log(this.improvements);
         return this.improvements.sort((a, b) => a.price - b.price);
       },
 

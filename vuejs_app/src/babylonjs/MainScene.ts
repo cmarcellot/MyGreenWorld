@@ -1,4 +1,4 @@
-import { Scene, Engine, FreeCamera, Vector3, HemisphericLight, MeshBuilder, SceneLoader, StandardMaterial, Texture, NodeMaterial, Axis, Space,Viewport} from '@babylonjs/core';
+import { Scene, Engine, FreeCamera, Vector3, HemisphericLight, MeshBuilder, SceneLoader, StandardMaterial, Texture, Color3, Mesh, NodeMaterial, Axis, Space, Viewport, CubeTexture} from '@babylonjs/core';
 import { CustomLoadingScreen } from "./CustomLoadingScreen";
 // We import the loaders to be able to load models
 import "@babylonjs/loaders";
@@ -13,6 +13,11 @@ export class MainScene {
     loadingScreen: CustomLoadingScreen
     groundSize!: number
     city! : City
+    armRight!: Mesh;
+    armLeft!: Mesh;
+    handRight!: Mesh;
+    handLeft!: Mesh;
+
 
     ///////////CONSTRUCTOR////////////
 
@@ -32,8 +37,9 @@ export class MainScene {
         this.engine.displayLoadingUI();
 
         //Init the ground size
-        this.groundSize = 300;
         this.city = p_city;
+        this.groundSize = 450;
+        
         // We create the scene
         this.scene = this.createScene(this.city);
         
@@ -44,14 +50,16 @@ export class MainScene {
     // Scene creation
     createScene(city : City): Scene {
         const scene = new Scene(this.engine);
-        const camera = new FreeCamera("camera", new Vector3(5, 10, -5), this.scene);
+        const camera = new FreeCamera("camera", new Vector3(40, 5, 0), this.scene);
         camera.attachControl();
         // The speed of the camera in the scene
         camera.speed = 1.5;
         // Activate collisions for the camera
         camera.checkCollisions = true;
         // Set the ellipsoid around the camera (your player's size)
-        camera.ellipsoid = new Vector3(1, 1.5, 1);
+        camera.ellipsoid = new Vector3(5, 1.75, 5);
+        camera.rotation.y = -(Math.PI / 2);
+        camera.minZ = 0.5;
 
         // Create a light to illuminate the scene
         const hemiLight = new HemisphericLight("hemiLight", new Vector3(0, 1, 0), this.scene);
@@ -71,6 +79,33 @@ export class MainScene {
         const ground = MeshBuilder.CreateGround("ground", {width: this.groundSize, height: this.groundSize}, this.scene);
         ground .checkCollisions = true;
         ground.material = this.CreateGroundMaterial();
+
+        let supermanMode = false;
+        window.addEventListener("keydown", (event) => {
+            // Reset the camera position when pressing the "R" key
+            if (event.keyCode === 82) {
+                camera.position = new Vector3(40, 5, 0);
+                camera.rotation.y = -(Math.PI / 2);
+            }
+            // supermanMode when pressing the "S" key
+            if (event.keyCode === 83) {
+                if(supermanMode){
+                    camera.speed = 1.5;
+                    this.armRight.isVisible = false;
+                    this.armLeft.isVisible = false;
+                    this.handRight.isVisible = false;
+                    this.handLeft.isVisible = false;
+                    supermanMode = false;
+                }else{
+                    camera.speed = 7.5;
+                    this.armRight.isVisible = true;
+                    this.armLeft.isVisible = true;
+                    this.handRight.isVisible = true;
+                    this.handLeft.isVisible = true;
+                    supermanMode = true;
+                }
+            }
+        });        
 
         this.CreateGrass();
         // TREE
@@ -95,7 +130,41 @@ export class MainScene {
         });
         
 
+        let clickCount = 0;
+        // Import of the tree
+        SceneLoader.ImportMesh("","./models/","tree.glb",this.scene,(newMeshes)=> {
+            
+            newMeshes.map((mesh) => {
+                mesh.checkCollisions = true;
+            });
+            const mesh = newMeshes[0];
+            mesh.position = new Vector3(0,0,0);
+            mesh.isPickable = true;
+            // reducing the tree size
+            mesh.scaling = new Vector3(3/150, 3/150, 3/150);
+            // making the tree clickable
+            mesh.name  = "tree";
+  
+            scene.onPointerDown = function (evt, pickResult) {
+                // We try to pick an object
+                if (pickResult && pickResult.hit && pickResult.pickedMesh) {
+                    if(pickResult.pickedMesh.name == "Object_4" || pickResult.pickedMesh.name == "Object_5" ){
+                        clickCount++;
+                        console.log("Mesh cliqué !" + clickCount + " fois !");
+                    }
+                }
+            };
+        });
+          
+        // Create a skybox
+        const envTex = CubeTexture.CreateFromPrefilteredData("./environments/blue_sky.env", scene);
+        scene.environmentTexture = envTex;
+        scene.createDefaultSkybox(envTex, true);
+        scene.environmentIntensity = 0.75;
+
         this.LoadModels();
+
+        this.CreateArms(camera);
         
         return scene;
     }
@@ -149,10 +218,27 @@ export class MainScene {
         }
     }
 
+    // Add environment
+    AddEnvironment(): void {
+        // Create a skybox
+        const envTex = CubeTexture.CreateFromPrefilteredData("./environments/blue_sky.env", this.scene);
+        this.scene.environmentTexture = envTex;
+        this.scene.createDefaultSkybox(envTex, true);
+        this.scene.environmentIntensity = 0.75;
+    }
+
     // Load all the models
     LoadModels(): void {
         // List of all the models to load
         const modelNames = [
+            "CaravanBuilding.glb",
+            "CottageBuilding.glb",
+            "HouseBuilding.glb",
+            "ModernBuilding_1.glb",
+            "ModernBuilding_2.glb",
+            "ModernHouseBuilding.glb",
+            "PalaceBuilding.glb",
+            "SkyscraperBuilding.glb",
             "SmallStore.glb",
             "DIYStore.glb",
             "ClothingStore.glb",
@@ -164,7 +250,7 @@ export class MainScene {
         ];
     
         // Path to the models
-        const modelDir = "./models/store/";
+        const modelDir = "./models/";
     
         // Progress bar
         let progress = 0;
@@ -174,8 +260,60 @@ export class MainScene {
         const loadModel = async (modelName: string): Promise<void> => {
             const result = await SceneLoader.ImportMeshAsync("", modelDir, modelName, this.scene);
             const mainMesh = result.meshes[0];
+            result.meshes.map((mesh) => {
+                mesh.checkCollisions = true;
+            });
     
             switch (modelName) {
+                case "CaravanBuilding.glb":
+                    mainMesh.position = new Vector3(25, 0.1, -40);
+                    mainMesh.scaling = new Vector3(0.25, 0.25, 0.25);
+                    mainMesh.rotation = new Vector3(0, 0, 0);
+                    mainMesh.scaling.x *= -1;
+                    break;
+    
+                case "CottageBuilding.glb":
+                    mainMesh.position = new Vector3(-80, 0.1, 125);
+                    mainMesh.scaling = new Vector3(2, 2, 2);
+                    mainMesh.rotation = new Vector3(0, 0, 0);
+                    mainMesh.scaling.x *= -1;
+                    break;
+                case "HouseBuilding.glb":
+                    mainMesh.position = new Vector3(-120,0.1,-75);
+                    mainMesh.scaling = new Vector3(0.1,0.1,0.1);
+                    mainMesh.rotation = new Vector3(0, 0, 0);
+                    mainMesh.scaling.x *= -1;
+                    break;
+                case "ModernBuilding_1.glb":
+                    mainMesh.position = new Vector3(-700,-0.55,-200);
+                    mainMesh.scaling = new Vector3(5,5,5);
+                    mainMesh.rotation = new Vector3(0, 0, 0);
+                    mainMesh.scaling.x *= -1;
+                    break;
+                case "ModernBuilding_2.glb":
+                    mainMesh.position = new Vector3(-675,-0.55,-225);
+                    mainMesh.scaling = new Vector3(5,5,5);
+                    mainMesh.rotation = new Vector3(0, 0, 0);
+                    mainMesh.scaling.x *= -1;
+                    break;
+                case "ModernHouseBuilding.glb":
+                    mainMesh.position = new Vector3(-150,-0.1,85);
+                    mainMesh.scaling = new Vector3(3,3,3);
+                    mainMesh.rotation = new Vector3(0,0,0);
+                    mainMesh.scaling.x *= -1;
+                    break;
+                case "PalaceBuilding.glb":
+                    mainMesh.position = new Vector3(75,0.1,150);
+                    mainMesh.scaling = new Vector3(1.5,1.5,1.5);
+                    mainMesh.rotation = new Vector3(0,0,0);
+                    mainMesh.scaling.x *= -1;
+                    break;
+                case "SkyscraperBuilding.glb":
+                    mainMesh.position = new Vector3(100,0,-150);
+                    mainMesh.scaling = new Vector3(0.4,0.4,0.4);
+                    mainMesh.rotation = new Vector3(0, 0, 0);
+                    mainMesh.scaling.x *= -1;
+                    break;
                 case "SmallStore.glb":
                     mainMesh.position = new Vector3(80, 0.1, -30);
                     mainMesh.scaling = new Vector3(0.25, 0.25, 0.25);
@@ -248,5 +386,43 @@ export class MainScene {
             loadModel(modelName);
         });
     }
+
+    CreateArms(camera : FreeCamera): void {
+        // Attach arms to camera
+        this.armRight = MeshBuilder.CreateBox("armRight", {width: 0.3, height: 0.3, depth: 7}, this.scene);
+        this.armRight.position = new Vector3(0.5, -0.5, -1);
+        this.armRight.rotation.y = Math.PI / 12;
+        this.armLeft = MeshBuilder.CreateBox("armLeft", {width: 0.3, height: 0.3, depth: 7}, this.scene);
+        this.armLeft.position = new Vector3(-0.5, -0.5, -1);
+        this.armLeft.rotation.y = -Math.PI / 12;
+        this.handRight = MeshBuilder.CreateSphere("handRight", {diameter: 0.5}, this.scene);
+        this.handRight.position = new Vector3(0, 0, 4);
+        this.handLeft = MeshBuilder.CreateSphere("handLeft", {diameter: 0.5}, this.scene);
+        this.handLeft.position = new Vector3(0, 0, 4);
+
+        // Parent arms and hands to camera
+        const cameraArm = new Mesh("cameraArm", this.scene);
+        cameraArm.parent = camera;
+        this.armRight.parent = cameraArm;
+        this.armLeft.parent = cameraArm;
+        this.handRight.parent = this.armRight;
+        this.handLeft.parent = this.armLeft;
+
+        // Add materials
+        const armMaterial = new StandardMaterial("armMaterial", this.scene);
+        armMaterial.diffuseColor = Color3.FromHexString("#0C59AA"); // bleu
+        this.armRight.material = armMaterial;
+        this.armLeft.material = armMaterial;
+        const handMaterial = new StandardMaterial("handMaterial", this.scene);
+        handMaterial.diffuseColor = Color3.FromHexString("#E4E4D6") // beige
+        this.handRight.material = handMaterial;
+        this.handLeft.material = handMaterial;
+
+        //hidden arms
+        this.armRight.isVisible = false;
+        this.armLeft.isVisible = false;
+        this.handRight.isVisible = false;
+        this.handLeft.isVisible = false;
+   }
 
 }

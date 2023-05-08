@@ -260,5 +260,214 @@
             "gainPerSec": 400000.00,
             "ecoBonus": 15
         }
+    ],
+    "improvements": [
+        {
+            "id":11,
+            "name": "Programme de compostage",
+            "desc": "Le joueur peut débloquer un programme de compostage pour les déchets alimentaires et de jardin, ce qui permet de produire du compost pour une utilisation locale dans les jardins communautaires ou les parcs de la ville, réduisant ainsi la quantité de déchets organiques envoyés en décharge.",
+            "price": 100.00,
+            "gainPerSec": 0.1,
+            "ecoBonus": 1,
+            "gainPerClick": 1.00
+        },
+        {
+            "id":12,
+            "name": "Centres de tri avancés",
+            "desc": "Le joueur peut débloquer des centres de tri modernisés et efficaces, équipés de technologies de pointe pour trier les matériaux recyclables tels que le plastique, le papier, le verre, et le métal de manière plus précise et efficace, permettant ainsi d'augmenter le taux de recyclage de la ville.",
+            "price": 1000.00,
+            "gainPerSec": 1.00,
+            "ecoBonus": 5,
+            "gainPerClick": 10.00
+        },
+        {
+            "id":13,
+            "name": "Programme de récupération des déchets électroniques",
+            "desc": "Le joueur peut mettre en place un programme de récupération des déchets électroniques, tels que les ordinateurs, les téléphones portables, et autres appareils électroniques, en permettant aux citoyens de les déposer dans des points de collecte spécifiques pour un recyclage approprié ou une réutilisation.",
+            "price": 10000.00,
+            "gainPerSec": 10.00,
+            "ecoBonus": 10,
+            "gainPerClick": 100.00
+        },
+        {
+            "id":14,
+            "name": "Système de récompense pour le tri des déchets",
+            "desc": "Le joueur peut débloquer un système de récompense pour encourager les citoyens à trier correctement leurs déchets. Les citoyens peuvent recevoir des bonus ou des réductions d'impôt en fonction de la qualité de leur tri, incitant ainsi à une meilleure gestion des déchets.",
+            "price": 100000.00,
+            "gainPerSec": 100.00,
+            "ecoBonus": 15,
+            "gainPerClick": 1000.00
+        },
+        {
+            "id":15,
+            "name": "Programme de réduction des déchets à la source",
+            "desc": "Le joueur peut débloquer un programme de sensibilisation et d'éducation pour aider les citoyens à réduire la production de déchets à la source, par exemple en encourageant l'utilisation de produits réutilisables, en promouvant l'économie circulaire ou en proposant des alternatives aux emballages jetables.",
+            "price": 1000000.00,
+            "gainPerSec": 1000.00,
+            "ecoBonus": 20,
+            "gainPerClick": 10000.00
+        },
+        {
+            "id":16,
+            "name": "Amélioration des infrastructures de collecte des déchets",
+            "desc": "Le joueur peut débloquer des améliorations des infrastructures de collecte des déchets, telles que des bacs de recyclage supplémentaires dans les quartiers résidentiels, des points de collecte sélective dans les lieux publics, ou des systèmes de collecte pneumatique pour optimiser la gestion des déchets.",
+            "price": 10000000.00,
+            "gainPerSec": 10000.00,
+            "ecoBonus": 25,
+            "gainPerClick": 100000.00
+        },
+        {
+            "id":21,
+            "name": "Extension du réseau de transport public",
+            "desc": "Le joueur peut débloquer de nouvelles lignes de transport en commun, telles que des lignes de bus, de tramway, de métro, ou de trains, pour étendre le réseau de transport public de la ville et permettre aux citoyens d'avoir accès à plus de destinations sans avoir besoin d'utiliser des véhicules privés.",
+            "price": 200.00,
+            "gainPerSec": 0.20,
+            "ecoBonus": 1,
+            "gainPerClick": 2.00
+        },
+        {
+            "id":22,
+            "name": "Amélioration des véhicules de transport public",
+            "desc": "Le joueur peut débloquer des véhicules de transport public plus écologiques, tels que des bus électriques, des trains à hydrogène, ou des trams alimentés par des énergies renouvelables, afin de réduire les émissions de gaz à effet de serre et de promouvoir une mobilité durable dans la ville.",
+            "price": 2000.00,
+            "gainPerSec": 2.00,
+            "ecoBonus": 5,
+            "gainPerClick": 20.00
+        },
+        {
+            "id":23,
+            "name": "Infrastructures pour les véhicules électriques",
+            "desc": "Le joueur peut débloquer des infrastructures de recharge pour les véhicules électriques, tels que des bornes de recharge rapide dans les stations de transport en commun, les parkings publics, ou les lieux stratégiques de la ville, pour encourager l'utilisation de véhicules électriques dans le réseau de transport public.",
+            "price": 20000.00,
+            "gainPerSec": 20.00,
+            "ecoBonus": 10,
+            "gainPerClick": 200.00
+        },
+        {
+            "id":24,
+            "name": "Amélioration de la fréquence et de la ponctualité des transports en commun",
+            "desc": "Le joueur peut débloquer des améliorations pour augmenter la fréquence et la ponctualité des transports en commun, ce qui rendra le réseau de transport public plus attractif pour les citoyens et les incitera à l'utiliser davantage comme alternative aux véhicules privés.",
+            "price": 200000.00,
+            "gainPerSec": 200.00,
+            "ecoBonus": 15,
+            "gainPerClick": 2000.00
+        },
+        {
+            "id":25,
+            "name": "Accessibilité améliorée",
+            "desc": "Le joueur peut débloquer des améliorations pour rendre le réseau de transport public plus accessible aux personnes à mobilité réduite, par exemple en ajoutant des rampes d'accès, des ascenseurs, ou des annonces sonores pour les personnes malvoyantes, afin de garantir que le transport public soit accessible à tous les citoyens de la ville.",
+            "price": 2000000.00,
+            "gainPerSec": 2000.00,
+            "ecoBonus": 20,
+            "gainPerClick": 20000.00
+        },
+        {
+            "id":26,
+            "name": "Programme de covoiturage ou de partage de véhicules",
+            "desc": "Le joueur peut débloquer un programme de covoiturage ou de partage de véhicules, permettant aux citoyens de partager des trajets en utilisant des véhicules publics, tels que des voitures, des vélos, ou des trottinettes électriques, pour réduire le nombre de véhicules privés sur les routes et encourager une mobilité plus durable.",
+            "price": 20000000.00,
+            "gainPerSec": 20000.00,
+            "ecoBonus": 25,
+            "gainPerClick": 200000.00
+        },
+        {
+            "id":31,
+            "name": "Subventions pour l'installation de panneaux solaires",
+            "desc": "Le joueur peut débloquer des améliorations pour offrir des subventions non seulement aux propriétaires de maisons, mais aussi aux propriétaires de bâtiments publics, tels que les écoles, les bibliothèques, les hôpitaux, etc., pour les encourager à installer des panneaux solaires et à promouvoir l'énergie solaire dans toute la ville.",
+            "price": 300.00,
+            "gainPerSec": 0.30,
+            "ecoBonus": 1,
+            "gainPerClick": 3.00
+        },
+        {
+            "id":32,
+            "name": "Augmentation du taux de subvention",
+            "desc": "Le joueur peut débloquer des améliorations pour augmenter le taux de subvention offert aux propriétaires qui installent des panneaux solaires sur leur toit. Cela peut inciter davantage de propriétaires à adopter l'énergie solaire en rendant l'investissement plus attractif financièrement.",
+            "price": 3000.00,
+            "gainPerSec": 3.00,
+            "ecoBonus": 5,
+            "gainPerClick": 30.00
+        },
+        {
+            "id":33,
+            "name": "Subventions pour les batteries de stockage d'énergie",
+            "desc": "Le joueur peut débloquer des améliorations pour offrir des subventions non seulement pour l'installation de panneaux solaires, mais aussi pour l'achat et l'installation de batteries de stockage d'énergie, ce qui permet aux propriétaires de stocker l'énergie solaire produite et de l'utiliser pendant les périodes de faible ensoleillement ou en cas de coupure d'électricité.",
+            "price": 30000.00,
+            "gainPerSec": 30.00,
+            "ecoBonus": 10,
+            "gainPerClick": 300.00
+        },
+        {
+            "id":34,
+            "name": "Programme de financement à faible taux d'intérêt",
+            "desc": "Le joueur peut débloquer des améliorations pour mettre en place un programme de financement à faible taux d'intérêt pour les propriétaires qui souhaitent installer des panneaux solaires, ce qui peut rendre l'investissement plus accessible et attractif pour un plus grand nombre de propriétaires.",
+            "price": 300000.00,
+            "gainPerSec": 300.00,
+            "ecoBonus": 15,
+            "gainPerClick": 3000.00
+        },
+        {
+            "id":35,
+            "name": "Promotion de l'autoconsommation et de la revente de l'énergie solaire",
+            "desc": "Le joueur peut débloquer des améliorations pour encourager l'autoconsommation de l'énergie solaire produite par les panneaux solaires installés, ainsi que la revente de l'excédent d'énergie produite à la grille électrique locale. Cela peut permettre aux propriétaires de réaliser des économies sur leur facture d'électricité et de contribuer à la production d'énergie renouvelable dans la ville.",
+            "price": 3000000.00,
+            "gainPerSec": 3000.00,
+            "ecoBonus": 20,
+            "gainPerClick": 30000.00
+        },
+        {
+            "id":41,
+            "name": "Campagnes de sensibilisation sur le tri des déchets",
+            "desc": "Le joueur peut débloquer des améliorations pour lancer des campagnes de sensibilisation pour encourager les habitants de la ville à trier leurs déchets de manière appropriée, en mettant l'accent sur l'importance du recyclage, de la compostage et de la réduction des déchets.",
+            "price": 400.00,
+            "gainPerSec": 0.40,
+            "ecoBonus": 1,
+            "gainPerClick": 4.00
+        },
+        {
+            "id":42,
+            "name": "Campagnes de sensibilisation sur la consommation responsable",
+            "desc": "Le joueur peut débloquer des améliorations pour lancer des campagnes de sensibilisation sur la consommation responsable, en mettant en avant les avantages de l'achat local, du commerce équitable, des produits durables et de la réduction de la consommation de ressources naturelles.",
+            "price": 4000.00,
+            "gainPerSec": 4.00,
+            "ecoBonus": 5,
+            "gainPerClick": 40.00
+        },
+        {
+            "id":43,
+            "name": "Campagnes de sensibilisation sur la mobilité durable",
+            "desc": "Le joueur peut débloquer des améliorations pour lancer des campagnes de sensibilisation sur la mobilité durable, en encourageant l'utilisation du transport public, du covoiturage, du vélo, de la marche et d'autres modes de transport écologiques, ainsi que la réduction de l'utilisation des véhicules individuels à moteur thermique.",
+            "price": 40000.00,
+            "gainPerSec": 40.00,
+            "ecoBonus": 10,
+            "gainPerClick": 400.00
+        },
+        {
+            "id":44,
+            "name": "Campagnes de sensibilisation sur l'économie d'énergie",
+            "desc": "Le joueur peut débloquer des améliorations pour lancer des campagnes de sensibilisation sur l'économie d'énergie, en mettant l'accent sur l'importance de la gestion efficace de l'énergie dans les bâtiments, les transports et les activités quotidiennes, ainsi que sur l'utilisation d'appareils économes en énergie et la réduction du gaspillage d'énergie.",
+            "price": 400000.00,
+            "gainPerSec": 400.00,
+            "ecoBonus": 15,
+            "gainPerClick": 4000.00
+        },
+        {
+            "id":45,
+            "name": "Campagnes de sensibilisation sur la protection de la biodiversité",
+            "desc": "Le joueur peut débloquer des améliorations pour lancer des campagnes de sensibilisation sur la protection de la biodiversité, en mettant en avant l'importance de la préservation des espaces naturels, de la plantation d'arbres, de la protection des habitats naturels, de la conservation des espèces en danger et de l'utilisation de pratiques agricoles durables.",
+            "price": 4000000.00,
+            "gainPerSec": 4000.00,
+            "ecoBonus": 20,
+            "gainPerClick": 40000.00
+        },
+        {
+            "id":46,
+            "name": "Campagnes de sensibilisation sur la gestion de l'eau",
+            "desc": "Le joueur peut débloquer des améliorations pour lancer des campagnes de sensibilisation sur la gestion de l'eau, en mettant en avant l'importance de la conservation de l'eau, de la réduction du gaspillage d'eau, de la collecte d'eau de pluie, de l'utilisation d'équipements économes en eau et de la protection des ressources en eau.",
+            "price": 4000000.00,
+            "gainPerSec": 40000.00,
+            "ecoBonus": 25,
+            "gainPerClick": 400000.00
+        }
     ]
 }

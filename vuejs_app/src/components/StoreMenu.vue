@@ -25,6 +25,8 @@
               <p class="bonusEco">Écologie: {{ living.ecoBonus }} %</p>
             </div>
           </div>
+          <button class="btn"
+          v-on:click="buy(living.price, living.ecoBonus, living.gainPerSec, living.boughtNumber, living.elementId)" > Acheter </button>
         </div>
 
         <div class="nav nav-bloc" @click="toggleContent2">
@@ -44,6 +46,8 @@
               <p class="bonusEco">Écologie: {{ central.ecoBonus }} %</p>
             </div>
           </div>
+          <button class="btn"
+           v-on:click="buyEnergy(central.price, central.ecoBonus, central.gainPerSec)"> Acheter </button>
         </div>
 
         <div class="nav nav-bloc" @click="toggleContent3">
@@ -65,6 +69,8 @@ import { Living } from '@/classes/Living';
 import { Commerce } from '@/classes/Commerce';
 import { Energy } from '@/classes/Energy';
 import jsonData from '@/assets/storage.json';
+import { City } from '@/classes/City';
+import { float } from '@babylonjs/core/types';
   
   export default defineComponent({
     name: 'StoreMenu',
@@ -77,6 +83,10 @@ import jsonData from '@/assets/storage.json';
         livings: [] as Living[],
         commerces: [] as Commerce[],
         energies: [] as Energy[],
+
+        //créer city pour tester
+        City : new City ("test",150,100,5,2.5),
+      
       };
     },
     methods: {
@@ -99,6 +109,44 @@ import jsonData from '@/assets/storage.json';
       sortedEnergies() {
         return this.energies.sort((a, b) => a.price - b.price);
       },
+
+ //Compare the cashQuantity and the price 
+      buy(price : float, gainPerSec : number, ecoBonus : number, boughtNumber : number, elementId : string) {
+      if (this.City.cashQuantity > price) {
+        //console.log('initial' + this.City.cashQuantity);
+        this.City.cashQuantity -= price;
+        console.log('Produit acheté avec succès !');
+        console.log('modif' + this.City.cashQuantity);
+       // console.log('initial' + this.City.ecoPourcentage+ ' et ' + this.City.gainPerSec)
+        this.City.ecoPourcentage += ecoBonus;
+        this.City.gainPerSec += gainPerSec;
+        boughtNumber += 1;
+      
+      } 
+      
+      else {
+        console.log("Vous n'avez pas assez d'argent pour acheter le produit.");
+        }
+      },
+
+
+      buyEnergy(price : float, gainPerSec : number, ecoBonus : number) {
+      if (this.City.cashQuantity > price) {
+        console.log('initial' + this.City.cashQuantity);
+        this.City.cashQuantity -= price;
+        console.log('Produit acheté avec succès !');
+        console.log('modif' + this.City.cashQuantity);
+        console.log('initial' + this.City.ecoPourcentage+ ' et ' + this.City.gainPerSec)
+        console.log(this.City.ecoPourcentage += ecoBonus);
+        console.log(this.City.gainPerSec += gainPerSec);
+        
+      } 
+      
+      else {
+        console.log("Vous n'avez pas assez d'argent pour acheter le produit.");
+        }
+      },
+
     },
     created(){
       // Create objects from json data
@@ -268,5 +316,18 @@ import jsonData from '@/assets/storage.json';
   height: 1px;
   background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
 }
+
+.btn {
+  border-radius: 20px;
+  padding: 10px 15px;
+  background-color: white;
+  color: #444;
+  border:rgb(250, 250, 250);
+  cursor: pointer;
+  position: relative;
+  top: 10px;
+  font-weight:400;
+}
+
 </style>
   

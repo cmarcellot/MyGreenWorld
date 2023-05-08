@@ -2,13 +2,13 @@
   <div id="app"><BabylonScene :city ="city" /></div>
   <!-- To put the store in the right side we can make a button that shows or hides a div here :
     <div class="store"></div> --> 
-  <div id="store"><StoreMenu /></div>
+  <div id="store"><StoreMenu :city ="city"  /></div>
   <!-- prog means progressiv -->
   <div id="cash" >
     <ProgCash :value = "city.cashQuantity" />
   </div>
   <div id="ecology ">
-    <ProgEcology/>
+    <ProgEcology :value = "city.ecoPourcentage"> </ProgEcology>
   </div>
 </template>
 

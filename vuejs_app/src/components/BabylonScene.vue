@@ -35,6 +35,7 @@ export default defineComponent({
     const percentLoaded = document.getElementById("percentLoaded") as HTMLElement;
     const loader = document.getElementById("loader") as HTMLElement;
     new MainScene(canvas, loadingBar, percentLoaded, loader, this.city);
+    this.city.updateCash();
    },
 });
 </script>

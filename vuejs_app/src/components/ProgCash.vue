@@ -2,7 +2,7 @@
     <div class="container">
        
         <b-progress height="20px" :value="value" show-progress class="mb-2"> 
-             {{value}} </b-progress>
+            {{ value % 1 === 0 ? value : value.toFixed(1) }} </b-progress>
 
     </div>
 </template>

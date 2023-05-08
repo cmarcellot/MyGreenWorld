@@ -51,6 +51,7 @@ export class City {
         this.livings= [];
         this.commerces=[];
         this.energies =[];
+   
     }
     
     
@@ -67,6 +68,7 @@ export class City {
           this.gainPerSec += living.gainPerSec;
             living.boughtNumber ++; 
             this.livings.push(living); 
+      
         } 
         
         else {
@@ -89,6 +91,12 @@ export class City {
             }
     }
 
+    updateCash() {
+        setInterval(() => {
+            this.cashQuantity += this.gainPerSec;
+          }, 1000);
+    }
+
     buyImprov(improvement : Improvement) {
 
         if (this.cashQuantity >= improvement.price) {
@@ -105,5 +113,6 @@ export class City {
             }
 
     }
+
 
 }

@@ -15,6 +15,7 @@
 import { defineComponent } from 'vue';
 import { MainScene } from '@/babylonjs/MainScene';
 
+
 export default defineComponent({
   name: 'BabylonScene',
   data() {
@@ -23,13 +24,16 @@ export default defineComponent({
       loaded: false,
     };
   },
+  props :[
+    "city"
+  ],
   mounted() {
     // On récupère le canvas et les éléments de chargement
     const canvas = document.querySelector("canvas") as HTMLCanvasElement;
     const loadingBar = document.getElementById("loadingBar") as HTMLElement;
     const percentLoaded = document.getElementById("percentLoaded") as HTMLElement;
     const loader = document.getElementById("loader") as HTMLElement;
-    new MainScene(canvas, loadingBar, percentLoaded, loader);
+    new MainScene(canvas, loadingBar, percentLoaded, loader, this.city);
    },
 });
 </script>

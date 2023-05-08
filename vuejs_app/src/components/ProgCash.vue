@@ -13,12 +13,9 @@ import Bootstrap from 'bootstrap-vue';
 export default {
    
     name: 'ProgCash',
-    data: () => {
-        return {
-            value : 50
-        }
-    },
-
+    props :[
+        "value"
+    ],
    
 
 }

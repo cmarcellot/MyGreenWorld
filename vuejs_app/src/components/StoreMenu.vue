@@ -26,7 +26,7 @@
             </div>
           </div>
           <button class="btn"
-          v-on:click="buy(living.price, living.ecoBonus, living.gainPerSec, living.boughtNumber, living.elementId)" > Acheter </button>
+          v-on:click="BuyLiving(city, living)" :class="{ 'disabled': city.cashQuantity < living.price }"> Acheter </button>
         </div>
 
         <div class="nav nav-bloc" @click="toggleContent2">
@@ -47,17 +47,27 @@
             </div>
           </div>
           <button class="btn"
-           v-on:click="buyEnergy(central.price, central.ecoBonus, central.gainPerSec)"> Acheter </button>
+          v-on:click="BuyEnergy(city, central)" :class="{ 'disabled': city.cashQuantity < central.price }"> Acheter </button>
         </div>
 
         <div class="nav nav-bloc" @click="toggleContent3">
           <p class="title-item">AMÉLIORATIONS</p>      
         </div>
-        <div id="content-1" class="nav nav-item" v-show="showContent3">
-          <p  class="title-bloc">Chauffage écologique</p>  
-        </div>
-        <div id="content-1" class="nav nav-item" v-show="showContent3">
-          <p  class="title-bloc">Luminaires automotiques</p>  
+        <div v-for="(improvement, index) in sortedImprovements()" :key="index" class="nav nav-item" v-show="showContent3">
+          <p class="title-bloc">{{ improvement.name }}</p>
+          <div class="container">
+            <div class="text-container">
+              <p class="description">{{ improvement.desc }}</p>
+              <hr class="separator" />
+              <p class="price"> Prix: {{ improvement.price }} €</p>
+              <hr class="separator" />
+              <p class="gainPerSec">Gains: {{ improvement.gainPerSec }}/sec</p>
+              <hr class="separator" />
+              <p class="bonusEco">Écologie: {{ improvement.ecoBonus }} %</p>
+            </div>
+          </div>
+          <button class="btn"
+          v-on:click="BuyImprov(city, improvement)" :class="{ 'disabled': city.cashQuantity < improvement.price }"> Acheter </button>
         </div>
       </div>
     </nav>
@@ -71,9 +81,14 @@ import { Energy } from '@/classes/Energy';
 import jsonData from '@/assets/storage.json';
 import { City } from '@/classes/City';
 import { float, int } from '@babylonjs/core';
+import { Improvement } from '@/classes/Improvement';
+  
 
   export default defineComponent({
     name: 'StoreMenu',
+    props :[
+    "city"
+  ],
     data() {
       return {
         showContent1: false,
@@ -83,9 +98,8 @@ import { float, int } from '@babylonjs/core';
         livings: [] as Living[],
         commerces: [] as Commerce[],
         energies: [] as Energy[],
+        improvements: [] as Improvement[],   
 
-        // create city 
-        City : new City ("test",150,100,5,2.5),
       };
     },
     methods: {
@@ -97,6 +111,7 @@ import { float, int } from '@babylonjs/core';
         this.showContent2 = !this.showContent2;
       },
       toggleContent3() {
+        console.log(this.improvements);
         this.showContent3 = !this.showContent3;
       },
 
@@ -108,43 +123,46 @@ import { float, int } from '@babylonjs/core';
       sortedEnergies() {
         return this.energies.sort((a, b) => a.price - b.price);
       },
+      sortedImprovements() {
+        return this.improvements.sort((a, b) => a.price - b.price);
+      },
 
  //Compare the cashQuantity and the price 
-      buy(price : float, gainPerSec : number, ecoBonus : number, boughtNumber : number, elementId : string) {
-      if (this.City.cashQuantity > price) {
-        //console.log('initial' + this.City.cashQuantity);
-        this.City.cashQuantity -= price;
-        console.log('Produit acheté avec succès !');
-        console.log('modif' + this.City.cashQuantity);
-       // console.log('initial' + this.City.ecoPourcentage+ ' et ' + this.City.gainPerSec)
-        this.City.ecoPourcentage += ecoBonus;
-        this.City.gainPerSec += gainPerSec;
-        boughtNumber += 1;
+      BuyLiving(city : City, living: Living) {
       
-      } 
-      
-      else {
-        console.log("Vous n'avez pas assez d'argent pour acheter le produit.");
-        }
-      },
-
-
-      buyEnergy(price : float, gainPerSec : number, ecoBonus : number) {
-      if (this.City.cashQuantity > price) {
-        console.log('initial' + this.City.cashQuantity);
-        this.City.cashQuantity -= price;
-        console.log('Produit acheté avec succès !');
-        console.log('modif' + this.City.cashQuantity);
-        console.log('initial' + this.City.ecoPourcentage+ ' et ' + this.City.gainPerSec)
-        console.log(this.City.ecoPourcentage += ecoBonus);
-        console.log(this.City.gainPerSec += gainPerSec);
+        city.buyLiv(living);
         
-      } 
-      
-      else {
-        console.log("Vous n'avez pas assez d'argent pour acheter le produit.");
-        }
       },
+
+      BuyEnergy(city : City, energy : Energy){
+
+        city.buyEco(energy);
+
+      },
+
+      BuyImprov (city : City, improvement : Improvement) {
+
+        city.buyImprov(improvement);
+
+      }
+
+
+      // buyEnergy(price : float, gainPerSec : number, ecoBonus : number) {
+      // if (this.City.cashQuantity > price) {
+      //   console.log('initial' + this.City.cashQuantity);
+      //   this.City.cashQuantity -= price;
+      //   console.log('Produit acheté avec succès !');
+      //   console.log('modif' + this.City.cashQuantity);
+      //   console.log('initial' + this.City.ecoPourcentage+ ' et ' + this.City.gainPerSec)
+      //   console.log(this.City.ecoPourcentage += ecoBonus);
+      //   console.log(this.City.gainPerSec += gainPerSec);
+        
+      // } 
+      
+      // else {
+      //   console.log("Vous n'avez pas assez d'argent pour acheter le produit.");
+      //   }
+      // },
 
     },
     created(){
@@ -182,8 +200,20 @@ import { float, int } from '@babylonjs/core';
           energy.gainPerSec,
           energy.ecoBonus));
       }
+
+      for (const improvement of jsonData.improvements) {
+        this.improvements.push(new Improvement(
+          improvement.id.toString(),
+          improvement.name,
+          improvement.desc,
+          improvement.price,
+          improvement.gainPerSec,
+          improvement.ecoBonus,
+          improvement.gainPerClick,
+          false,
+          0));
+      }
     }
-    
   });
 </script>
   
@@ -326,6 +356,12 @@ import { float, int } from '@babylonjs/core';
   position: relative;
   top: 10px;
   font-weight:400;
+}
+
+.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
 }
 
 </style>

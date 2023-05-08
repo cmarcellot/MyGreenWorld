@@ -2,6 +2,7 @@ import { Scene, Engine, FreeCamera, Vector3, HemisphericLight, MeshBuilder, Scen
 import { CustomLoadingScreen } from "./CustomLoadingScreen";
 // We import the loaders to be able to load models
 import "@babylonjs/loaders";
+import { City } from '@/classes/City';
 
 export class MainScene {
 
@@ -11,10 +12,12 @@ export class MainScene {
     engine: Engine;
     loadingScreen: CustomLoadingScreen
     groundSize!: number
+    city! : City
     armRight!: Mesh;
     armLeft!: Mesh;
     handRight!: Mesh;
     handLeft!: Mesh;
+
 
     ///////////CONSTRUCTOR////////////
 
@@ -22,7 +25,8 @@ export class MainScene {
         private canvas:HTMLCanvasElement,
         private loadingBar: HTMLElement,
         private percentLoaded: HTMLElement,
-        private loader: HTMLElement
+        private loader: HTMLElement,
+        private p_city : City
     ) {
         // We create an engine for the scene rendering
         this.engine = new Engine(canvas, true);
@@ -33,8 +37,9 @@ export class MainScene {
         this.engine.displayLoadingUI();
 
         //Init the ground size
+        this.city = p_city;
         this.groundSize = 450;
-
+        
         // We create the scene
         this.scene = this.createScene();
 
@@ -54,12 +59,14 @@ export class MainScene {
         this.engine.runRenderLoop(() => {
             this.scene.render();
         });   
+        this.scene = this.createScene(this.city);
+        
     }
 
     ///////////METHODS////////////
 
     // Scene creation
-    createScene(): Scene {
+    createScene(city : City): Scene {
         const scene = new Scene(this.engine);
         const camera = new FreeCamera("camera", new Vector3(40, 5, 0), this.scene);
         camera.attachControl();
@@ -121,7 +128,6 @@ export class MainScene {
     
         this.CreateGrass();
 
-        let clickCount = 0;
         // Import of the tree
         SceneLoader.ImportMesh("","./models/","tree.glb",this.scene,(newMeshes)=> {
             
@@ -140,8 +146,7 @@ export class MainScene {
                 // We try to pick an object
                 if (pickResult && pickResult.hit && pickResult.pickedMesh) {
                     if(pickResult.pickedMesh.name == "Object_4" || pickResult.pickedMesh.name == "Object_5" ){
-                        clickCount++;
-                        console.log("Mesh cliqué !" + clickCount + " fois !");
+                        city.incrementCashQuantity();
                     }
                 }
             };

@@ -52,4 +52,58 @@ export class City {
         this.commerces=[];
         this.energies =[];
     }
+    
+    
+    incrementCashQuantity() {
+        this.cashQuantity = this.cashQuantity + this.gainPerClick;
+    }
+
+    buyLiv(living : Living) {
+        if (this.cashQuantity >= living.price) {
+          this.cashQuantity -= living.price;
+          console.log('Produit acheté avec succès !');
+          console.log('modif' + this.cashQuantity);
+          this.ecoPourcentage += living.ecoBonus;
+          this.gainPerSec += living.gainPerSec;
+            living.boughtNumber ++; 
+            this.livings.push(living); 
+        } 
+        
+        else {
+          console.log("Vous n'avez pas assez d'argent pour acheter le produit.");
+          }
+        }
+
+    buyEco(energy : Energy) {
+        if (this.cashQuantity >= energy.price) {
+            this.cashQuantity -= energy.price;
+            console.log('Produit acheté avec succès !');
+            console.log('modif' + this.cashQuantity);
+            this.ecoPourcentage += energy.ecoBonus;
+            this.gainPerSec += energy.gainPerSec;
+            this.energies.push(energy); 
+          } 
+          
+          else {
+            console.log("Vous n'avez pas assez d'argent pour acheter le produit.");
+            }
+    }
+
+    buyImprov(improvement : Improvement) {
+
+        if (this.cashQuantity >= improvement.price) {
+            this.cashQuantity -= improvement.price;
+            console.log('Produit acheté avec succès !');
+            console.log('modif' + this.cashQuantity);
+            this.ecoPourcentage += improvement.ecoBonus;
+            this.gainPerSec += improvement.gainPerSec;
+            this.energies.push(improvement); 
+          } 
+          
+          else {
+            console.log("Vous n'avez pas assez d'argent pour acheter le produit.");
+            }
+
+    }
+
 }

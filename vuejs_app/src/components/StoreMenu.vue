@@ -67,7 +67,7 @@
             </div>
           </div>
           <button class="btn"
-           v-on:click="buyEnergy(improvement.price, improvement.ecoBonus, improvement.gainPerSec)" :class="{ 'disabled': city.cashQuantity < improvement.price }"> Acheter </button>
+          v-on:click="BuyImprov(city, improvement)" :class="{ 'disabled': city.cashQuantity < improvement.price }"> Acheter </button>
         </div>
       </div>
     </nav>
@@ -136,6 +136,12 @@ import { Improvement } from '@/classes/Improvement';
       BuyEnergy(city : City, energy : Energy){
 
         city.buyEco(energy);
+
+      },
+
+      BuyImprov (city : City, improvement : Improvement) {
+
+        city.buyImprov(improvement);
 
       }
 

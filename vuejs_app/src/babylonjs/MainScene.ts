@@ -40,11 +40,6 @@ export class MainScene {
         this.city = p_city;
         this.groundSize = 450;
 
-        // We hide the loading screen
-        this.engine.hideLoadingUI();
-        // If we have a model to load, we can launch the loading here
-        //this.CreateEnvironment();
-
         //resize the scene 
         window.addEventListener('resize', () =>{
             this.engine.resize();

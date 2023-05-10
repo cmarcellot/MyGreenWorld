@@ -55,7 +55,7 @@
           <p class="title-bloc">{{ improvement.name }}</p>
           <div class="container">
             <div class="text-container">
-              <p class="description">{{ improvement.desc }}</p>
+              <p class="box">{{ improvement.desc }}</p>
               <hr class="separator" />
               <p class="price"> Prix: {{ improvement.price }}</p>
               <hr class="separator" />
@@ -416,6 +416,15 @@ import { Improvement } from '@/classes/Improvement';
   opacity: 0.5;
   cursor: not-allowed;
   pointer-events: none;
+}
+
+.box {
+  border: 1px solid rgb(0, 0, 0);
+  border-radius: 10px;
+  padding: 10px;
+  background-color: #6e6e6e;
+  border-bottom: #000;
+  overflow: auto;
 }
 
 </style>

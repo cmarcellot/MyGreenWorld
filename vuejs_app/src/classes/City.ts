@@ -26,6 +26,7 @@ export class City {
     livings: Array<Living>;
     commerces: Array<Commerce>;
     energies :Array<Energy>;
+    
     // Constructor of the class's objects with 
 /**
  * Arguments
@@ -112,6 +113,22 @@ export class City {
             console.log("Vous n'avez pas assez d'argent pour acheter le produit.");
             }
 
+    }
+
+    countLiving(){
+      if(this.livings.length == 0) {
+        console.log(' Vous avez rien acheté ! ')
+      }
+
+      else {
+        console.log( this.livings.length)
+
+      }
+    }
+    
+    countCommerce() {
+
+      this.commerces.length
     }
 
 

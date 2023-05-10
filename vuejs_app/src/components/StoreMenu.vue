@@ -24,6 +24,7 @@
               <hr class="separator" />
               <p class="bonusEco">Écologie: {{ living.ecoBonus }} %</p>
             </div>
+            <!-- <p> {{ city.livings.length }}</p> -->
           </div>
           <button class="btn"
           v-on:click="BuyLiving(city, living)" :class="{ 'disabled': city.cashQuantity < living.price }"> Acheter </button>
@@ -143,7 +144,14 @@ import { Improvement } from '@/classes/Improvement';
 
         city.buyImprov(improvement);
 
-      }
+      },
+
+      Count (city : City) {
+
+        city.countLiving();
+
+      },
+      
 
 
       // buyEnergy(price : float, gainPerSec : number, ecoBonus : number) {

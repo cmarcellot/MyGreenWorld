@@ -26,6 +26,7 @@ export class City {
     livings: Array<Living>;
     commerces: Array<Commerce>;
     energies :Array<Energy>;
+    
     // Constructor of the class's objects with 
 /**
  * Arguments
@@ -105,7 +106,8 @@ export class City {
             console.log('modif' + this.cashQuantity);
             this.ecoPourcentage += improvement.ecoBonus;
             this.gainPerSec += improvement.gainPerSec;
-            this.energies.push(improvement); 
+            improvement.unlocked = true;
+            this.improvements.push(improvement); 
           } 
           
           else {
@@ -113,6 +115,4 @@ export class City {
             }
 
     }
-
-
 }

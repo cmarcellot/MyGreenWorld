@@ -2,131 +2,75 @@
     "livings": [
         {
             "id": 1,
-            "name": "Bungalow",
-            "description": "Bungalow description",
+            "name": "Caravane",
+            "description": "Caravane description",
             "price": 50.00,
             "gainPerSec": 0.1,
-            "ecoBonus": -1
+            "ecoBonus": -1,
+            "picture": "pic_Caravan.jpg"
         },
         {
             "id": 2,
-            "name": "Bungalow 2",
-            "description": "Bungalow 2 description",
-            "price": 1500.00,
-            "gainPerSec": 3.00,
-            "ecoBonus": 5
-        },
-        {
-            "id": 3,
             "name": "Maison simple",
             "description": "Maison simple description",
             "price": 500.00,
             "gainPerSec": 1.00,
-            "ecoBonus": -5
+            "ecoBonus": -5,
+            "picture": "pic_LittleHouse.jpg"
         },
         {
-            "id": 4,
-            "name": "Maison simple 2",
-            "description": "Maison simple 2 description",
-            "price": 3750.00,
-            "gainPerSec": 7.50,
-            "ecoBonus": 10
-        },
-        {
-            "id": 5,
+            "id": 3,
             "name": "Appartements",
             "description": "Appartements description",
             "price": 2500.00,
             "gainPerSec": 5.00,
-            "ecoBonus": -10
+            "ecoBonus": -10,
+            "picture": "pic_Building1.jpg"
         },
         {
-            "id": 6,
-            "name": "Appartements 2",
-            "description": "Appartements 2 description",
-            "price": 15000.00,
-            "gainPerSec": 30.00,
-            "ecoBonus": 20
-        },
-        {
-            "id": 7,
+            "id": 4,
             "name": "Maison avec étages",
             "description": "Maison avec étages description",
             "price": 5000.00,
             "gainPerSec": 10.00,
-            "ecoBonus": -10
+            "ecoBonus": -10,
+            "picture": "pic_BigHouse.jpg"
         },
         {
-            "id": 8,
-            "name": "Maison avec étages 2",
-            "description": "Maison avec étages 2 description",
-            "price": 375000.00,
-            "gainPerSec": 75.00,
-            "ecoBonus": 20
-        },
-        {
-            "id": 9,
+            "id": 5,
             "name": "Villa",
             "description": "Villa description",
             "price": 25000.00,
             "gainPerSec": 50.00,
-            "ecoBonus": -5
+            "ecoBonus": -5,
+            "picture": "pic_Villa.jpg"
         },
         {
-            "id": 10,
-            "name": "Villa 2",
-            "description": "Villa 2 description",
-            "price": 150000.00,
-            "gainPerSec": 300.00,
-            "ecoBonus": 10
-        },
-        {
-            "id": 11,
+            "id": 6,
             "name": "Manoir",
             "description": "Manoir description",
             "price": 50000.00,
             "gainPerSec": 100.00,
-            "ecoBonus": -5
+            "ecoBonus": -5,
+            "picture": "pic_Mansion.jpg"
         },
         {
-            "id": 12,
-            "name": "Manoir 2",
-            "description": "Manoir 2 description",
-            "price": 625000.00,
-            "gainPerSec": 1250.00,
-            "ecoBonus": 10
-        },
-        {
-            "id": 13,
+            "id": 7,
             "name": "Tour d’immeuble",
             "description": "Tour d’immeuble description",
             "price": 250000.00,
             "gainPerSec": 500.00,
-            "ecoBonus": -15
+            "ecoBonus": -15,
+            "picture": "pic_Building2.jpg"
         },
         {
-            "id": 14,
-            "name": "Tour d’immeuble 2",
-            "description": "Tour d’immeuble 2 description",
-            "price": 2500000.00,
-            "gainPerSec": 5000.00,
-            "ecoBonus": 25
-        },
-        {
-            "id": 15,
+            "id": 8,
             "name": "Gratte-ciel",
             "description": "Gratte-ciel description",
             "price": 1000000.00,
             "gainPerSec": 2000.00,
-            "ecoBonus": -20
-        },
-        {
-            "id": 16,
-            "name": "Gratte-ciel 2",
-            "description": "Gratte-ciel 2 description",
-            "price": 10000000.00,
-            "gainPerSec": 20000.00,
-            "ecoBonus": 30
+            "ecoBonus": -20,
+            "picture": "pic_Skyscraper.jpg"
         }
     ],
     "commerces": [
@@ -136,7 +80,8 @@
             "description": "Marché description",
             "price": 50.00,
             "gainPerSec": 0.1,
-            "ecoBonus": 10
+            "ecoBonus": 10,
+            "picture": "pic_SmallStore.jpg"
         },
         {
             "id": 2,
@@ -144,7 +89,8 @@
             "description": "Magasin de bricolage description",
             "price": 500.00,
             "gainPerSec": 1.00,
-            "ecoBonus": 5
+            "ecoBonus": 5,
+            "picture": "pic_DIYStore.jpg"
         },
         {
             "id": 3,
@@ -152,23 +98,26 @@
             "description": "Magasin de vêtements description",
             "price": 5000.00,
             "gainPerSec": 10.00,
-            "ecoBonus": -5
+            "ecoBonus": -5,
+            "picture": "pic_ClothingStore.jpg"
         },
         {
             "id": 4,
-            "name": "Magasin d'électronique",
-            "description": "Magasin d'électronique description",
+            "name": "FastFood",
+            "description": "FastFood description",
             "price": 25000.00,
             "gainPerSec": 50.00,
-            "ecoBonus": -5
+            "ecoBonus": -5,
+            "picture": "pic_FastFood.jpg"
         },
         {
             "id": 5,
-            "name": "Magasin d’ameublement",
-            "description": "Magasin d’ameublement description",
+            "name": "Hotel",
+            "description": "Hotel description",
             "price": 50000.00,
             "gainPerSec": 100.00,
-            "ecoBonus": 5
+            "ecoBonus": 5,
+            "picture": "pic_Hotel.jpg"
         },
         {
             "id": 6,
@@ -176,7 +125,8 @@
             "description": "Supermarché description",
             "price": 100000.00,
             "gainPerSec": 200.00,
-            "ecoBonus": 5
+            "ecoBonus": 5,
+            "picture": "pic_SuperMarket.jpg"
         },
         {
             "id": 7,
@@ -184,7 +134,8 @@
             "description": "Concessionnaire description",
             "price": 500000.00,
             "gainPerSec": 1000.00,
-            "ecoBonus": -5
+            "ecoBonus": -5,
+            "picture": "pic_CarStore.jpg"
         },
         {
             "id": 8,
@@ -192,7 +143,8 @@
             "description": "Centre commercial description",
             "price": 2500000.00,
             "gainPerSec": 5000.00,
-            "ecoBonus": -5
+            "ecoBonus": -5,
+            "picture": "pic_BigStore.jpg"
         }
     ],
     "energies": [

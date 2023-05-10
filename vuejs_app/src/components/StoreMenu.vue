@@ -14,11 +14,9 @@
         <div v-for="(living, index) in sortedLivingsCommerces()" :key="index" class="nav nav-item" v-show="showContent1">
           <p class="title-bloc">{{ living.name }}</p>
           <div class="container">
-            <img class="image" src="../../public/images/greenCity.jpg" alt="Image de la maison" />
+            <img class="image" :src="require('../../public/images/' + living.picture)" alt="Image habitation ou commerce" />
             <div class="text-container">
-              <p class="description">{{ living.desc }}</p>
-              <hr class="separator" />
-              <p class="price"> Prix: {{ living.price }} €</p>
+              <p class="price"> Prix: {{ living.price }}</p>
               <hr class="separator" />
               <p class="gainPerSec">Gains: {{ living.gainPerSec }}/sec</p>
               <hr class="separator" />
@@ -37,9 +35,7 @@
           <div class="container">
             <img class="image" src="../../public/images/greenCityTree.jpg" alt="Image de la centrale" />
             <div class="text-container">
-              <p class="description">{{ central.desc }}</p>
-              <hr class="separator" />
-              <p class="price"> Prix: {{ central.price }} €</p>
+              <p class="price"> Prix: {{ central.price }}</p>
               <hr class="separator" />
               <p class="gainPerSec">Gains: {{ central.gainPerSec }}/sec</p>
               <hr class="separator" />
@@ -59,7 +55,7 @@
             <div class="text-container">
               <p class="description">{{ improvement.desc }}</p>
               <hr class="separator" />
-              <p class="price"> Prix: {{ improvement.price }} €</p>
+              <p class="price"> Prix: {{ improvement.price }}</p>
               <hr class="separator" />
               <p class="gainPerSec">Gains: {{ improvement.gainPerSec }}/sec</p>
               <hr class="separator" />
@@ -174,7 +170,8 @@ import { Improvement } from '@/classes/Improvement';
           living.description, 
           living.price, 
           living.gainPerSec, 
-          living.ecoBonus
+          living.ecoBonus,
+          living.picture
         ));
       }
 
@@ -186,7 +183,8 @@ import { Improvement } from '@/classes/Improvement';
           commerce.description,
           commerce.price,
           commerce.gainPerSec,
-          commerce.ecoBonus
+          commerce.ecoBonus,
+          commerce.picture
         ));
       }
 
@@ -345,9 +343,9 @@ import { Improvement } from '@/classes/Improvement';
 }
 /* For managing the image of each building of the store */
 .image {
-  width: 75px;
-  height: 75px;
-  margin-right: 75px;
+  width: 100px;
+  height: 100px;
+  margin-right: 100px;
 }
 /* For managing the text of each building of the store */
 .text-container {

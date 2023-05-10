@@ -65,6 +65,22 @@
           <button class="btn"
           v-on:click="BuyImprov(city, improvement)" :class="{ 'disabled': city.cashQuantity < improvement.price }"> Acheter </button>
         </div>
+
+        <div class="nav nav-bloc" @click="toggleContent4">
+          <p class="title-item">ADMINTOOLS</p>      
+        </div>
+        <div class="nav nav-item" v-show="showContent4">
+          <p class="title-bloc">Ajouter argent</p>
+          <div class="container">
+            <button class="btn"
+              v-on:click="Add1000(city)"> + 1.000 </button>
+            <button class="btn"
+              v-on:click="Add10000(city)"> +10.000 </button>
+            <button class="btn"
+              v-on:click="Add100000(city)"> + 100.000 </button>
+          </div>
+          
+        </div>
       </div>
     </nav>
 </template>
@@ -89,6 +105,7 @@ import { Improvement } from '@/classes/Improvement';
         showContent1: false,
         showContent2: false,
         showContent3: false,
+        showContent4: false,
 
         livings: [] as Living[],
         commerces: [] as Commerce[],
@@ -108,6 +125,9 @@ import { Improvement } from '@/classes/Improvement';
       toggleContent3() {
         console.log(this.improvements);
         this.showContent3 = !this.showContent3;
+      },
+      toggleContent4() {
+        this.showContent4 = !this.showContent4;
       },
 
       // Sort the list of livings and commerces by price
@@ -139,8 +159,19 @@ import { Improvement } from '@/classes/Improvement';
 
         city.buyImprov(improvement);
 
-      }
+      },
 
+      Add1000(city : City) {
+        city.cashQuantity += 1000;
+      },
+
+      Add10000(city : City) {
+        city.cashQuantity += 10000;
+      },
+
+      Add100000(city : City) {
+        city.cashQuantity += 100000;
+      },
 
       // buyEnergy(price : float, gainPerSec : number, ecoBonus : number) {
       // if (this.City.cashQuantity > price) {

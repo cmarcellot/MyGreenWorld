@@ -23,8 +23,9 @@
               <p class="gainPerSec">Gains: {{ living.gainPerSec }}/sec</p>
               <hr class="separator" />
               <p class="bonusEco">Écologie: {{ living.ecoBonus }} %</p>
+              <hr class="separator" />
+              <p class="livingCount">Nombre achetés : {{ living.boughtNumber }}</p>
             </div>
-            <!-- <p> {{ city.livings.length }}</p> -->
           </div>
           <button class="btn"
           v-on:click="BuyLiving(city, living)" :class="{ 'disabled': city.cashQuantity < living.price }"> Acheter </button>
@@ -65,10 +66,12 @@
               <p class="gainPerSec">Gains: {{ improvement.gainPerSec }}/sec</p>
               <hr class="separator" />
               <p class="bonusEco">Écologie: {{ improvement.ecoBonus }} %</p>
+              <hr v-if="improvement.unlocked == true" class="separator" />
+              <p v-if="improvement.unlocked == true" class="message">Amélioration déjà débloqué</p>
             </div>
           </div>
-          <button class="btn"
-          v-on:click="BuyImprov(city, improvement)" :class="{ 'disabled': city.cashQuantity < improvement.price }"> Acheter </button>
+          <button v-if="improvement.unlocked == false" class="btn"
+          v-on:click="BuyImprov(city, improvement)" :class="{ 'disabled': city.cashQuantity < improvement.price}"> Acheter </button>
         </div>
       </div>
     </nav>
@@ -144,14 +147,7 @@ import { Improvement } from '@/classes/Improvement';
 
         city.buyImprov(improvement);
 
-      },
-
-      Count (city : City) {
-
-        city.countLiving();
-
-      },
-      
+      }
 
 
       // buyEnergy(price : float, gainPerSec : number, ecoBonus : number) {
@@ -381,6 +377,10 @@ import { Improvement } from '@/classes/Improvement';
   position: relative;
   top: 10px;
   font-weight:400;
+}
+
+.message {
+  color: white;
 }
 
 .disabled {

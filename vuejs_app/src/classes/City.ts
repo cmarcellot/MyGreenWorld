@@ -106,7 +106,8 @@ export class City {
             console.log('modif' + this.cashQuantity);
             this.ecoPourcentage += improvement.ecoBonus;
             this.gainPerSec += improvement.gainPerSec;
-            this.energies.push(improvement); 
+            improvement.unlocked = true;
+            this.improvements.push(improvement); 
           } 
           
           else {
@@ -114,22 +115,4 @@ export class City {
             }
 
     }
-
-    countLiving(){
-      if(this.livings.length == 0) {
-        console.log(' Vous avez rien acheté ! ')
-      }
-
-      else {
-        console.log( this.livings.length)
-
-      }
-    }
-    
-    countCommerce() {
-
-      this.commerces.length
-    }
-
-
 }

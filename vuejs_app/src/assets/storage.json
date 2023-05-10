@@ -3,7 +3,7 @@
         {
             "id": 1,
             "name": "Bungalow",
-            "description": "Bungalow description",
+            "description": "Bungalow ",
             "price": 50.00,
             "gainPerSec": 0.1,
             "ecoBonus": -1
@@ -11,7 +11,7 @@
         {
             "id": 2,
             "name": "Bungalow 2",
-            "description": "Bungalow 2 description",
+            "description": "Bungalow 2 ",
             "price": 1500.00,
             "gainPerSec": 3.00,
             "ecoBonus": 5
@@ -19,7 +19,7 @@
         {
             "id": 3,
             "name": "Maison simple",
-            "description": "Maison simple description",
+            "description": "Maison simple ",
             "price": 500.00,
             "gainPerSec": 1.00,
             "ecoBonus": -5
@@ -27,7 +27,7 @@
         {
             "id": 4,
             "name": "Maison simple 2",
-            "description": "Maison simple 2 description",
+            "description": "Maison simple 2 ",
             "price": 3750.00,
             "gainPerSec": 7.50,
             "ecoBonus": 10
@@ -35,7 +35,7 @@
         {
             "id": 5,
             "name": "Appartements",
-            "description": "Appartements description",
+            "description": "Appartements ",
             "price": 2500.00,
             "gainPerSec": 5.00,
             "ecoBonus": -10
@@ -43,7 +43,7 @@
         {
             "id": 6,
             "name": "Appartements 2",
-            "description": "Appartements 2 description",
+            "description": "Appartements 2 ",
             "price": 15000.00,
             "gainPerSec": 30.00,
             "ecoBonus": 20
@@ -51,7 +51,7 @@
         {
             "id": 7,
             "name": "Maison avec étages",
-            "description": "Maison avec étages description",
+            "description": "Maison avec étages ",
             "price": 5000.00,
             "gainPerSec": 10.00,
             "ecoBonus": -10
@@ -59,7 +59,7 @@
         {
             "id": 8,
             "name": "Maison avec étages 2",
-            "description": "Maison avec étages 2 description",
+            "description": "Maison avec étages 2 ",
             "price": 375000.00,
             "gainPerSec": 75.00,
             "ecoBonus": 20
@@ -67,7 +67,7 @@
         {
             "id": 9,
             "name": "Villa",
-            "description": "Villa description",
+            "description": "Villa ",
             "price": 25000.00,
             "gainPerSec": 50.00,
             "ecoBonus": -5
@@ -75,7 +75,7 @@
         {
             "id": 10,
             "name": "Villa 2",
-            "description": "Villa 2 description",
+            "description": "Villa 2 ",
             "price": 150000.00,
             "gainPerSec": 300.00,
             "ecoBonus": 10
@@ -83,7 +83,7 @@
         {
             "id": 11,
             "name": "Manoir",
-            "description": "Manoir description",
+            "description": "Manoir ",
             "price": 50000.00,
             "gainPerSec": 100.00,
             "ecoBonus": -5
@@ -91,7 +91,7 @@
         {
             "id": 12,
             "name": "Manoir 2",
-            "description": "Manoir 2 description",
+            "description": "Manoir 2 ",
             "price": 625000.00,
             "gainPerSec": 1250.00,
             "ecoBonus": 10
@@ -99,7 +99,7 @@
         {
             "id": 13,
             "name": "Tour d’immeuble",
-            "description": "Tour d’immeuble description",
+            "description": "Tour d’immeuble ",
             "price": 250000.00,
             "gainPerSec": 500.00,
             "ecoBonus": -15
@@ -107,7 +107,7 @@
         {
             "id": 14,
             "name": "Tour d’immeuble 2",
-            "description": "Tour d’immeuble 2 description",
+            "description": "Tour d’immeuble 2 ",
             "price": 2500000.00,
             "gainPerSec": 5000.00,
             "ecoBonus": 25
@@ -115,7 +115,7 @@
         {
             "id": 15,
             "name": "Gratte-ciel",
-            "description": "Gratte-ciel description",
+            "description": "Gratte-ciel ",
             "price": 1000000.00,
             "gainPerSec": 2000.00,
             "ecoBonus": -20
@@ -123,7 +123,7 @@
         {
             "id": 16,
             "name": "Gratte-ciel 2",
-            "description": "Gratte-ciel 2 description",
+            "description": "Gratte-ciel 2 ",
             "price": 10000000.00,
             "gainPerSec": 20000.00,
             "ecoBonus": 30
@@ -133,7 +133,7 @@
         {
             "id": 1,
             "name": "Marché",
-            "description": "Marché description",
+            "description": "Marché ",
             "price": 50.00,
             "gainPerSec": 0.1,
             "ecoBonus": 10
@@ -141,7 +141,7 @@
         {
             "id": 2,
             "name": "Magasin de bricolage",
-            "description": "Magasin de bricolage description",
+            "description": "Magasin de bricolage ",
             "price": 500.00,
             "gainPerSec": 1.00,
             "ecoBonus": 5
@@ -149,7 +149,7 @@
         {
             "id": 3,
             "name": "Magasin de vêtements",
-            "description": "Magasin de vêtements description",
+            "description": "Magasin de vêtements ",
             "price": 5000.00,
             "gainPerSec": 10.00,
             "ecoBonus": -5
@@ -157,7 +157,7 @@
         {
             "id": 4,
             "name": "Magasin d'électronique",
-            "description": "Magasin d'électronique description",
+            "description": "Magasin d'électronique ",
             "price": 25000.00,
             "gainPerSec": 50.00,
             "ecoBonus": -5
@@ -165,7 +165,7 @@
         {
             "id": 5,
             "name": "Magasin d’ameublement",
-            "description": "Magasin d’ameublement description",
+            "description": "Magasin d’ameublement ",
             "price": 50000.00,
             "gainPerSec": 100.00,
             "ecoBonus": 5
@@ -173,7 +173,7 @@
         {
             "id": 6,
             "name": "Supermarché",
-            "description": "Supermarché description",
+            "description": "Supermarché ",
             "price": 100000.00,
             "gainPerSec": 200.00,
             "ecoBonus": 5
@@ -181,7 +181,7 @@
         {
             "id": 7,
             "name": "Concessionnaire",
-            "description": "Concessionnaire description",
+            "description": "Concessionnaire ",
             "price": 500000.00,
             "gainPerSec": 1000.00,
             "ecoBonus": -5
@@ -189,7 +189,7 @@
         {
             "id": 8,
             "name": "Centre commercial",
-            "description": "Centre commercial description",
+            "description": "Centre commercial ",
             "price": 2500000.00,
             "gainPerSec": 5000.00,
             "ecoBonus": -5
@@ -199,7 +199,7 @@
         {
             "id": 1,
             "name": "Centrale éolienne",
-            "description": "Centrale éolienne description",
+            "description": "Centrale éolienne ",
             "price": 5000.00,
             "gainPerSec": 20.00,
             "ecoBonus": 20
@@ -207,7 +207,7 @@
         {
             "id": 2,
             "name": "Centrale à biomasse",
-            "description": "Centrale à biomasse description",
+            "description": "Centrale à biomasse ",
             "price": 50000.00,
             "gainPerSec": 200.00,
             "ecoBonus": 10
@@ -215,7 +215,7 @@
         {
             "id": 3,
             "name": "Centrale à charbon",
-            "description": "Centrale à charbon description",
+            "description": "Centrale à charbon ",
             "price": 500000.00,
             "gainPerSec": 2000.00,
             "ecoBonus": -10
@@ -223,7 +223,7 @@
         {
             "id": 4,
             "name": "Centrale à pétrole",
-            "description": "Centrale à pétrole description",
+            "description": "Centrale à pétrole ",
             "price": 1000000.00,
             "gainPerSec": 4000.00,
             "ecoBonus": -10
@@ -231,7 +231,7 @@
         {
             "id": 5,
             "name": "Centrale solaire",
-            "description": "Centrale solaire description",
+            "description": "Centrale solaire",
             "price": 5000000.00,
             "gainPerSec": 20000.00,
             "ecoBonus": 20
@@ -239,7 +239,7 @@
         {
             "id": 6,
             "name": "Centrale géothermique",
-            "description": "Centrale géothermique description",
+            "description": "Centrale géothermique ",
             "price": 10000000.00,
             "gainPerSec": 40000.00,
             "ecoBonus": 50
@@ -247,7 +247,7 @@
         {
             "id": 7,
             "name": "Centrale hydroélectrique",
-            "description": "Centrale hydroélectrique description",
+            "description": "Centrale hydroélectrique",
             "price": 50000000.00,
             "gainPerSec": 200000.00,
             "ecoBonus": 50
@@ -255,7 +255,7 @@
         {
             "id": 8,
             "name": "Centrale nucléaire",
-            "description": "Centrale nucléaire description",
+            "description": "Centrale nucléaire ",
             "price": 100000000.00,
             "gainPerSec": 400000.00,
             "ecoBonus": 15

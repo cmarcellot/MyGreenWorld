@@ -98,8 +98,8 @@ import jsonData from '@/assets/storage.json';
 import { City } from '@/classes/City';
 import { float } from '@babylonjs/core/types';
 import { Improvement } from '@/classes/Improvement';
-  
-  export default defineComponent({
+
+export default defineComponent({
     name: 'StoreMenu',
     props :[
     "city"
@@ -148,34 +148,42 @@ import { Improvement } from '@/classes/Improvement';
 
  //Compare the cashQuantity and the price 
       BuyLiving(city : City, living: Living) {
-      
+        this.playClickSound();
         city.buyLiv(living);
         
       },
 
       BuyEnergy(city : City, energy : Energy){
-
+        this.playClickSound();
         city.buyEco(energy);
 
       },
 
       BuyImprov (city : City, improvement : Improvement) {
-
+        this.playClickSound();
         city.buyImprov(improvement);
 
       },
 
       Add1000(city : City) {
+        this.playClickSound();
         city.cashQuantity += 1000;
       },
 
       Add10000(city : City) {
+        this.playClickSound();
         city.cashQuantity += 10000;
       },
 
       Add100000(city : City) {
+        this.playClickSound();
         city.cashQuantity += 100000;
       },
+
+      playClickSound() {
+      const audio = new Audio('/sounds/SonAchat.mp3');
+      audio.play();
+    },
 
       // buyEnergy(price : float, gainPerSec : number, ecoBonus : number) {
       // if (this.City.cashQuantity > price) {

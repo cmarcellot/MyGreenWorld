@@ -94,7 +94,7 @@ export class City {
 
     updateCash() {
         setInterval(() => {
-            this.cashQuantity += this.gainPerSec;
+            this.cashQuantity += this.gainPerSec * (this.ecoPourcentage / 100);
           }, 1000);
     }
 

@@ -63,7 +63,7 @@
               <hr class="separator" />
               <p class="bonusEco">Écologie: {{ improvement.ecoBonus }} %</p>
               <hr v-if="improvement.unlocked == true" class="separator" />
-              <p v-if="improvement.unlocked == true" class="message">Amélioration déjà débloqué</p>
+              <p v-if="improvement.unlocked == true" class="message">Amélioration déjà débloquée</p>
             </div>
           </div>
           <button v-if="improvement.unlocked == false" class="btn"

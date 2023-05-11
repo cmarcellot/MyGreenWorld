@@ -18,7 +18,6 @@ export class MainScene {
     handRight!: Mesh;
     handLeft!: Mesh;
 
-
     ///////////CONSTRUCTOR////////////
 
     constructor(
@@ -68,6 +67,15 @@ export class MainScene {
         camera.rotation.y = -(Math.PI / 2);
         camera.minZ = 0.5;
 
+        camera.keysUp.push(90); // Z key
+        camera.keysLeft.push(81); // Q key
+        camera.keysDown.push(83); // S key
+        camera.keysRight.push(68); // D key
+        camera.keysUpward.push(32); // Space bar
+        camera.keysDownward.push(16); // Shift key
+
+        camera.applyGravity = true; // Apply gravity to the camera
+
         // Create a light to illuminate the scene
         const hemiLight = new HemisphericLight("hemiLight", new Vector3(0, 1, 0), this.scene);
         hemiLight.intensity = 0.5;
@@ -89,28 +97,32 @@ export class MainScene {
 
         let supermanMode = false;
         window.addEventListener("keydown", (event) => {
-            // Reset the camera position when pressing the "R" key
-            if (event.keyCode === 82) {
-                camera.position = new Vector3(40, 5, 0);
-                camera.rotation.y = -(Math.PI / 2);
-            }
-            // supermanMode when pressing the "S" key
-            if (event.keyCode === 83) {
-                if(supermanMode){
-                    camera.speed = 1.5;
-                    this.armRight.isVisible = false;
-                    this.armLeft.isVisible = false;
-                    this.handRight.isVisible = false;
-                    this.handLeft.isVisible = false;
-                    supermanMode = false;
-                }else{
-                    camera.speed = 7.5;
-                    this.armRight.isVisible = true;
-                    this.armLeft.isVisible = true;
-                    this.handRight.isVisible = true;
-                    this.handLeft.isVisible = true;
-                    supermanMode = true;
-                }
+            switch(event.keyCode) {
+                case 82: // R key
+                    // Respawn
+                    camera.position = new Vector3(40, 5, 0);
+                    camera.rotation.y = -(Math.PI / 2);
+                    break;
+                case 70: // F key
+                    //Fly mode
+                    if(supermanMode){
+                        camera.speed = 1.5;
+                        /*this.armRight.isVisible = false;
+                        this.armLeft.isVisible = false;
+                        this.handRight.isVisible = false;
+                        this.handLeft.isVisible = false;*/
+                        camera.applyGravity = true; 
+                        supermanMode = false;
+                    }else{
+                        camera.speed = 7.5;
+                        /*this.armRight.isVisible = true;
+                        this.armLeft.isVisible = true;
+                        this.handRight.isVisible = true;
+                        this.handLeft.isVisible = true;*/
+                        camera.applyGravity = false; 
+                        supermanMode = true;
+                    }
+                    break;
             }
         });        
 
@@ -148,7 +160,7 @@ export class MainScene {
 
         this.LoadModels();
 
-        this.CreateArms(camera);
+        //this.CreateArms(camera);
         
         return scene;
     }

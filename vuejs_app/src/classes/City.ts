@@ -118,7 +118,7 @@ export class City {
     }
 
     playTreeSound() {
-      const audio = new Audio('/sounds/SonArgent.mp3');
+      const audio = new Audio('/sounds/SonArbre.mp3');
       audio.play();
 
     }

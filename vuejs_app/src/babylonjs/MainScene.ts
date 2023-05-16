@@ -146,7 +146,9 @@ export class MainScene {
                 // We try to pick an object
                 if (pickResult && pickResult.hit && pickResult.pickedMesh) {
                     if(pickResult.pickedMesh.name == "Object_4" || pickResult.pickedMesh.name == "Object_5" ){
+                        city.playTreeSound();
                         city.incrementCashQuantity();
+
                     }
                 }
             };

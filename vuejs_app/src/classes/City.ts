@@ -3,6 +3,7 @@ import {Improvement } from "./Improvement";
 import {Living } from "./Living";
 import {Commerce } from "./Commerce";
 import {Energy } from "./Energy";
+
 /**  this class represents the player's city 
  * Attributes
  * name : the city's name given by the player
@@ -113,6 +114,12 @@ export class City {
           else {
             console.log("Vous n'avez pas assez d'argent pour acheter le produit.");
             }
+
+    }
+
+    playTreeSound() {
+      const audio = new Audio('/sounds/SonArgent.mp3');
+      audio.play();
 
     }
 }

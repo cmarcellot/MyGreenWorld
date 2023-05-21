@@ -107,6 +107,7 @@ export class City {
             console.log('modif' + this.cashQuantity);
             this.ecoPourcentage += improvement.ecoBonus;
             this.gainPerSec += improvement.gainPerSec;
+            this.gainPerClick += improvement.gainPerClick;
             improvement.unlocked = true;
             this.improvements.push(improvement); 
           } 

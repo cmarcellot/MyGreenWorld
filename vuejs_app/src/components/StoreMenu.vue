@@ -18,7 +18,7 @@
             <div class="text-container">
               <p class="price"> Prix: {{ living.price }}</p>
               <hr class="separator" />
-              <p class="gainPerSec">Gains: {{ living.gainPerSec }}/sec</p>
+              <p class="gainPerSec">Gain: {{ living.gainPerSec }}/sec</p>
               <hr class="separator" />
               <p class="bonusEco">Écologie: {{ living.ecoBonus }} %</p>
               <hr class="separator" />
@@ -39,7 +39,7 @@
             <div class="text-container">
               <p class="price"> Prix: {{ central.price }}</p>
               <hr class="separator" />
-              <p class="gainPerSec">Gains: {{ central.gainPerSec }}/sec</p>
+              <p class="gainPerSec">Gain: {{ central.gainPerSec }}/sec</p>
               <hr class="separator" />
               <p class="bonusEco">Écologie: {{ central.ecoBonus }} %</p>
             </div>
@@ -59,7 +59,9 @@
               <hr class="separator" />
               <p class="price"> Prix: {{ improvement.price }}</p>
               <hr class="separator" />
-              <p class="gainPerSec">Gains: {{ improvement.gainPerSec }}/sec</p>
+              <p class="gainPerSec">Gain par seconde: {{ improvement.gainPerSec }}/sec</p>
+              <hr class="separator" />
+              <p class="gainPerClick">Gain par clique: {{ improvement.gainPerClick }}/clique</p>
               <hr class="separator" />
               <p class="bonusEco">Écologie: {{ improvement.ecoBonus }} %</p>
               <hr v-if="improvement.unlocked == true" class="separator" />

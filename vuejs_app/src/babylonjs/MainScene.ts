@@ -17,6 +17,7 @@ export class MainScene {
     armLeft!: Mesh;
     handRight!: Mesh;
     handLeft!: Mesh;
+    show!: boolean;
 
     ///////////CONSTRUCTOR////////////
 
@@ -360,20 +361,38 @@ export class MainScene {
                     mainMesh.scaling.x *= -1;
                     break;
             }
-    
+
+            // get the progress bar
+            const cash = document.getElementById("cash") as HTMLElement;
+            const eco = document.getElementById("ecology") as HTMLElement;
+            const store = document.getElementById("store") as HTMLElement;
+
+
             // Update the progress bar
             progress += increment;
             this.loadingScreen.updateLoadStatus(progress);
-    
-            // When all the models are loaded, we hide the loading screen
-            if (progress === 100) {
-                // We hide the loading screen
-                this.engine.hideLoadingUI();
-    
-                // We launch the scene rendering in the engine render loop
-                this.engine.runRenderLoop(() => {
-                    this.scene.render();
-                });
+         
+            //hide the bars 
+            if (progress !== 100) {
+                cash.hidden = true;
+                eco.hidden = true;
+                store.hidden  = true;
+            }
+             // When all the models are loaded, we hide the loading screen
+            else {
+                
+                 // We hide the loading screen
+                 this.engine.hideLoadingUI() 
+                
+                 // We launch the scene rendering in the engine render loop
+                 this.engine.runRenderLoop(() => {
+                     this.scene.render();
+                 });
+                
+                 // show the bars 
+                 cash.hidden = false;
+                 eco.hidden = false;
+                 store.hidden = false;  
             }
         };
     

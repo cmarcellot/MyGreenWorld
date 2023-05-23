@@ -44,7 +44,6 @@ export class Improvement extends BuyableElement {
             this.gainPerClick= gainPerClick;
             this.unlocked = unlocked;
             this.boughtNumber= boughtNumber;
-
     }
 
 }

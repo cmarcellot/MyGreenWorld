@@ -130,6 +130,9 @@ import { Improvement } from '@/classes/Improvement';
       BuyLiving(city : City, living: Living) {
       
         city.buyLiv(living);
+        this.sendData(living);
+        
+        
         
       },
 
@@ -143,25 +146,10 @@ import { Improvement } from '@/classes/Improvement';
 
         city.buyImprov(improvement);
 
-      }
-
-
-      // buyEnergy(price : float, gainPerSec : number, ecoBonus : number) {
-      // if (this.City.cashQuantity > price) {
-      //   console.log('initial' + this.City.cashQuantity);
-      //   this.City.cashQuantity -= price;
-      //   console.log('Produit acheté avec succès !');
-      //   console.log('modif' + this.City.cashQuantity);
-      //   console.log('initial' + this.City.ecoPourcentage+ ' et ' + this.City.gainPerSec)
-      //   console.log(this.City.ecoPourcentage += ecoBonus);
-      //   console.log(this.City.gainPerSec += gainPerSec);
-        
-      // } 
-      
-      // else {
-      //   console.log("Vous n'avez pas assez d'argent pour acheter le produit.");
-      //   }
-      // },
+      },
+      sendData(living: Living) {
+    this.$emit('achat', living);
+    }
 
     },
     created(){
@@ -174,7 +162,8 @@ import { Improvement } from '@/classes/Improvement';
           living.description, 
           living.price, 
           living.gainPerSec, 
-          living.ecoBonus
+          living.ecoBonus,
+          living.modelName
         ));
       }
 
@@ -186,7 +175,8 @@ import { Improvement } from '@/classes/Improvement';
           commerce.description,
           commerce.price,
           commerce.gainPerSec,
-          commerce.ecoBonus
+          commerce.ecoBonus,
+          commerce.modelName
         ));
       }
 
@@ -197,7 +187,8 @@ import { Improvement } from '@/classes/Improvement';
           energy.description,
           energy.price,
           energy.gainPerSec,
-          energy.ecoBonus));
+          energy.ecoBonus,
+          energy.modelName));
       }
 
       for (const improvement of jsonData.improvements) {

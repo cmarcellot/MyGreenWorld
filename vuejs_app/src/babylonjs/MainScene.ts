@@ -3,6 +3,7 @@ import { CustomLoadingScreen } from "./CustomLoadingScreen";
 // We import the loaders to be able to load models
 import "@babylonjs/loaders";
 import { City } from '@/classes/City';
+import { Living } from '@/classes/Living';
 
 export class MainScene {
 
@@ -13,6 +14,7 @@ export class MainScene {
     loadingScreen: CustomLoadingScreen
     groundSize!: number
     city! : City
+    living! : Living
     armRight!: Mesh;
     armLeft!: Mesh;
     handRight!: Mesh;
@@ -26,7 +28,9 @@ export class MainScene {
         private loadingBar: HTMLElement,
         private percentLoaded: HTMLElement,
         private loader: HTMLElement,
-        private p_city : City
+        private p_city : City,
+        private p_living : Living
+
     ) {
         // We create an engine for the scene rendering
         this.engine = new Engine(canvas, true);
@@ -38,6 +42,7 @@ export class MainScene {
 
         //Init the ground size
         this.city = p_city;
+        this.living = p_living;
         this.groundSize = 450;
 
         //resize the scene 
@@ -48,14 +53,14 @@ export class MainScene {
         this.engine.resize();
         
         // We create the scene
-        this.scene = this.createScene(this.city);
+        this.scene = this.createScene(this.city,this.living);
         
     }
 
     ///////////METHODS////////////
 
     // Scene creation
-    createScene(city : City): Scene {
+    createScene(city : City, living:Living): Scene {
         const scene = new Scene(this.engine);
         const camera = new FreeCamera("camera", new Vector3(40, 5, 0), this.scene);
         camera.attachControl();
@@ -129,12 +134,15 @@ export class MainScene {
             mesh.scaling = new Vector3(3/150, 3/150, 3/150);
             // making the tree clickable
             mesh.name  = "tree";
-  
             scene.onPointerDown = function (evt, pickResult) {
                 // We try to pick an object
                 if (pickResult && pickResult.hit && pickResult.pickedMesh) {
                     if(pickResult.pickedMesh.name == "Object_4" || pickResult.pickedMesh.name == "Object_5" ){
                         city.incrementCashQuantity();
+                        ()=>{
+                            const audio = new Audio('./sounds/SonArbre.mp3');
+                            audio.play();
+                        }
                     }
                 }
             };
@@ -145,7 +153,6 @@ export class MainScene {
         scene.environmentTexture = envTex;
         scene.createDefaultSkybox(envTex, true);
         scene.environmentIntensity = 0.75;
-
         this.LoadModels();
 
         this.CreateArms(camera);
@@ -169,6 +176,7 @@ export class MainScene {
 
         return groundMat;
     }
+ 
 
     // Node material for a grass effect
     CreateGrass(): void {
@@ -210,6 +218,138 @@ export class MainScene {
         this.scene.createDefaultSkybox(envTex, true);
         this.scene.environmentIntensity = 0.75;
     }
+    // load a model based on its name
+    loadLiving = async (modelName: string): Promise<void> => {
+        const modelNames = [
+            "CaravanBuilding.glb",
+            "CottageBuilding.glb",
+            "HouseBuilding.glb",
+            "ModernBuilding_1.glb",
+            "ModernBuilding_2.glb",
+            "ModernHouseBuilding.glb",
+            "PalaceBuilding.glb",
+            "SkyscraperBuilding.glb",
+            "SmallStore.glb",
+            "DIYStore.glb",
+            "ClothingStore.glb",
+            "FastFood.glb",
+            "Hotel.glb",
+            "Supermarket.glb",
+            "CarStore.glb",
+            "BigStore.glb",
+        ];
+        const modelDir = "./models/";
+        const result = await SceneLoader.ImportMeshAsync("", modelDir, modelName, this.scene);
+        const mainMesh = result.meshes[0];
+        const meshes = result.meshes;
+        meshes.map((mesh) => {
+            mesh.checkCollisions = true;
+            mesh.isVisible = true;
+            
+        });
+        
+        switch (modelName) {
+            case "CaravanBuilding.glb":
+                mainMesh.position = new Vector3(25, 0.1, -40);
+                mainMesh.scaling = new Vector3(0.25, 0.25, 0.25);
+                mainMesh.rotation = new Vector3(0, 0, 0);
+                mainMesh.scaling.x *= -1;
+                break;
+
+            case "CottageBuilding.glb":
+                mainMesh.position = new Vector3(-80, 0.1, 125);
+                mainMesh.scaling = new Vector3(2, 2, 2);
+                mainMesh.rotation = new Vector3(0, 0, 0);
+                mainMesh.scaling.x *= -1;
+                break;
+            case "HouseBuilding.glb":
+                mainMesh.position = new Vector3(-120,0.1,-75);
+                mainMesh.scaling = new Vector3(0.1,0.1,0.1);
+                mainMesh.rotation = new Vector3(0, 0, 0);
+                mainMesh.scaling.x *= -1;
+                break;
+            case "ModernBuilding_1.glb":
+                mainMesh.position = new Vector3(-700,-0.55,-200);
+                mainMesh.scaling = new Vector3(5,5,5);
+                mainMesh.rotation = new Vector3(0, 0, 0);
+                mainMesh.scaling.x *= -1;
+                break;
+            case "ModernBuilding_2.glb":
+                mainMesh.position = new Vector3(-675,-0.55,-225);
+                mainMesh.scaling = new Vector3(5,5,5);
+                mainMesh.rotation = new Vector3(0, 0, 0);
+                mainMesh.scaling.x *= -1;
+                break;
+            case "ModernHouseBuilding.glb":
+                mainMesh.position = new Vector3(-150,-0.1,85);
+                mainMesh.scaling = new Vector3(3,3,3);
+                mainMesh.rotation = new Vector3(0,0,0);
+                mainMesh.scaling.x *= -1;
+                break;
+            case "PalaceBuilding.glb":
+                mainMesh.position = new Vector3(75,0.1,150);
+                mainMesh.scaling = new Vector3(1.5,1.5,1.5);
+                mainMesh.rotation = new Vector3(0,0,0);
+                mainMesh.scaling.x *= -1;
+                break;
+            case "SkyscraperBuilding.glb":
+                mainMesh.position = new Vector3(100,0,-150);
+                mainMesh.scaling = new Vector3(0.4,0.4,0.4);
+                mainMesh.rotation = new Vector3(0, 0, 0);
+                mainMesh.scaling.x *= -1;
+                break;
+            case "SmallStore.glb":
+                mainMesh.position = new Vector3(80, 0.1, -30);
+                mainMesh.scaling = new Vector3(0.25, 0.25, 0.25);
+                mainMesh.rotation = new Vector3(0, 0, 0);
+                mainMesh.scaling.x *= -1;
+                break;
+
+            case "DIYStore.glb":
+                mainMesh.position = new Vector3(-40, 0.1, 75);
+                mainMesh.scaling = new Vector3(0.5, 0.5, 0.5);
+                mainMesh.rotation = new Vector3(0, 0, 0);
+                mainMesh.scaling.x *= -1;
+                break;
+            case "ClothingStore.glb":
+                mainMesh.position = new Vector3(-85,0.1,-25);
+                mainMesh.scaling = new Vector3(0.5,0.5,0.5);
+                mainMesh.rotation = new Vector3(0, 0, 0);
+                mainMesh.scaling.x *= -1;
+                break;
+            case "FastFood.glb":
+                mainMesh.position = new Vector3(-30,3,-75);
+                mainMesh.scaling = new Vector3(3,3,3);
+                mainMesh.rotation = new Vector3(0, 0, 0);
+                mainMesh.scaling.x *= -1;
+                break;
+            case "Hotel.glb":
+                mainMesh.position = new Vector3(20,0.1,-100);
+                mainMesh.scaling = new Vector3(2,2,2);
+                mainMesh.rotation = new Vector3(0, 0, 0);
+                mainMesh.scaling.x *= -1;
+                break;
+            case "Supermarket.glb":
+                mainMesh.position = new Vector3(-105,0.1,30);
+                mainMesh.scaling = new Vector3(0.5,0.5,0.5);
+                mainMesh.rotation = new Vector3(0,Math.PI*1.5,0);
+                mainMesh.scaling.x *= -1;
+                break;
+            case "CarStore.glb":
+                mainMesh.position = new Vector3(20,0.1,100);
+                mainMesh.scaling = new Vector3(0.5,0.5,0.5);
+                mainMesh.rotation = new Vector3(0,Math.PI/2,0);
+                mainMesh.scaling.x *= -1;
+                break;
+            case "BigStore.glb":
+                mainMesh.position = new Vector3(100,2.5,30);
+                mainMesh.scaling = new Vector3(1.2,1.2,1.2);
+                mainMesh.rotation = new Vector3(0, 0, 0);
+                mainMesh.scaling.x *= -1;
+                break;
+        }
+        
+    }
 
     // Load all the models
     LoadModels(): void {
@@ -244,10 +384,13 @@ export class MainScene {
         const loadModel = async (modelName: string): Promise<void> => {
             const result = await SceneLoader.ImportMeshAsync("", modelDir, modelName, this.scene);
             const mainMesh = result.meshes[0];
-            result.meshes.map((mesh) => {
+            const meshes = result.meshes;
+            meshes.map((mesh) => {
                 mesh.checkCollisions = true;
+                mesh.isVisible = false;
+                
             });
-    
+
             switch (modelName) {
                 case "CaravanBuilding.glb":
                     mainMesh.position = new Vector3(25, 0.1, -40);
@@ -363,12 +506,15 @@ export class MainScene {
                     this.scene.render();
                 });
             }
+           
+            
         };
     
         // We load all the models
         modelNames.forEach((modelName) => {
             loadModel(modelName);
         });
+        
     }
 
     CreateArms(camera : FreeCamera): void {

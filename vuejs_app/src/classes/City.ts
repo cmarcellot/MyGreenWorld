@@ -66,9 +66,9 @@ export class City {
           console.log('modif' + this.cashQuantity);
           this.ecoPourcentage += living.ecoBonus;
           this.gainPerSec += living.gainPerSec;
-            living.boughtNumber ++; 
-            this.livings.push(living); 
-      
+          living.boughtNumber ++; 
+          this.livings.push(living); 
+          return living;
         } 
         
         else {
@@ -105,7 +105,7 @@ export class City {
             console.log('modif' + this.cashQuantity);
             this.ecoPourcentage += improvement.ecoBonus;
             this.gainPerSec += improvement.gainPerSec;
-            this.energies.push(improvement); 
+            this.improvements.push(improvement); 
           } 
           
           else {

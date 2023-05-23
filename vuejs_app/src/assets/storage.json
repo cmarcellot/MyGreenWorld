@@ -6,7 +6,8 @@
             "description": "Bungalow description",
             "price": 50.00,
             "gainPerSec": 0.1,
-            "ecoBonus": -1
+            "ecoBonus": -1,
+            "modelName": "CaravanBuilding.glb"
         },
         {
             "id": 2,
@@ -14,7 +15,8 @@
             "description": "Bungalow 2 description",
             "price": 1500.00,
             "gainPerSec": 3.00,
-            "ecoBonus": 5
+            "ecoBonus": 5,
+            "modelName": "CottageBuilding.glb"
         },
         {
             "id": 3,
@@ -22,7 +24,8 @@
             "description": "Maison simple description",
             "price": 500.00,
             "gainPerSec": 1.00,
-            "ecoBonus": -5
+            "ecoBonus": -5,
+            "modelName": "HouseBuilding.glb"
         },
         {
             "id": 4,
@@ -30,7 +33,8 @@
             "description": "Maison simple 2 description",
             "price": 3750.00,
             "gainPerSec": 7.50,
-            "ecoBonus": 10
+            "ecoBonus": 10,
+            "modelName": "ModernBuilding_1.glb"
         },
         {
             "id": 5,
@@ -38,7 +42,8 @@
             "description": "Appartements description",
             "price": 2500.00,
             "gainPerSec": 5.00,
-            "ecoBonus": -10
+            "ecoBonus": -10,
+            "modelName": "ModernBuilding_2.glb"
         },
         {
             "id": 6,
@@ -46,7 +51,8 @@
             "description": "Appartements 2 description",
             "price": 15000.00,
             "gainPerSec": 30.00,
-            "ecoBonus": 20
+            "ecoBonus": 20,
+            "modelName": "ModernHouseBuilding.glb"
         },
         {
             "id": 7,
@@ -54,7 +60,8 @@
             "description": "Maison avec étages description",
             "price": 5000.00,
             "gainPerSec": 10.00,
-            "ecoBonus": -10
+            "ecoBonus": -10,
+            "modelName": "PalaceBuilding.glb"
         },
         {
             "id": 8,
@@ -62,7 +69,8 @@
             "description": "Maison avec étages 2 description",
             "price": 375000.00,
             "gainPerSec": 75.00,
-            "ecoBonus": 20
+            "ecoBonus": 20,
+            "modelName": "SkyscraperBuilding.glb"
         },
         {
             "id": 9,
@@ -70,7 +78,8 @@
             "description": "Villa description",
             "price": 25000.00,
             "gainPerSec": 50.00,
-            "ecoBonus": -5
+            "ecoBonus": -5,
+            "modelName": ""
         },
         {
             "id": 10,
@@ -78,7 +87,8 @@
             "description": "Villa 2 description",
             "price": 150000.00,
             "gainPerSec": 300.00,
-            "ecoBonus": 10
+            "ecoBonus": 10,
+            "modelName": ""
         },
         {
             "id": 11,
@@ -86,7 +96,8 @@
             "description": "Manoir description",
             "price": 50000.00,
             "gainPerSec": 100.00,
-            "ecoBonus": -5
+            "ecoBonus": -5,
+            "modelName": ""
         },
         {
             "id": 12,
@@ -94,7 +105,8 @@
             "description": "Manoir 2 description",
             "price": 625000.00,
             "gainPerSec": 1250.00,
-            "ecoBonus": 10
+            "ecoBonus": 10,
+            "modelName": ""
         },
         {
             "id": 13,
@@ -102,7 +114,8 @@
             "description": "Tour d’immeuble description",
             "price": 250000.00,
             "gainPerSec": 500.00,
-            "ecoBonus": -15
+            "ecoBonus": -15,
+            "modelName": ""
         },
         {
             "id": 14,
@@ -110,7 +123,8 @@
             "description": "Tour d’immeuble 2 description",
             "price": 2500000.00,
             "gainPerSec": 5000.00,
-            "ecoBonus": 25
+            "ecoBonus": 25,
+            "modelName": ""
         },
         {
             "id": 15,
@@ -118,7 +132,8 @@
             "description": "Gratte-ciel description",
             "price": 1000000.00,
             "gainPerSec": 2000.00,
-            "ecoBonus": -20
+            "ecoBonus": -20,
+            "modelName": ""
         },
         {
             "id": 16,
@@ -126,7 +141,8 @@
             "description": "Gratte-ciel 2 description",
             "price": 10000000.00,
             "gainPerSec": 20000.00,
-            "ecoBonus": 30
+            "ecoBonus": 30,
+            "modelName": ""
         }
     ],
     "commerces": [
@@ -136,7 +152,8 @@
             "description": "Marché description",
             "price": 50.00,
             "gainPerSec": 0.1,
-            "ecoBonus": 10
+            "ecoBonus": 10,
+            "modelName": "SmallStore.glb"
         },
         {
             "id": 2,
@@ -144,7 +161,8 @@
             "description": "Magasin de bricolage description",
             "price": 500.00,
             "gainPerSec": 1.00,
-            "ecoBonus": 5
+            "ecoBonus": 5,
+            "modelName": "DIYStore.glb"
         },
         {
             "id": 3,
@@ -152,7 +170,8 @@
             "description": "Magasin de vêtements description",
             "price": 5000.00,
             "gainPerSec": 10.00,
-            "ecoBonus": -5
+            "ecoBonus": -5,
+            "modelName": "ClothingStore.glb"
         },
         {
             "id": 4,
@@ -160,7 +179,8 @@
             "description": "Magasin d'électronique description",
             "price": 25000.00,
             "gainPerSec": 50.00,
-            "ecoBonus": -5
+            "ecoBonus": -5,
+            "modelName": "FastFood.glb"
         },
         {
             "id": 5,
@@ -168,7 +188,8 @@
             "description": "Magasin d’ameublement description",
             "price": 50000.00,
             "gainPerSec": 100.00,
-            "ecoBonus": 5
+            "ecoBonus": 5,
+            "modelName": "Hotel.glb"
         },
         {
             "id": 6,
@@ -176,7 +197,8 @@
             "description": "Supermarché description",
             "price": 100000.00,
             "gainPerSec": 200.00,
-            "ecoBonus": 5
+            "ecoBonus": 5,
+            "modelName": "Supermarket.glb"
         },
         {
             "id": 7,
@@ -184,7 +206,8 @@
             "description": "Concessionnaire description",
             "price": 500000.00,
             "gainPerSec": 1000.00,
-            "ecoBonus": -5
+            "ecoBonus": -5,
+            "modelName": "CarStore.glb"
         },
         {
             "id": 8,
@@ -192,7 +215,8 @@
             "description": "Centre commercial description",
             "price": 2500000.00,
             "gainPerSec": 5000.00,
-            "ecoBonus": -5
+            "ecoBonus": -5,
+            "modelName": "BigStore.glb"
         }
     ],
     "energies": [
@@ -202,7 +226,8 @@
             "description": "Centrale éolienne description",
             "price": 5000.00,
             "gainPerSec": 20.00,
-            "ecoBonus": 20
+            "ecoBonus": 20,
+            "modelName":""
         },
         {
             "id": 2,
@@ -210,7 +235,8 @@
             "description": "Centrale à biomasse description",
             "price": 50000.00,
             "gainPerSec": 200.00,
-            "ecoBonus": 10
+            "ecoBonus": 10,
+            "modelName":""
         },
         {
             "id": 3,
@@ -218,7 +244,8 @@
             "description": "Centrale à charbon description",
             "price": 500000.00,
             "gainPerSec": 2000.00,
-            "ecoBonus": -10
+            "ecoBonus": -10,
+            "modelName":""
         },
         {
             "id": 4,
@@ -226,7 +253,8 @@
             "description": "Centrale à pétrole description",
             "price": 1000000.00,
             "gainPerSec": 4000.00,
-            "ecoBonus": -10
+            "ecoBonus": -10,
+            "modelName":""
         },
         {
             "id": 5,
@@ -234,7 +262,8 @@
             "description": "Centrale solaire description",
             "price": 5000000.00,
             "gainPerSec": 20000.00,
-            "ecoBonus": 20
+            "ecoBonus": 20,
+            "modelName":""
         },
         {
             "id": 6,
@@ -242,7 +271,8 @@
             "description": "Centrale géothermique description",
             "price": 10000000.00,
             "gainPerSec": 40000.00,
-            "ecoBonus": 50
+            "ecoBonus": 50,
+            "modelName":""
         },
         {
             "id": 7,
@@ -250,7 +280,8 @@
             "description": "Centrale hydroélectrique description",
             "price": 50000000.00,
             "gainPerSec": 200000.00,
-            "ecoBonus": 50
+            "ecoBonus": 50,
+            "modelName":""
         },
         {
             "id": 8,
@@ -258,7 +289,8 @@
             "description": "Centrale nucléaire description",
             "price": 100000000.00,
             "gainPerSec": 400000.00,
-            "ecoBonus": 15
+            "ecoBonus": 15,
+            "modelName":""
         }
     ],
     "improvements": [

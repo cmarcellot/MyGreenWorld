@@ -31,7 +31,7 @@ export default defineComponent({
   },
   data() {
     return {
-      city: new City("test",0, 100, 1, 0),
+      city: new City("MyGreenWorld",0, 100, 1, 0),
     }
   },
 });

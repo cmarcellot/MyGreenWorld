@@ -22,6 +22,7 @@ export default defineComponent({
     return {
       // On initialise la propriété loaded à false
       loaded: false,
+      scene : {} as MainScene
     };
   },
   props :[
@@ -33,9 +34,14 @@ export default defineComponent({
     const loadingBar = document.getElementById("loadingBar") as HTMLElement;
     const percentLoaded = document.getElementById("percentLoaded") as HTMLElement;
     const loader = document.getElementById("loader") as HTMLElement;
-    new MainScene(canvas, loadingBar, percentLoaded, loader, this.city);
+    this.scene = new MainScene(canvas, loadingBar, percentLoaded, loader, this.city);
     this.city.updateCash();
-   },
+  },
+   watch : {
+    'city.ecoPourcentage': function(newVal, oldVal) {
+      this.scene.updateSkybox(newVal, oldVal);
+    }
+   }
 });
 </script>
 

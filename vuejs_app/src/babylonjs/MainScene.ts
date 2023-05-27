@@ -56,6 +56,15 @@ export class MainScene {
 
     // Scene creation
     createScene(city : City): Scene {
+        // get the progress bar
+        const cash = document.getElementById("cash") as HTMLElement;
+        const eco = document.getElementById("ecology") as HTMLElement;
+        const store = document.getElementById("store") as HTMLElement;
+
+        cash.hidden = true;
+        eco.hidden = true;
+        store.hidden  = true;
+
         const scene = new Scene(this.engine);
         const camera = new FreeCamera("camera", new Vector3(40, 5, 0), this.scene);
         camera.attachControl();

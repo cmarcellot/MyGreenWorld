@@ -128,12 +128,8 @@ import { Improvement } from '@/classes/Improvement';
 
  //Compare the cashQuantity and the price 
       BuyLiving(city : City, living: Living) {
-      
         city.buyLiv(living);
         this.sendData(living);
-        
-        
-        
       },
 
       BuyEnergy(city : City, energy : Energy){

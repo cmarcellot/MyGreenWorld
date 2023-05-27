@@ -386,7 +386,7 @@ export class MainScene {
             const mainMesh = result.meshes[0];
             const meshes = result.meshes;
             meshes.map((mesh) => {
-                mesh.checkCollisions = true;
+                mesh.checkCollisions = false;
                 mesh.isVisible = false;
                 
             });

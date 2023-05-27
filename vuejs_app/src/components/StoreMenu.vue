@@ -200,8 +200,15 @@ export default defineComponent({
       },
 
       deleteSave() {
-        localStorage.removeItem('cityData');
-        console.log("Supprimer sauvegarde");
+        //Request for confirmation of deletion
+        if (confirm("Voulez-vous vraiment supprimer la sauvegarde ?")) {
+          console.log("Suppression de la sauvegarde");
+          localStorage.removeItem('cityData');
+          //Refresh the page
+          window.location.reload();
+        } else {
+          console.log("Annulation de la suppression");
+        }
       },
 
       getSavedElement(elementId: string, type: string) {

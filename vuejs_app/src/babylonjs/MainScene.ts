@@ -28,6 +28,14 @@ export class MainScene {
         private loader: HTMLElement,
         private p_city : City
     ) {
+        const cash = document.getElementById("cash") as HTMLElement;
+        const eco = document.getElementById("ecology") as HTMLElement;
+        const store = document.getElementById("store") as HTMLElement;
+
+        cash.hidden = true;
+        eco.hidden = true;
+        store.hidden  = true;
+            
         // We create an engine for the scene rendering
         this.engine = new Engine(canvas, true);
 

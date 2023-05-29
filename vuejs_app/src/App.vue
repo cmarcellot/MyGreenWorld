@@ -4,10 +4,10 @@
     <div class="store"></div> --> 
   <div id="store"><StoreMenu :city ="city" @achat="handleEvent"  /></div>
   <!-- prog means progressiv -->
-  <div id="cash" >
+  <div id="cash">
     <ProgCash :value = "city.cashQuantity" />
   </div>
-  <div id="ecology ">
+  <div id="ecology">
     <ProgEcology :value = "city.ecoPourcentage"> </ProgEcology>
   </div>
 </template>
@@ -20,10 +20,12 @@ import ProgCash from './components/ProgCash.vue';
 import StoreMenu from './components/StoreMenu.vue';
 import {City} from './classes/City';
 import {Living} from './classes/Living';
+import {MainScene} from '@/babylonjs/MainScene';
+
 
 export default defineComponent({
   name: 'App',
-  
+
   components: {
     BabylonScene,
     ProgEcology,
@@ -32,8 +34,8 @@ export default defineComponent({
   },
   data() {
     return {
-      city: new City("test",0, 100, 1, 0),
-      living: {}
+      living: {},
+      city: new City("MyGreenWorld",0, 100, 1, 0),
     }
   },
   methods: {

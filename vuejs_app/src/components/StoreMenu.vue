@@ -11,37 +11,35 @@
         <div class="nav nav-bloc" @click="toggleContent1">
           <p class="title-item">HABITATIONS ET COMMERCES</p>  
         </div>
-        <div v-for="(living, index) in sortedLivingsCommerces()" :key="index" class="nav nav-item" v-show="showContent1">
-          <p class="title-bloc">{{ living.name }}</p>
+        <div v-for="(livingOrCommerce, index) in sortedLivingsCommerces(city)" :key="index" class="nav nav-item" v-show="showContent1">
+          <p class="title-bloc">{{ livingOrCommerce.name }}</p>
           <div class="container">
-            <img class="image" src="../../public/images/greenCity.jpg" alt="Image de la maison" />
+            <img class="image" :src="require('../../public/images/' + livingOrCommerce.picture)" alt="Image habitation ou commerce" />
             <div class="text-container">
-              <p class="description">{{ living.desc }}</p>
+              <p class="price"> Prix: {{ livingOrCommerce.price }}</p>
               <hr class="separator" />
-              <p class="price"> Prix: {{ living.price }} €</p>
+              <p class="gainPerSec">Gain: {{ livingOrCommerce.gainPerSec }}/sec</p>
               <hr class="separator" />
-              <p class="gainPerSec">Gains: {{ living.gainPerSec }}/sec</p>
+              <p class="bonusEco">Écologie: {{ livingOrCommerce.ecoBonus }} %</p>
               <hr class="separator" />
-              <p class="bonusEco">Écologie: {{ living.ecoBonus }} %</p>
+              <p class="livingCount">Nombre achetés : {{ livingOrCommerce.boughtNumber }}</p>
             </div>
           </div>
           <button class="btn"
-          v-on:click="BuyLiving(city, living)" :class="{ 'disabled': city.cashQuantity < living.price }"> Acheter </button>
+          v-on:click="BuyLivingOrCommerce(city, livingOrCommerce)" :class="{ 'disabled': city.cashQuantity < livingOrCommerce.price }"> Acheter </button>
         </div>
 
         <div class="nav nav-bloc" @click="toggleContent2">
           <p class="title-item">CENTRALES ÉLECTRIQUES</p>      
         </div>
-        <div v-for="(central, index) in sortedEnergies()" :key="index" class="nav nav-item" v-show="showContent2">
+        <div v-for="(central, index) in sortedEnergies(city)" :key="index" class="nav nav-item" v-show="showContent2">
           <p class="title-bloc">{{ central.name }}</p>
           <div class="container">
             <img class="image" src="../../public/images/greenCityTree.jpg" alt="Image de la centrale" />
             <div class="text-container">
-              <p class="description">{{ central.desc }}</p>
+              <p class="price"> Prix: {{ central.price }}</p>
               <hr class="separator" />
-              <p class="price"> Prix: {{ central.price }} €</p>
-              <hr class="separator" />
-              <p class="gainPerSec">Gains: {{ central.gainPerSec }}/sec</p>
+              <p class="gainPerSec">Gain: {{ central.gainPerSec }}/sec</p>
               <hr class="separator" />
               <p class="bonusEco">Écologie: {{ central.ecoBonus }} %</p>
             </div>
@@ -53,21 +51,47 @@
         <div class="nav nav-bloc" @click="toggleContent3">
           <p class="title-item">AMÉLIORATIONS</p>      
         </div>
-        <div v-for="(improvement, index) in sortedImprovements()" :key="index" class="nav nav-item" v-show="showContent3">
+        <div v-for="(improvement, index) in sortedImprovements(city)" :key="index" class="nav nav-item" v-show="showContent3">
           <p class="title-bloc">{{ improvement.name }}</p>
           <div class="container">
             <div class="text-container">
-              <p class="description">{{ improvement.desc }}</p>
+              <p class="box">{{ improvement.desc }}</p>
               <hr class="separator" />
-              <p class="price"> Prix: {{ improvement.price }} €</p>
+              <p class="price"> Prix: {{ improvement.price }}</p>
               <hr class="separator" />
-              <p class="gainPerSec">Gains: {{ improvement.gainPerSec }}/sec</p>
+              <p class="gainPerSec">Gain par seconde: {{ improvement.gainPerSec }}/sec</p>
+              <hr class="separator" />
+              <p class="gainPerClick">Gain par clique: {{ improvement.gainPerClick }}/clique</p>
               <hr class="separator" />
               <p class="bonusEco">Écologie: {{ improvement.ecoBonus }} %</p>
+              <hr v-if="improvement.unlocked == true" class="separator" />
+              <p v-if="improvement.unlocked == true" class="message">Amélioration déjà débloquée</p>
             </div>
           </div>
-          <button class="btn"
-          v-on:click="BuyImprov(city, improvement)" :class="{ 'disabled': city.cashQuantity < improvement.price }"> Acheter </button>
+          <button v-if="improvement.unlocked == false" class="btn"
+          v-on:click="BuyImprov(city, improvement)" :class="{ 'disabled': city.cashQuantity < improvement.price}"> Acheter </button>
+        </div>
+
+        <div class="nav nav-bloc" @click="toggleContent4">
+          <p class="title-item">PARAMÈTRES</p>      
+        </div>
+        <div class="nav nav-item" v-show="showContent4">
+          <button class="btn btn-red" @click="deleteSave">Supprimer sauvegarde</button>
+        </div>
+
+        <div class="nav nav-bloc" @click="toggleContent5">
+          <p class="title-item">ADMINTOOLS</p>      
+        </div>
+        <div class="nav nav-item" v-show="showContent5">
+          <p class="title-bloc">Ajouter argent</p>
+          <div class="container">
+            <button class="btn"
+              v-on:click="Add1000(city)"> + 1.000 </button>
+            <button class="btn"
+              v-on:click="Add10000(city)"> +10.000 </button>
+            <button class="btn"
+              v-on:click="Add100000(city)"> + 100.000 </button>
+          </div>
         </div>
       </div>
     </nav>
@@ -82,8 +106,9 @@ import jsonData from '@/assets/storage.json';
 import { City } from '@/classes/City';
 import { float } from '@babylonjs/core/types';
 import { Improvement } from '@/classes/Improvement';
-  
-  export default defineComponent({
+import { BuyableElement } from '@/classes/BuyableElement';
+
+export default defineComponent({
     name: 'StoreMenu',
     props :[
     "city"
@@ -93,6 +118,8 @@ import { Improvement } from '@/classes/Improvement';
         showContent1: false,
         showContent2: false,
         showContent3: false,
+        showContent4: false,
+        showContent5: false,
 
         livings: [] as Living[],
         commerces: [] as Commerce[],
@@ -113,91 +140,215 @@ import { Improvement } from '@/classes/Improvement';
         console.log(this.improvements);
         this.showContent3 = !this.showContent3;
       },
+      toggleContent4() {
+        this.showContent4 = !this.showContent4;
+      },
+      toggleContent5() {
+        this.showContent5 = !this.showContent5;
+      },
 
       // Sort the list of livings and commerces by price
-      sortedLivingsCommerces() {
+      sortedLivingsCommerces(city : City) {
         const liste = this.livings.concat(this.commerces);
+        city.livings = this.livings;
+        city.commerces = this.commerces;
         return liste.sort((a, b) => a.price - b.price);
       },
-      sortedEnergies() {
+      sortedEnergies(city : City) {
+        city.energies = this.energies;
         return this.energies.sort((a, b) => a.price - b.price);
       },
-      sortedImprovements() {
+      sortedImprovements(city : City) {
+        city.improvements = this.improvements;
         return this.improvements.sort((a, b) => a.price - b.price);
       },
 
- //Compare the cashQuantity and the price 
-      BuyLiving(city : City, living: Living) {
-        city.buyLiv(living);
-        this.sendData(living);
+
+      //Compare the cashQuantity and the price 
+      BuyLivingOrCommerce(city : City, livingOrCommerce: any) {
+        this.playClickSound();
+        city.buyLivingOrCommerce(livingOrCommerce);
+        this.sendData(livingOrCommerce);
+
       },
 
       BuyEnergy(city : City, energy : Energy){
-
+        this.playClickSound();
         city.buyEco(energy);
-
       },
 
       BuyImprov (city : City, improvement : Improvement) {
-
+        this.playClickSound();
         city.buyImprov(improvement);
-
       },
-      sendData(living: Living) {
-    this.$emit('achat', living);
-    }
+
+
+     sendData(living: Living) {
+        this.$emit('achat', living);
+      },
+
+      Add1000(city : City) {
+        this.playClickSound();
+        city.cashQuantity += 1000;
+      },
+
+      Add10000(city : City) {
+        this.playClickSound();
+        city.cashQuantity += 10000;
+      },
+
+      Add100000(city : City) {
+        this.playClickSound();
+        city.cashQuantity += 100000;
+      },
+
+      playClickSound() {
+        const audio = new Audio('/sounds/SonAchat.mp3');
+        audio.play();
+      },
+
+      deleteSave() {
+        //Request for confirmation of deletion
+        if (confirm("Voulez-vous vraiment supprimer la sauvegarde ?")) {
+          console.log("Suppression de la sauvegarde");
+          localStorage.removeItem('cityData');
+          //Refresh the page
+          window.location.reload();
+        } else {
+          console.log("Annulation de la suppression");
+        }
+      },
+
+      getSavedElement(elementId: string, type: string) {
+        const savedCity = localStorage.getItem("cityData");
+        if (savedCity) {
+          const cityData = JSON.parse(savedCity);
+          const { livings, commerces, energies, improvements } = cityData;
+
+          switch (type) {
+            case "living":
+              for (const living of livings) {
+                if (living.elementId === elementId) {
+                  return living;
+                }
+              }
+              break;
+
+            case "commerce":
+              for (const commerce of commerces) {
+                if (commerce.elementId === elementId) {
+                  return commerce;
+                }
+              }
+              break;
+
+            case "energy":
+              for (const energy of energies) {
+                if (energy.elementId === elementId) {
+                  return energy;
+                }
+              }
+              break;
+
+            case "improvement":
+              for (const improvement of improvements) {
+                if (improvement.elementId === elementId) {
+                  return improvement;
+                }
+              }
+              break;
+
+            default:
+              break;
+          }
+        }
+        return null;
+      }
+
+      // buyEnergy(price : float, gainPerSec : number, ecoBonus : number) {
+      // if (this.City.cashQuantity > price) {
+      //   console.log('initial' + this.City.cashQuantity);
+      //   this.City.cashQuantity -= price;
+      //   console.log('Produit acheté avec succès !');
+      //   console.log('modif' + this.City.cashQuantity);
+      //   console.log('initial' + this.City.ecoPourcentage+ ' et ' + this.City.gainPerSec)
+      //   console.log(this.City.ecoPourcentage += ecoBonus);
+      //   console.log(this.City.gainPerSec += gainPerSec);
+        
+      // } 
+      
+      // else {
+      //   console.log("Vous n'avez pas assez d'argent pour acheter le produit.");
+      //   }
+      // },
+
 
     },
     created(){
       // Create objects from json data
-      for (const living of jsonData.livings) {
-        this.livings.push(new Living(
-          0, 
-          living.id.toString(), 
-          living.name, 
-          living.description, 
-          living.price, 
-          living.gainPerSec, 
-          living.ecoBonus,
-          living.modelName
-        ));
-      }
 
-      for (const commerce of jsonData.commerces) {
-        this.commerces.push(new Commerce(
+      for (const livingData of jsonData.livings) {
+        console.log(livingData);
+        const savedLiving = this.getSavedElement(livingData.id.toString(), 'living');
+        const living = savedLiving ? savedLiving : new Living(
           0,
-          commerce.id.toString(),
-          commerce.name,
-          commerce.description,
-          commerce.price,
-          commerce.gainPerSec,
-          commerce.ecoBonus,
-          commerce.modelName
-        ));
+          livingData.id.toString(),
+          livingData.name,
+          livingData.description,
+          livingData.price,
+          livingData.gainPerSec,
+          livingData.ecoBonus,
+          livingData.picture,
+          livingData.modelName
+        );
+        this.livings.push(living);
       }
 
-      for (const energy of jsonData.energies) {
-        this.energies.push(new Energy(
-          energy.id.toString(),
-          energy.name,
-          energy.description,
-          energy.price,
-          energy.gainPerSec,
-          energy.ecoBonus,
-          energy.modelName));
+      for (const commerceData of jsonData.commerces) {
+        console.log(commerceData);
+        const savedCommerce = this.getSavedElement(commerceData.id.toString(), 'commerce');
+        const commerce = savedCommerce ? savedCommerce : new Commerce(
+          0,
+          commerceData.id.toString(),
+          commerceData.name,
+          commerceData.description,
+          commerceData.price,
+          commerceData.gainPerSec,
+          commerceData.ecoBonus,
+          commerceData.picture,
+          commerceData.modelName
+        );
+        this.commerces.push(commerce);
       }
 
-      for (const improvement of jsonData.improvements) {
-        this.improvements.push(new Improvement(
-          improvement.id.toString(),
-          improvement.name,
-          improvement.desc,
-          improvement.price,
-          improvement.gainPerSec,
-          improvement.ecoBonus,
-          improvement.gainPerClick,
+      for (const energyData of jsonData.energies) {
+        const savedEnergy = this.getSavedElement(energyData.id.toString(), 'energy');
+        const energy = savedEnergy ? savedEnergy : new Energy(
+          energyData.id.toString(),
+          energyData.name,
+          energyData.description,
+          energyData.price,
+          energyData.gainPerSec,
+          energyData.ecoBonus
+        );
+        this.energies.push(energy);
+
+      }
+
+      for (const improvementData of jsonData.improvements) {
+        const savedImprovement = this.getSavedElement(improvementData.id.toString(), 'improvement');
+        const improvement = savedImprovement ? savedImprovement : new Improvement(
+          improvementData.id.toString(),
+          improvementData.name,
+          improvementData.desc,
+          improvementData.price,
+          improvementData.gainPerSec,
+          improvementData.ecoBonus,
+          improvementData.gainPerClick,
           false,
-          0));
+          0
+        );
+        this.improvements.push(improvement);
       }
     }
   });
@@ -332,9 +483,9 @@ import { Improvement } from '@/classes/Improvement';
 }
 /* For managing the image of each building of the store */
 .image {
-  width: 75px;
-  height: 75px;
-  margin-right: 75px;
+  width: 100px;
+  height: 100px;
+  margin-right: 100px;
 }
 /* For managing the text of each building of the store */
 .text-container {
@@ -362,10 +513,29 @@ import { Improvement } from '@/classes/Improvement';
   font-weight:400;
 }
 
+.message {
+  color: white;
+}
+
 .disabled {
   opacity: 0.5;
   cursor: not-allowed;
   pointer-events: none;
+}
+
+.box {
+  border: 1px solid rgb(0, 0, 0);
+  border-radius: 10px;
+  padding: 10px;
+  background-color: #6e6e6e;
+  border-bottom: #000;
+  overflow: auto;
+}
+
+.btn-red {
+  text-align: center;
+  background-color: red;
+  color: white;
 }
 
 </style>

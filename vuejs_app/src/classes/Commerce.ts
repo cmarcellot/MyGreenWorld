@@ -11,6 +11,8 @@ export class Commerce extends BuyableElement {
 
     boughtNumber : int;
     modelName : string;
+    picture : string;
+
     
     /** the constructor method calls the super() method : constructor of the parent class BuyableElement
      * Arguments
@@ -24,10 +26,13 @@ export class Commerce extends BuyableElement {
     boughtNumber: number of commerces bought by the player
     */
 
-    constructor(boughtNumber : int, elementId: string, name : string, desc : string, price : float, gainPerSec : float, ecoBonus : int, modelName : string){
+
+    constructor(boughtNumber : int, elementId: string, name : string, desc : string, price : float, gainPerSec : float, ecoBonus : int, picture : string, modelName : string){
         super(elementId,name, desc, price, gainPerSec,ecoBonus);
         this.boughtNumber=boughtNumber;
+        this.picture = picture;
         this.modelName = modelName;
+
     }
 
     getNextPrice () :  void {

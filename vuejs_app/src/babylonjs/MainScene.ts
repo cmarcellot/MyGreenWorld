@@ -19,7 +19,7 @@ export class MainScene {
     armLeft!: Mesh;
     handRight!: Mesh;
     handLeft!: Mesh;
-
+    show!: boolean;
 
     ///////////CONSTRUCTOR////////////
 
@@ -60,7 +60,18 @@ export class MainScene {
     ///////////METHODS////////////
 
     // Scene creation
-    createScene(city : City, living:Living): Scene {
+
+
+    createScene(city : City): Scene {
+        // get the progress bar
+        const cash = document.getElementById("cash") as HTMLElement;
+        const eco = document.getElementById("ecology") as HTMLElement;
+        const store = document.getElementById("store") as HTMLElement;
+
+        cash.hidden = true;
+        eco.hidden = true;
+        store.hidden  = true;
+
         const scene = new Scene(this.engine);
         const camera = new FreeCamera("camera", new Vector3(40, 5, 0), this.scene);
         camera.attachControl();
@@ -72,6 +83,15 @@ export class MainScene {
         camera.ellipsoid = new Vector3(5, 1.75, 5);
         camera.rotation.y = -(Math.PI / 2);
         camera.minZ = 0.5;
+
+        camera.keysUp.push(90); // Z key
+        camera.keysLeft.push(81); // Q key
+        camera.keysDown.push(83); // S key
+        camera.keysRight.push(68); // D key
+        camera.keysUpward.push(32); // Space bar
+        camera.keysDownward.push(16); // Shift key
+
+        camera.applyGravity = true; // Apply gravity to the camera
 
         // Create a light to illuminate the scene
         const hemiLight = new HemisphericLight("hemiLight", new Vector3(0, 1, 0), this.scene);
@@ -94,28 +114,32 @@ export class MainScene {
 
         let supermanMode = false;
         window.addEventListener("keydown", (event) => {
-            // Reset the camera position when pressing the "R" key
-            if (event.keyCode === 82) {
-                camera.position = new Vector3(40, 5, 0);
-                camera.rotation.y = -(Math.PI / 2);
-            }
-            // supermanMode when pressing the "S" key
-            if (event.keyCode === 83) {
-                if(supermanMode){
-                    camera.speed = 1.5;
-                    this.armRight.isVisible = false;
-                    this.armLeft.isVisible = false;
-                    this.handRight.isVisible = false;
-                    this.handLeft.isVisible = false;
-                    supermanMode = false;
-                }else{
-                    camera.speed = 7.5;
-                    this.armRight.isVisible = true;
-                    this.armLeft.isVisible = true;
-                    this.handRight.isVisible = true;
-                    this.handLeft.isVisible = true;
-                    supermanMode = true;
-                }
+            switch(event.keyCode) {
+                case 82: // R key
+                    // Respawn
+                    camera.position = new Vector3(40, 5, 0);
+                    camera.rotation.y = -(Math.PI / 2);
+                    break;
+                case 70: // F key
+                    //Fly mode
+                    if(supermanMode){
+                        camera.speed = 1.5;
+                        /*this.armRight.isVisible = false;
+                        this.armLeft.isVisible = false;
+                        this.handRight.isVisible = false;
+                        this.handLeft.isVisible = false;*/
+                        camera.applyGravity = true; 
+                        supermanMode = false;
+                    }else{
+                        camera.speed = 7.5;
+                        /*this.armRight.isVisible = true;
+                        this.armLeft.isVisible = true;
+                        this.handRight.isVisible = true;
+                        this.handLeft.isVisible = true;*/
+                        camera.applyGravity = false; 
+                        supermanMode = true;
+                    }
+                    break;
             }
         });        
 
@@ -138,11 +162,9 @@ export class MainScene {
                 // We try to pick an object
                 if (pickResult && pickResult.hit && pickResult.pickedMesh) {
                     if(pickResult.pickedMesh.name == "Object_4" || pickResult.pickedMesh.name == "Object_5" ){
+                        city.playTreeSound();
                         city.incrementCashQuantity();
-                        ()=>{
-                            const audio = new Audio('./sounds/SonArbre.mp3');
-                            audio.play();
-                        }
+
                     }
                 }
             };
@@ -155,7 +177,7 @@ export class MainScene {
         scene.environmentIntensity = 0.75;
         this.LoadModels();
 
-        this.CreateArms(camera);
+        //this.CreateArms(camera);
         
         return scene;
     }
@@ -491,20 +513,38 @@ export class MainScene {
                     mainMesh.scaling.x *= -1;
                     break;
             }
-    
+
+            // get the progress bar
+            const cash = document.getElementById("cash") as HTMLElement;
+            const eco = document.getElementById("ecology") as HTMLElement;
+            const store = document.getElementById("store") as HTMLElement;
+
+
             // Update the progress bar
             progress += increment;
             this.loadingScreen.updateLoadStatus(progress);
-    
-            // When all the models are loaded, we hide the loading screen
-            if (progress === 100) {
-                // We hide the loading screen
-                this.engine.hideLoadingUI();
-    
-                // We launch the scene rendering in the engine render loop
-                this.engine.runRenderLoop(() => {
-                    this.scene.render();
-                });
+         
+            //hide the bars 
+            if (progress !== 100) {
+                cash.hidden = true;
+                eco.hidden = true;
+                store.hidden  = true;
+            }
+             // When all the models are loaded, we hide the loading screen
+            else {
+                
+                 // We hide the loading screen
+                 this.engine.hideLoadingUI() 
+                
+                 // We launch the scene rendering in the engine render loop
+                 this.engine.runRenderLoop(() => {
+                     this.scene.render();
+                 });
+                
+                 // show the bars 
+                 cash.hidden = false;
+                 eco.hidden = false;
+                 store.hidden = false;  
             }
            
             

@@ -53,7 +53,7 @@ export class MainScene {
         this.engine.resize();
         
         // We create the scene
-        this.scene = this.createScene(this.city,this.living);
+        this.scene = this.createScene(this.city);
         
     }
 

@@ -110,8 +110,6 @@
             "gainPerSec": 10.00,
             "ecoBonus": -5,
             "picture": "pic_ClothingStore.jpg",
-            "modelName": "ClothingStore.glb",
-            "modelName": "FastFood.glb,
             "modelName": "ClothingStore.glb"
         },
         {

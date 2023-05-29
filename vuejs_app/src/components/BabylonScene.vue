@@ -44,10 +44,8 @@ export default defineComponent({
    watch : {
     living(newValue,old) {
       if(this.living.boughtNumber==1){
-        this.scene.loadLiving(this.living.modelName);
+        this.scene.loadLiving(this.living.modelName, 0); // 0 because no loading bar
       }
-      
-      
     }
    }
 });

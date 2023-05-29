@@ -1,4 +1,4 @@
-import { Scene, Engine, FreeCamera, Vector3, HemisphericLight, MeshBuilder, SceneLoader, StandardMaterial, Texture, Color3, Mesh, NodeMaterial, Axis, Space, Viewport, CubeTexture} from '@babylonjs/core';
+import { Scene, Engine, FreeCamera, Vector3, HemisphericLight, MeshBuilder, SceneLoader, StandardMaterial, Texture, Color3, Mesh, NodeMaterial, Axis, Space, Viewport, CubeTexture, Sound} from '@babylonjs/core';
 import { CustomLoadingScreen } from "./CustomLoadingScreen";
 // We import the loaders to be able to load models
 import "@babylonjs/loaders";
@@ -56,15 +56,6 @@ export class MainScene {
 
     // Scene creation
     createScene(city : City): Scene {
-        // get the progress bar
-        const cash = document.getElementById("cash") as HTMLElement;
-        const eco = document.getElementById("ecology") as HTMLElement;
-        const store = document.getElementById("store") as HTMLElement;
-
-        cash.hidden = true;
-        eco.hidden = true;
-        store.hidden  = true;
-
         const scene = new Scene(this.engine);
         const camera = new FreeCamera("camera", new Vector3(40, 5, 0), this.scene);
         camera.attachControl();
@@ -156,16 +147,21 @@ export class MainScene {
                 // We try to pick an object
                 if (pickResult && pickResult.hit && pickResult.pickedMesh) {
                     if(pickResult.pickedMesh.name == "Object_4" || pickResult.pickedMesh.name == "Object_5" ){
-                        city.playTreeSound();
                         city.incrementCashQuantity();
-
                     }
                 }
             };
         });
           
         // Create a skybox
-        const envTex = CubeTexture.CreateFromPrefilteredData("./environments/blue_sky.env", scene);
+        let envTex: CubeTexture;
+        if(this.city.ecoPourcentage > 50){
+            envTex = CubeTexture.CreateFromPrefilteredData("./environments/blue_sky.env", scene);
+        }
+        else{
+            envTex = CubeTexture.CreateFromPrefilteredData("./environments/grey_sky.env", scene);
+        }
+        
         scene.environmentTexture = envTex;
         scene.createDefaultSkybox(envTex, true);
         scene.environmentIntensity = 0.75;
@@ -175,6 +171,21 @@ export class MainScene {
         //this.CreateArms(camera);
         
         return scene;
+    }
+
+    updateSkybox = async (newEcoPourcentage: number, oldEcoPourcentage: number): Promise<void> => {
+        // Update skybox
+        let envTex: CubeTexture;
+        if(newEcoPourcentage >= 50 && oldEcoPourcentage < 50) {
+            envTex = CubeTexture.CreateFromPrefilteredData("./environments/blue_sky.env", this.scene);
+            this.scene.environmentTexture = envTex;
+            this.scene.createDefaultSkybox(envTex, true);
+        }
+        else if(newEcoPourcentage < 50 && oldEcoPourcentage >= 50) {
+            envTex = CubeTexture.CreateFromPrefilteredData("./environments/grey_sky.env", this.scene);
+            this.scene.environmentTexture = envTex;
+            this.scene.createDefaultSkybox(envTex, true);
+        }
     }
     
     // Base texture for a grass effect
@@ -224,15 +235,6 @@ export class MainScene {
             instance.position.y = 0.25;
             instance.rotate(Axis.Y, Math.random() * Math.PI * 2, Space.LOCAL);
         }
-    }
-
-    // Add environment
-    AddEnvironment(): void {
-        // Create a skybox
-        const envTex = CubeTexture.CreateFromPrefilteredData("./environments/blue_sky.env", this.scene);
-        this.scene.environmentTexture = envTex;
-        this.scene.createDefaultSkybox(envTex, true);
-        this.scene.environmentIntensity = 0.75;
     }
 
     // Load all the models

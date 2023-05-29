@@ -18,7 +18,7 @@
             "gainPerSec": 1.00,
             "ecoBonus": -5,
             "picture": "pic_LittleHouse.jpg",
-            "modelName": "CottageBuilding.glb"
+            "modelName": "HouseBuilding.glb"
         },
         {
             "id": 3,
@@ -28,7 +28,7 @@
             "gainPerSec": 5.00,
             "ecoBonus": -10,
             "picture": "pic_Building1.jpg",
-            "modelName": "HouseBuilding.glb"
+            "modelName": "ModernBuilding_1.glb"
         },
         {
             "id": 4,
@@ -38,7 +38,7 @@
             "gainPerSec": 10.00,
             "ecoBonus": -10,
             "picture": "pic_BigHouse.jpg",
-            "modelName": "ModernBuilding_1.glb"
+            "modelName": "CottageBuilding.glb"
         },
         {
             "id": 5,
@@ -48,7 +48,7 @@
             "gainPerSec": 50.00,
             "ecoBonus": -5,
             "picture": "pic_Villa.jpg",
-            "modelName": "ModernBuilding_2.glb"
+            "modelName": "ModernHouseBuilding.glb"
         },
         {
             "id": 6,
@@ -58,7 +58,7 @@
             "gainPerSec": 100.00,
             "ecoBonus": -5,
             "picture": "pic_Mansion.jpg",
-            "modelName": "ModernHouseBuilding.glb"
+            "modelName": "PalaceBuilding.glb"
         },
         {
             "id": 7,
@@ -68,7 +68,7 @@
             "gainPerSec": 500.00,
             "ecoBonus": -15,
             "picture": "pic_Building2.jpg",
-            "modelName": "PalaceBuilding.glb"
+            "modelName": "ModernBuilding_2.glb"
         },
         {
             "id": 8,

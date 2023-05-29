@@ -40,16 +40,16 @@ export class MainScene {
         this.city = p_city;
         this.groundSize = 450;
 
-        //resize the scene 
+        //resize the scene
         window.addEventListener('resize', () =>{
             this.engine.resize();
         });
 
         this.engine.resize();
-        
+
         // We create the scene
         this.scene = this.createScene(this.city);
-        
+
     }
 
     ///////////METHODS////////////
@@ -112,7 +112,7 @@ export class MainScene {
                         this.armLeft.isVisible = false;
                         this.handRight.isVisible = false;
                         this.handLeft.isVisible = false;*/
-                        camera.applyGravity = true; 
+                        camera.applyGravity = true;
                         supermanMode = false;
                     }else{
                         camera.speed = 7.5;
@@ -120,18 +120,18 @@ export class MainScene {
                         this.armLeft.isVisible = true;
                         this.handRight.isVisible = true;
                         this.handLeft.isVisible = true;*/
-                        camera.applyGravity = false; 
+                        camera.applyGravity = false;
                         supermanMode = true;
                     }
                     break;
             }
-        });        
+        });
 
         this.CreateGrass();
 
         // Import of the tree
         SceneLoader.ImportMesh("","./models/","tree.glb",this.scene,(newMeshes)=> {
-            
+
             newMeshes.map((mesh) => {
                 mesh.checkCollisions = true;
             });
@@ -142,7 +142,7 @@ export class MainScene {
             mesh.scaling = new Vector3(3/150, 3/150, 3/150);
             // making the tree clickable
             mesh.name  = "tree";
-  
+
             scene.onPointerDown = function (evt, pickResult) {
                 // We try to pick an object
                 if (pickResult && pickResult.hit && pickResult.pickedMesh) {
@@ -154,7 +154,7 @@ export class MainScene {
                 }
             };
         });
-          
+
         // Create a skybox
         const envTex = CubeTexture.CreateFromPrefilteredData("./environments/blue_sky.env", scene);
         scene.environmentTexture = envTex;
@@ -164,10 +164,10 @@ export class MainScene {
         this.LoadModels();
 
         //this.CreateArms(camera);
-        
+
         return scene;
     }
-    
+
     // Base texture for a grass effect
     CreateGroundMaterial(): StandardMaterial {
         const groundMat = new StandardMaterial("groundMat", this.scene);
@@ -192,7 +192,7 @@ export class MainScene {
         // Rotate the plane to make it look like a grass blade
         blade.rotation.x = Math.PI * 0.5;
         blade.bakeCurrentTransformIntoVertices();
-    
+
         // Create a node material to apply the grass texture
         NodeMaterial.ParseFromSnippetAsync("#8WH2KS#22", this.scene).then((nodeMaterial) => {
             blade.material = nodeMaterial;
@@ -247,14 +247,14 @@ export class MainScene {
             "CarStore.glb",
             "BigStore.glb",
         ];
-    
+
         // Path to the models
         const modelDir = "./models/";
-    
+
         // Progress bar
         let progress = 0;
         const increment = 100 / modelNames.length;
-    
+
         // create a function to load a model
         const loadModel = async (modelName: string): Promise<void> => {
             const result = await SceneLoader.ImportMeshAsync("", modelDir, modelName, this.scene);
@@ -262,7 +262,7 @@ export class MainScene {
             result.meshes.map((mesh) => {
                 mesh.checkCollisions = true;
             });
-    
+
             switch (modelName) {
                 case "CaravanBuilding.glb":
                     mainMesh.position = new Vector3(25, 0.1, -40);
@@ -270,7 +270,7 @@ export class MainScene {
                     mainMesh.rotation = new Vector3(0, 0, 0);
                     mainMesh.scaling.x *= -1;
                     break;
-    
+
                 case "CottageBuilding.glb":
                     mainMesh.position = new Vector3(-80, 0.1, 125);
                     mainMesh.scaling = new Vector3(2, 2, 2);
@@ -319,7 +319,7 @@ export class MainScene {
                     mainMesh.rotation = new Vector3(0, 0, 0);
                     mainMesh.scaling.x *= -1;
                     break;
-    
+
                 case "DIYStore.glb":
                     mainMesh.position = new Vector3(-40, 0.1, 75);
                     mainMesh.scaling = new Vector3(0.5, 0.5, 0.5);
@@ -367,37 +367,41 @@ export class MainScene {
             // get the progress bar
             const cash = document.getElementById("cash") as HTMLElement;
             const eco = document.getElementById("ecology") as HTMLElement;
-            const store = document.getElementById("store") as HTMLElement;
-
+            const store = document.getElementById("menu") as HTMLElement;
 
             // Update the progress bar
             progress += increment;
             this.loadingScreen.updateLoadStatus(progress);
-         
-            //hide the bars 
+
+            //hide the bars
             if (progress !== 100) {
                 cash.hidden = true;
                 eco.hidden = true;
-                store.hidden  = true;
+                //disable click
+                store.classList.add('disabled');
+                // m.hidden = true;
+
             }
              // When all the models are loaded, we hide the loading screen
             else {
-                
+
                  // We hide the loading screen
-                 this.engine.hideLoadingUI() 
-                
+                 this.engine.hideLoadingUI()
+
                  // We launch the scene rendering in the engine render loop
                  this.engine.runRenderLoop(() => {
                      this.scene.render();
                  });
-                
-                 // show the bars 
+
+                 // show the bars
                  cash.hidden = false;
                  eco.hidden = false;
-                 store.hidden = false;  
+                 //enable click
+                store.classList.remove('disabled');
+                // m.hidden = false;
             }
         };
-    
+
         // We load all the models
         modelNames.forEach((modelName) => {
             loadModel(modelName);

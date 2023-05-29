@@ -1,6 +1,6 @@
 <template>
-    <nav class="side-nav col-lg-3">
-      <div class="wrapper">
+    <nav id="menu" class="side-nav col-lg-3">
+      <div class="wrapper" id="wrap">
 
         <div class="three-dots-container">
           <div class="d1"> MY </div>
@@ -423,7 +423,7 @@ export default defineComponent({
 }
 
 .disabled {
-  opacity: 0.5;
+  opacity: 1;
   cursor: not-allowed;
   pointer-events: none;
 }

@@ -45,7 +45,9 @@ export default defineComponent({
     living(newValue,old) {
       if(this.living.boughtNumber==1){
         this.scene.loadLiving(this.living.modelName, 0); // 0 because no loading bar
-      }
+      },
+      'city.ecoPourcentage': function(newVal, oldVal) {
+      this.scene.updateSkybox(newVal, oldVal);
     }
    }
 });

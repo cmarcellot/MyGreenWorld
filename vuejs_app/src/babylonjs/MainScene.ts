@@ -8,7 +8,6 @@ import { Living } from '@/classes/Living';
 export class MainScene {
 
     ///////////ATTRIBUTES////////////
-
     scene: Scene;
     engine: Engine;
     loadingScreen: CustomLoadingScreen
@@ -23,15 +22,12 @@ export class MainScene {
     progress!: number;
 
     ///////////CONSTRUCTOR////////////
-
     constructor(
         private canvas:HTMLCanvasElement,
         private loadingBar: HTMLElement,
         private percentLoaded: HTMLElement,
         private loader: HTMLElement,
-        private p_city : City,
-        private p_living : Living
-
+        private p_city : City
     ) {
         const cash = document.getElementById("cash") as HTMLElement;
         const eco = document.getElementById("ecology") as HTMLElement;
@@ -51,7 +47,6 @@ export class MainScene {
 
         //Init the ground size
         this.city = p_city;
-        this.living = p_living;
         this.groundSize = 450;
         this.progress = 0;
 
@@ -163,6 +158,7 @@ export class MainScene {
                 // We try to pick an object
                 if (pickResult && pickResult.hit && pickResult.pickedMesh) {
                     if(pickResult.pickedMesh.name == "Object_4" || pickResult.pickedMesh.name == "Object_5" ){
+                        city.playTreeSound();
                         city.incrementCashQuantity();
                     }
                 }
@@ -181,8 +177,7 @@ export class MainScene {
         scene.environmentTexture = envTex;
         scene.createDefaultSkybox(envTex, true);
         scene.environmentIntensity = 0.75;
-        //this.LoadModels();
-
+        
         //this.CreateArms(camera);
         
         return scene;
@@ -404,7 +399,7 @@ export class MainScene {
                 break;
         }
         
-        if(length >= 0){
+        if(length > 0){
 
             const increment = 100 / length;
             increment.toFixed(1);
@@ -416,10 +411,13 @@ export class MainScene {
 
             // Update the progress bar
             this.progress += increment;
-            this.loadingScreen.updateLoadStatus(this.progress);
+
+            const roundedProgress = Math.round(this.progress);
+            
+            this.loadingScreen.updateLoadStatus(roundedProgress);
 
             //hide the bars 
-            if (this.progress < 100) {
+            if (roundedProgress < 100) {
                 cash.hidden = true;
                 eco.hidden = true;
                 store.hidden  = true;
@@ -441,7 +439,6 @@ export class MainScene {
                  store.hidden = false;  
             }
         }
-        
     }
 
     CreateArms(camera : FreeCamera): void {

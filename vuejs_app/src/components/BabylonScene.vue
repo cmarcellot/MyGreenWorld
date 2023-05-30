@@ -37,17 +37,16 @@ export default defineComponent({
     const loadingBar = document.getElementById("loadingBar") as HTMLElement;
     const percentLoaded = document.getElementById("percentLoaded") as HTMLElement;
     const loader = document.getElementById("loader") as HTMLElement;
-    this.scene = new MainScene(canvas, loadingBar, percentLoaded, loader, this.city, this.living);
+    this.scene = new MainScene(canvas, loadingBar, percentLoaded, loader, this.city);
     this.city.updateCash();
-   
    },
    watch : {
-    living(newValue,old) {
+    'living': function() {
       if(this.living.boughtNumber==1){
         this.scene.loadLiving(this.living.modelName, 0); // 0 because no loading bar
       }
     },
-      'city.ecoPourcentage': function(newVal, oldVal) {
+    'city.ecoPourcentage': function(newVal, oldVal) {
       this.scene.updateSkybox(newVal, oldVal);
     }
    }

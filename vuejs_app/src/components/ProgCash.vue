@@ -24,8 +24,8 @@ export default {
     },
 
     formatNumber(number, abbrevType) {
-      const abbreviationsShort = ['', '', 'M', 'B', 'T', 'Q', 'Qu', 'Sx', 'Sp', 'O', 'N'];
-      const abbreviationsLong = ['', '', 'million', 'billion', 'trillion', 'quadrillion', 'quintillion', 'sextillions', 'septillion', 'octillion', 'nonillion'];
+      const abbreviationsShort = ['', 'K', 'M', 'B', 'T', 'Q', 'Qu', 'Sx', 'Sp', 'O', 'N'];
+      const abbreviationsLong = ['', 'millier', 'million', 'billion', 'trillion', 'quadrillion', 'quintillion', 'sextillions', 'septillion', 'octillion', 'nonillion'];
       const base = 1000;
       const decimals = 1;
 

@@ -66,7 +66,15 @@ export class City {
         this.cashQuantity -= livingOrCommerce.price;
         console.log('Produit acheté avec succès !');
         console.log('modif' + this.cashQuantity);
-        this.ecoPourcentage += livingOrCommerce.ecoBonus;
+
+        if (this.ecoPourcentage + livingOrCommerce.ecoBonus > 100) {
+          this.ecoPourcentage = 100;
+        } else if (this.ecoPourcentage + livingOrCommerce.ecoBonus < 0) {
+          this.ecoPourcentage = 0;
+        } else {
+          this.ecoPourcentage += livingOrCommerce.ecoBonus;
+        }
+
         this.gainPerSec += livingOrCommerce.gainPerSec;
         livingOrCommerce.boughtNumber++;
       } else {
@@ -79,7 +87,15 @@ export class City {
         this.cashQuantity -= energy.price;
         console.log('Produit acheté avec succès !');
         console.log('modif' + this.cashQuantity);
-        this.ecoPourcentage += energy.ecoBonus;
+
+        if (this.ecoPourcentage + energy.ecoBonus > 100) {
+          this.ecoPourcentage = 100;
+        } else if (this.ecoPourcentage + energy.ecoBonus < 0) {
+          this.ecoPourcentage = 0;
+        } else {
+          this.ecoPourcentage += energy.ecoBonus;
+        }
+        
         this.gainPerSec += energy.gainPerSec;
       } 
       else {
@@ -98,7 +114,15 @@ export class City {
         this.cashQuantity -= improvement.price;
         console.log('Produit acheté avec succès !');
         console.log('modif' + this.cashQuantity);
-        this.ecoPourcentage += improvement.ecoBonus;
+
+        if (this.ecoPourcentage + improvement.ecoBonus > 100) {
+          this.ecoPourcentage = 100;
+        } else if (this.ecoPourcentage + improvement.ecoBonus < 0) {
+          this.ecoPourcentage = 0;
+        } else {
+          this.ecoPourcentage += improvement.ecoBonus;
+        }
+
         this.gainPerSec += improvement.gainPerSec;
         this.gainPerClick += improvement.gainPerClick;
         improvement.unlocked = true;

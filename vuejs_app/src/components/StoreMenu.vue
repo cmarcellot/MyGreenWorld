@@ -16,7 +16,7 @@
           <div class="container">
             <img class="image" :src="require('../../public/images/' + livingOrCommerce.picture)" alt="Image habitation ou commerce" />
             <div class="text-container">
-              <p class="price"> Prix: {{ livingOrCommerce.price }}</p>
+              <p class="price"> Prix: {{ Math.ceil(livingOrCommerce.price * Math.pow(1.15, livingOrCommerce.boughtNumber)) }}</p>
               <hr class="separator" />
               <p class="gainPerSec">Gain: {{ livingOrCommerce.gainPerSec }}/sec</p>
               <hr class="separator" />
@@ -26,7 +26,7 @@
             </div>
           </div>
           <button class="btn"
-          v-on:click="BuyLivingOrCommerce(city, livingOrCommerce)" :class="{ 'disabled': city.cashQuantity < livingOrCommerce.price }"> Acheter </button>
+          v-on:click="BuyLivingOrCommerce(city, livingOrCommerce)" :class="{ 'disabled': city.cashQuantity < Math.ceil(livingOrCommerce.price * Math.pow(1.15, livingOrCommerce.boughtNumber)) }"> Acheter </button>
         </div>
 
         <div class="nav nav-bloc" @click="toggleContent2">

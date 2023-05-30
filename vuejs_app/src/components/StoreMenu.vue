@@ -1,5 +1,5 @@
 <template>
-    <nav class="side-nav col-lg-3">
+    <nav id="menu" class="side-nav col-lg-3">
       <div class="wrapper">
 
         <div class="three-dots-container">
@@ -517,6 +517,12 @@ export default defineComponent({
 
 .disabled {
   opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.menu{
+  opacity: 1;
   cursor: not-allowed;
   pointer-events: none;
 }

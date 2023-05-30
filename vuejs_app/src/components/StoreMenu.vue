@@ -16,13 +16,13 @@
           <div class="container">
             <img class="image" :src="require('../../public/images/' + livingOrCommerce.picture)" alt="Image habitation ou commerce" />
             <div class="text-container">
-              <p class="price"> Prix: {{ Math.ceil(livingOrCommerce.price * Math.pow(1.15, livingOrCommerce.boughtNumber)) }}</p>
+              <p class="price"> Prix: {{ Math.ceil(livingOrCommerce.price * Math.pow(1.15, livingOrCommerce.boughtNumber)).toLocaleString(undefined, { maximumFractionDigits: 0 }) }}</p>
               <hr class="separator" />
-              <p class="gainPerSec">Gain: {{ livingOrCommerce.gainPerSec }}/sec</p>
+              <p class="gainPerSec">Gain: {{ livingOrCommerce.gainPerSec.toLocaleString(undefined, { maximumFractionDigits: 0 }) }}/sec</p>
               <hr class="separator" />
               <p class="bonusEco">Écologie: {{ livingOrCommerce.ecoBonus }} %</p>
               <hr class="separator" />
-              <p class="livingCount">Nombre achetés : {{ livingOrCommerce.boughtNumber }}</p>
+              <p class="livingCount">Nombre achetés : {{ livingOrCommerce.boughtNumber.toLocaleString(undefined, { maximumFractionDigits: 0 }) }}</p>
             </div>
           </div>
           <button class="btn"

@@ -27,7 +27,7 @@
             "price": 130000.00,
             "gainPerSec": 260.00,
             "ecoBonus": -2,
-            "picture": "pic_Building1.jpg"
+            "picture": "pic_Building1.jpg",
             "modelName": "ModernBuilding_1.glb"
         },
         {
@@ -37,7 +37,7 @@
             "price": 20000000.00,
             "gainPerSec": 7800.00,
             "ecoBonus": -1,
-            "picture": "pic_BigHouse.jpg"
+            "picture": "pic_BigHouse.jpg",
             "modelName": "CottageBuilding.glb"
         },
         {
@@ -47,7 +47,7 @@
             "price": 5100000000.00,
             "gainPerSec": 260000.00,
             "ecoBonus": 1,
-            "picture": "pic_Villa.jpg"
+            "picture": "pic_Villa.jpg",
             "modelName": "ModernHouseBuilding.glb"
         },
         {
@@ -57,7 +57,7 @@
             "price": 1000000000000.00,
             "gainPerSec": 10000000.00,
             "ecoBonus": 2,
-            "picture": "pic_Mansion.jpg"
+            "picture": "pic_Mansion.jpg",
             "modelName": "PalaceBuilding.glb"
         },
         {
@@ -67,7 +67,7 @@
             "price": 170000000000000.00,
             "gainPerSec": 430000000.00,
             "ecoBonus": 5,
-            "picture": "pic_Building2.jpg"
+            "picture": "pic_Building2.jpg",
             "modelName": "ModernBuilding_2.glb"
         },
         {
@@ -77,7 +77,7 @@
             "price": 26000000000000000.00,
             "gainPerSec": 21000000000.00,
             "ecoBonus": 10,
-            "picture": "pic_Skyscraper.jpg"
+            "picture": "pic_Skyscraper.jpg",
             "modelName": "SkyscraperBuilding.glb"
         }
     ],
@@ -89,7 +89,7 @@
             "price": 100.00,
             "gainPerSec": 1.0,
             "ecoBonus": -10,
-            "picture": "pic_SmallStore.jpg"
+            "picture": "pic_SmallStore.jpg",
             "modelName": "SmallStore.glb"
         },
         {
@@ -99,7 +99,7 @@
             "price": 12000.00,
             "gainPerSec": 47.00,
             "ecoBonus": -5,
-            "picture": "pic_DIYStore.jpg"
+            "picture": "pic_DIYStore.jpg",
             "modelName": "DIYStore.glb"
         },
         {
@@ -109,7 +109,7 @@
             "price": 1400000.00,
             "gainPerSec": 1400.00,
             "ecoBonus": -2,
-            "picture": "pic_ClothingStore.jpg"
+            "picture": "pic_ClothingStore.jpg",
             "modelName": "ClothingStore.glb"
         },
         {
@@ -119,7 +119,7 @@
             "price": 330000000.00,
             "gainPerSec": 44000.00,
             "ecoBonus": -1,
-            "picture": "pic_FastFood.jpg"
+            "picture": "pic_FastFood.jpg",
             "modelName": "FastFood.glb"
         },
         {
@@ -129,7 +129,7 @@
             "price": 75000000000.00,
             "gainPerSec": 100.00,
             "ecoBonus": 1,
-            "picture": "pic_Hotel.jpg"
+            "picture": "pic_Hotel.jpg",
             "modelName": "Hotel.glb"
         },
         {
@@ -139,7 +139,7 @@
             "price": 14000000000000.00,
             "gainPerSec": 65000000.00,
             "ecoBonus": 2,
-            "picture": "pic_SuperMarket.jpg"
+            "picture": "pic_SuperMarket.jpg",
             "modelName": "Supermarket.glb"
         },
         {
@@ -149,7 +149,7 @@
             "price": 2100000000000000.00,
             "gainPerSec": 2900000000.00,
             "ecoBonus": 5,
-            "picture": "pic_CarStore.jpg"
+            "picture": "pic_CarStore.jpg",
             "modelName": "CarStore.glb"
         },
         {
@@ -159,7 +159,7 @@
             "price": 310000000000000000.00,
             "gainPerSec": 150000000000.00,
             "ecoBonus": 10,
-            "picture": "pic_BigStore.jpg"
+            "picture": "pic_BigStore.jpg",
             "modelName": "BigStore.glb"
         }
     ],

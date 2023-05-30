@@ -1,4 +1,7 @@
 <template>
+    <div id="soundIcon" @click="toggleSound">
+      <font-awesome-icon :icon="soundOn ? 'volume-up' : 'volume-mute'"></font-awesome-icon>
+    </div>
     <div class="container">
        
        <b-progress height="20px" :value="value" show-progress class="mb-2"> 
@@ -8,18 +11,44 @@
 </template>
 
 <script>
+import { soundManager } from '@/babylonjs/SoundManager';
 import Bootstrap from 'bootstrap-vue';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+
 export default {
     
     name: 'ProgEcology',
+    components: {
+        FontAwesomeIcon
+    },
+    data() {
+        return {
+            // We initialize the soundOn property to true
+            soundOn: true,
+            audioContext: null
+        };
+    },
     props :[
         "value"
     ],
-   
     computed : {
         percent() {
 
             return this.percentage.toFixed();
+        }
+    },
+    mounted() {
+        this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    },
+    methods: {
+        toggleSound() {
+            if (this.soundOn) {
+                soundManager.disableSound();
+            } else {
+                soundManager.enableSound();
+            }
+            
+            this.soundOn = !this.soundOn;
         }
     },
 
@@ -73,6 +102,16 @@ export default {
 @keyframes animate-stripes {
     0% {background-position: 0 0; }
     100% {background-position: 0 0; }
+}
+
+#soundIcon {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 9999;
+  cursor: pointer;
+  color: white;
+  font-size: 24px;
 }
 
 </style>

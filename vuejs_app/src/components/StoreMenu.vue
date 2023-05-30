@@ -104,9 +104,8 @@ import { Commerce } from '@/classes/Commerce';
 import { Energy } from '@/classes/Energy';
 import jsonData from '@/assets/storage.json';
 import { City } from '@/classes/City';
-import { float } from '@babylonjs/core/types';
 import { Improvement } from '@/classes/Improvement';
-import { BuyableElement } from '@/classes/BuyableElement';
+import { soundManager } from '@/babylonjs/SoundManager';
 
 export default defineComponent({
     name: 'StoreMenu',
@@ -203,8 +202,7 @@ export default defineComponent({
       },
 
       playClickSound() {
-        const audio = new Audio('/sounds/SonAchat.mp3');
-        audio.play();
+        soundManager.playSound('/sounds/SonAchat.mp3');
       },
 
       deleteSave() {

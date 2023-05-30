@@ -3,7 +3,7 @@ import {Improvement } from "./Improvement";
 import {Living } from "./Living";
 import {Commerce } from "./Commerce";
 import {Energy } from "./Energy";
-import { BuyableElement } from "./BuyableElement";
+import { soundManager } from '@/babylonjs/SoundManager';
 
 /**  this class represents the player's city 
  * Attributes
@@ -112,9 +112,7 @@ export class City {
     }
 
     playTreeSound() {
-      const audio = new Audio('/sounds/SonArbre.mp3');
-      audio.play();
-
+      soundManager.playSound('/sounds/SonArbre.mp3');
     }
 
     saveCity() {

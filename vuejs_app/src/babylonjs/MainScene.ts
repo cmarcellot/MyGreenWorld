@@ -413,6 +413,8 @@ export class MainScene {
             const cash = document.getElementById("cash") as HTMLElement;
             const eco = document.getElementById("ecology") as HTMLElement;
             const store = document.getElementById("store") as HTMLElement;
+            const menu = document.getElementById("menu") as HTMLElement;
+
 
             // Update the progress bar
             this.progress += increment;
@@ -423,6 +425,8 @@ export class MainScene {
                 cash.hidden = true;
                 eco.hidden = true;
                 store.hidden  = true;
+                menu.classList.add("menu");
+
             }
              // When all the models are loaded, we hide the loading screen
             else {
@@ -439,6 +443,8 @@ export class MainScene {
                  cash.hidden = false;
                  eco.hidden = false;
                  store.hidden = false;  
+                 menu.classList.remove("menu");
+
             }
         }
         

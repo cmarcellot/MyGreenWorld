@@ -22,7 +22,7 @@
               <p v-if="Math.ceil(livingOrCommerce.price * Math.pow(1.15, livingOrCommerce.boughtNumber)) < 1000" class="price tooltip"> Prix: {{ formatNumber(Math.ceil(livingOrCommerce.price * Math.pow(1.15, livingOrCommerce.boughtNumber)), "short") }}
               </p>
               <hr class="separator" />
-              <p class="gainPerSec">Gain: {{ livingOrCommerce.gainPerSec.toLocaleString(undefined, { maximumFractionDigits: 0 }) }}/sec</p>
+              <p class="gainPerSec">Gain: {{ getTooltipText(livingOrCommerce.gainPerSec, 'short') }}/sec</p>
               <hr class="separator" />
               <p class="bonusEco">Écologie: {{ livingOrCommerce.ecoBonus }} %</p>
               <hr class="separator" />

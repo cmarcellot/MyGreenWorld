@@ -1,8 +1,8 @@
 <template>
-  <div id="app"><BabylonScene :city ="city" /></div>
+  <div id="app"><BabylonScene :city ="city" :living="living"/></div>
   <!-- To put the store in the right side we can make a button that shows or hides a div here :
     <div class="store"></div> --> 
-  <div id="store"><StoreMenu :city ="city"  /></div>
+  <div id="store"><StoreMenu :city ="city" @achat="handleEvent"  /></div>
   <!-- prog means progressiv -->
   <div id="cash">
     <ProgCash :value = "city.cashQuantity" />
@@ -19,7 +19,9 @@ import ProgEcology from './components/ProgEcology.vue';
 import ProgCash from './components/ProgCash.vue';
 import StoreMenu from './components/StoreMenu.vue';
 import {City} from './classes/City';
+import {Living} from './classes/Living';
 import {MainScene} from '@/babylonjs/MainScene';
+
 
 export default defineComponent({
   name: 'App',
@@ -32,9 +34,16 @@ export default defineComponent({
   },
   data() {
     return {
-      city: new City("test",0, 100, 1, 0),
+      living: {},
+      city: new City("MyGreenWorld",0, 100, 1, 0),
     }
   },
+  methods: {
+    handleEvent(living :Living) {
+      this.living= living;
+    }
+   
+  }
 });
 </script>
 

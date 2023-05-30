@@ -16,7 +16,7 @@ boughtNumber: number of improvements bought by the player
 export class Improvement extends BuyableElement {
     gainPerClick: float;
     unlocked: boolean;
-    boughtNumber: int;  
+    boughtNumber: int; 
     /** the constructor method calls the super() method : constructor of the parent class BuyableElement
      * Arguments
      * 

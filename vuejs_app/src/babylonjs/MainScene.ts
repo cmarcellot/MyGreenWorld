@@ -33,6 +33,14 @@ export class MainScene {
         private p_living : Living
 
     ) {
+        const cash = document.getElementById("cash") as HTMLElement;
+        const eco = document.getElementById("ecology") as HTMLElement;
+        const store = document.getElementById("menu") as HTMLElement;
+
+        cash.hidden = true;
+        eco.hidden = true;
+        store.classList.add("disabled");
+            
         // We create an engine for the scene rendering
         this.engine = new Engine(canvas, true);
 
@@ -47,16 +55,16 @@ export class MainScene {
         this.groundSize = 450;
         this.progress = 0;
 
-        //resize the scene
+        //resize the scene 
         window.addEventListener('resize', () =>{
             this.engine.resize();
         });
 
         this.engine.resize();
-
+        
         // We create the scene
         this.scene = this.createScene(this.city);
-
+        
     }
 
     ///////////METHODS////////////
@@ -121,7 +129,7 @@ export class MainScene {
                         this.armLeft.isVisible = false;
                         this.handRight.isVisible = false;
                         this.handLeft.isVisible = false;*/
-                        camera.applyGravity = true;
+                        camera.applyGravity = true; 
                         supermanMode = false;
                     }else{
                         camera.speed = 7.5;
@@ -129,18 +137,18 @@ export class MainScene {
                         this.armLeft.isVisible = true;
                         this.handRight.isVisible = true;
                         this.handLeft.isVisible = true;*/
-                        camera.applyGravity = false;
+                        camera.applyGravity = false; 
                         supermanMode = true;
                     }
                     break;
             }
-        });
+        });        
 
         this.CreateGrass();
 
         // Import of the tree
         SceneLoader.ImportMesh("","./models/","tree.glb",this.scene,(newMeshes)=> {
-
+            
             newMeshes.map((mesh) => {
                 mesh.checkCollisions = true;
             });
@@ -160,7 +168,7 @@ export class MainScene {
                 }
             };
         });
-
+          
         // Create a skybox
         let envTex: CubeTexture;
         if(this.city.ecoPourcentage > 50){
@@ -176,7 +184,7 @@ export class MainScene {
         //this.LoadModels();
 
         //this.CreateArms(camera);
-
+        
         return scene;
     }
 
@@ -194,6 +202,7 @@ export class MainScene {
             this.scene.createDefaultSkybox(envTex, true);
         }
     }
+    
     // Base texture for a grass effect
     CreateGroundMaterial(): StandardMaterial {
         const groundMat = new StandardMaterial("groundMat", this.scene);
@@ -219,7 +228,7 @@ export class MainScene {
         // Rotate the plane to make it look like a grass blade
         blade.rotation.x = Math.PI * 0.5;
         blade.bakeCurrentTransformIntoVertices();
-
+    
         // Create a node material to apply the grass texture
         NodeMaterial.ParseFromSnippetAsync("#8WH2KS#22", this.scene).then((nodeMaterial) => {
             blade.material = nodeMaterial;
@@ -245,145 +254,6 @@ export class MainScene {
 
         const buildings = this.city.livings.concat(this.city.commerces);
         let buildingsLength = 0;
-    }
-
-
-    // Load all the models
-    LoadModels(): void {
-        // List of all the models to load
-        const modelNames = [
-            "CaravanBuilding.glb",
-            "CottageBuilding.glb",
-            "HouseBuilding.glb",
-            "ModernBuilding_1.glb",
-            "ModernBuilding_2.glb",
-            "ModernHouseBuilding.glb",
-            "PalaceBuilding.glb",
-            "SkyscraperBuilding.glb",
-            "SmallStore.glb",
-            "DIYStore.glb",
-            "ClothingStore.glb",
-            "FastFood.glb",
-            "Hotel.glb",
-            "Supermarket.glb",
-            "CarStore.glb",
-            "BigStore.glb",
-        ];
-
-        // Path to the models
-        const modelDir = "./models/";
-
-        // Progress bar
-        let progress = 0;
-        const increment = 100 / modelNames.length;
-
-        // create a function to load a model
-        const loadModel = async (modelName: string): Promise<void> => {
-            const result = await SceneLoader.ImportMeshAsync("", modelDir, modelName, this.scene);
-            const mainMesh = result.meshes[0];
-            result.meshes.map((mesh) => {
-                mesh.checkCollisions = true;
-            });
-
-            switch (modelName) {
-                case "CaravanBuilding.glb":
-                    mainMesh.position = new Vector3(25, 0.1, -40);
-                    mainMesh.scaling = new Vector3(0.25, 0.25, 0.25);
-                    mainMesh.rotation = new Vector3(0, 0, 0);
-                    mainMesh.scaling.x *= -1;
-                    break;
-
-                case "CottageBuilding.glb":
-                    mainMesh.position = new Vector3(-80, 0.1, 125);
-                    mainMesh.scaling = new Vector3(2, 2, 2);
-                    mainMesh.rotation = new Vector3(0, 0, 0);
-                    mainMesh.scaling.x *= -1;
-                    break;
-                case "HouseBuilding.glb":
-                    mainMesh.position = new Vector3(-120,0.1,-75);
-                    mainMesh.scaling = new Vector3(0.1,0.1,0.1);
-                    mainMesh.rotation = new Vector3(0, 0, 0);
-                    mainMesh.scaling.x *= -1;
-                    break;
-                case "ModernBuilding_1.glb":
-                    mainMesh.position = new Vector3(-700,-0.55,-200);
-                    mainMesh.scaling = new Vector3(5,5,5);
-                    mainMesh.rotation = new Vector3(0, 0, 0);
-                    mainMesh.scaling.x *= -1;
-                    break;
-                case "ModernBuilding_2.glb":
-                    mainMesh.position = new Vector3(-675,-0.55,-225);
-                    mainMesh.scaling = new Vector3(5,5,5);
-                    mainMesh.rotation = new Vector3(0, 0, 0);
-                    mainMesh.scaling.x *= -1;
-                    break;
-                case "ModernHouseBuilding.glb":
-                    mainMesh.position = new Vector3(-150,-0.1,85);
-                    mainMesh.scaling = new Vector3(3,3,3);
-                    mainMesh.rotation = new Vector3(0,0,0);
-                    mainMesh.scaling.x *= -1;
-                    break;
-                case "PalaceBuilding.glb":
-                    mainMesh.position = new Vector3(75,0.1,150);
-                    mainMesh.scaling = new Vector3(1.5,1.5,1.5);
-                    mainMesh.rotation = new Vector3(0,0,0);
-                    mainMesh.scaling.x *= -1;
-                    break;
-                case "SkyscraperBuilding.glb":
-                    mainMesh.position = new Vector3(100,0,-150);
-                    mainMesh.scaling = new Vector3(0.4,0.4,0.4);
-                    mainMesh.rotation = new Vector3(0, 0, 0);
-                    mainMesh.scaling.x *= -1;
-                    break;
-                case "SmallStore.glb":
-                    mainMesh.position = new Vector3(80, 0.1, -30);
-                    mainMesh.scaling = new Vector3(0.25, 0.25, 0.25);
-                    mainMesh.rotation = new Vector3(0, 0, 0);
-                    mainMesh.scaling.x *= -1;
-                    break;
-
-                case "DIYStore.glb":
-                    mainMesh.position = new Vector3(-40, 0.1, 75);
-                    mainMesh.scaling = new Vector3(0.5, 0.5, 0.5);
-                    mainMesh.rotation = new Vector3(0, 0, 0);
-                    mainMesh.scaling.x *= -1;
-                    break;
-                case "ClothingStore.glb":
-                    mainMesh.position = new Vector3(-85,0.1,-25);
-                    mainMesh.scaling = new Vector3(0.5,0.5,0.5);
-                    mainMesh.rotation = new Vector3(0, 0, 0);
-                    mainMesh.scaling.x *= -1;
-                    break;
-                case "FastFood.glb":
-                    mainMesh.position = new Vector3(-30,3,-75);
-                    mainMesh.scaling = new Vector3(3,3,3);
-                    mainMesh.rotation = new Vector3(0, 0, 0);
-                    mainMesh.scaling.x *= -1;
-                    break;
-                case "Hotel.glb":
-                    mainMesh.position = new Vector3(20,0.1,-100);
-                    mainMesh.scaling = new Vector3(2,2,2);
-                    mainMesh.rotation = new Vector3(0, 0, 0);
-                    mainMesh.scaling.x *= -1;
-                    break;
-                case "Supermarket.glb":
-                    mainMesh.position = new Vector3(-105,0.1,30);
-                    mainMesh.scaling = new Vector3(0.5,0.5,0.5);
-                    mainMesh.rotation = new Vector3(0,Math.PI*1.5,0);
-                    mainMesh.scaling.x *= -1;
-                    break;
-                case "CarStore.glb":
-                    mainMesh.position = new Vector3(20,0.1,100);
-                    mainMesh.scaling = new Vector3(0.5,0.5,0.5);
-                    mainMesh.rotation = new Vector3(0,Math.PI/2,0);
-                    mainMesh.scaling.x *= -1;
-                    break;
-                case "BigStore.glb":
-                    mainMesh.position = new Vector3(100,2.5,30);
-                    mainMesh.scaling = new Vector3(1.2,1.2,1.2);
-                    mainMesh.rotation = new Vector3(0, 0, 0);
-                    mainMesh.scaling.x *= -1;
-                    break;
 
         // calculate the number of buildings
         for(let i = 0; i < buildings.length; i++){
@@ -414,20 +284,12 @@ export class MainScene {
             const eco = document.getElementById("ecology") as HTMLElement;
             const store = document.getElementById("menu") as HTMLElement;
 
-            // Update the progress bar
-            progress += increment;
-            this.loadingScreen.updateLoadStatus(progress);
-
-            //hide the bars
-            if (progress !== 100) {
-
             // show the bars 
             cash.hidden = false;
             eco.hidden = false;
-            store.classList.add('disabled');
+            store.classList.remove("disabled");
         }
     }
-}
 
     // load a model based on its name
     loadLiving = async (modelName: string, length: number): Promise<void> => {
@@ -558,43 +420,29 @@ export class MainScene {
 
             //hide the bars 
             if (this.progress < 100) {
-
                 cash.hidden = true;
                 eco.hidden = true;
-                //disable click
-                store.classList.add('disabled');
-                // m.hidden = true;
-
+                store.classList.add("disabled");
             }
              // When all the models are loaded, we hide the loading screen
             else {
-
+                
                  // We hide the loading screen
-                 this.engine.hideLoadingUI()
-
+                 this.engine.hideLoadingUI() 
+                
                  // We launch the scene rendering in the engine render loop
                  this.engine.runRenderLoop(() => {
                      this.scene.render();
                  });
-
-                 // show the bars
+                
+                 // show the bars 
                  cash.hidden = false;
                  eco.hidden = false;
-                 //enable click
-                store.classList.remove('disabled');
-                // m.hidden = false;
-            }
-        };
-
-        // We load all the models
-        modelNames.forEach((modelName) => {
-            loadModel(modelName);
-        });
-
+                 store.classList.remove("disabled");
+                }
         }
-
+        
     }
-}
 
     CreateArms(camera : FreeCamera): void {
         // Attach arms to camera

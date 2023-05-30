@@ -61,6 +61,7 @@ export class City {
       this.cashQuantity = this.cashQuantity + this.gainPerClick;
     }
 
+
     buyLivingOrCommerce(livingOrCommerce: any) {
       if (this.cashQuantity >= livingOrCommerce.price) {
         this.cashQuantity -= livingOrCommerce.price;
@@ -69,10 +70,12 @@ export class City {
         this.ecoPourcentage += livingOrCommerce.ecoBonus;
         this.gainPerSec += livingOrCommerce.gainPerSec;
         livingOrCommerce.boughtNumber++;
+        return livingOrCommerce;
       } else {
         console.log("Vous n'avez pas assez d'argent pour acheter le produit.");
       }
     }
+
 
     buyEco(energy : Energy) {
       if (this.cashQuantity >= energy.price) {
@@ -111,6 +114,7 @@ export class City {
     playTreeSound() {
       const audio = new Audio('/sounds/SonArbre.mp3');
       audio.play();
+
     }
 
     saveCity() {

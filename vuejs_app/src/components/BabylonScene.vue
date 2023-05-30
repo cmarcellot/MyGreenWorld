@@ -14,6 +14,8 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import { MainScene } from '@/babylonjs/MainScene';
+import {Living} from '../classes/Living';
+import { sceneUboDeclaration } from '@babylonjs/core/Shaders/ShadersInclude/sceneUboDeclaration';
 
 
 export default defineComponent({
@@ -26,7 +28,8 @@ export default defineComponent({
     };
   },
   props :[
-    "city"
+    "city",
+    "living"
   ],
   mounted() {
     // On récupère le canvas et les éléments de chargement
@@ -34,11 +37,17 @@ export default defineComponent({
     const loadingBar = document.getElementById("loadingBar") as HTMLElement;
     const percentLoaded = document.getElementById("percentLoaded") as HTMLElement;
     const loader = document.getElementById("loader") as HTMLElement;
-    this.scene = new MainScene(canvas, loadingBar, percentLoaded, loader, this.city);
+    this.scene = new MainScene(canvas, loadingBar, percentLoaded, loader, this.city, this.living);
     this.city.updateCash();
-  },
+   
+   },
    watch : {
-    'city.ecoPourcentage': function(newVal, oldVal) {
+    living(newValue,old) {
+      if(this.living.boughtNumber==1){
+        this.scene.loadLiving(this.living.modelName, 0); // 0 because no loading bar
+      }
+    },
+      'city.ecoPourcentage': function(newVal, oldVal) {
       this.scene.updateSkybox(newVal, oldVal);
     }
    }

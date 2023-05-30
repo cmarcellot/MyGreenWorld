@@ -16,7 +16,11 @@
           <div class="container">
             <img class="image" :src="require('../../public/images/' + livingOrCommerce.picture)" alt="Image habitation ou commerce" />
             <div class="text-container">
-              <p class="price"> Prix: {{ Math.ceil(livingOrCommerce.price * Math.pow(1.15, livingOrCommerce.boughtNumber)).toLocaleString(undefined, { maximumFractionDigits: 0 }) }}</p>
+              <p v-if="Math.ceil(livingOrCommerce.price * Math.pow(1.15, livingOrCommerce.boughtNumber)) > 1000" class="price tooltip" :title="getTooltipText(livingOrCommerce.price * Math.pow(1.15, livingOrCommerce.boughtNumber), 'long')"> Prix: {{ formatNumber(Math.ceil(livingOrCommerce.price * Math.pow(1.15, livingOrCommerce.boughtNumber)), "short") }}
+                <span class="tooltip-indicator">?</span>
+              </p>
+              <p v-if="Math.ceil(livingOrCommerce.price * Math.pow(1.15, livingOrCommerce.boughtNumber)) < 1000" class="price tooltip"> Prix: {{ formatNumber(Math.ceil(livingOrCommerce.price * Math.pow(1.15, livingOrCommerce.boughtNumber)), "short") }}
+              </p>
               <hr class="separator" />
               <p class="gainPerSec">Gain: {{ livingOrCommerce.gainPerSec.toLocaleString(undefined, { maximumFractionDigits: 0 }) }}/sec</p>
               <hr class="separator" />
@@ -124,8 +128,7 @@ export default defineComponent({
         livings: [] as Living[],
         commerces: [] as Commerce[],
         energies: [] as Energy[],
-        improvements: [] as Improvement[],   
-
+        improvements: [] as Improvement[]
       };
     },
     methods: {
@@ -161,6 +164,39 @@ export default defineComponent({
       sortedImprovements(city : City) {
         city.improvements = this.improvements;
         return this.improvements.sort((a, b) => a.price - b.price);
+      },
+
+      formatNumber(number: number, abbrevType: string) {
+        const abbreviationsShort = ['', 'K', 'M', 'B', 'T', 'Q', 'Qu', 'Sx', 'Sp', 'O', 'N'];
+        const abbreviationsLong = ['', 'millier', 'million', 'billion', 'trillion', 'quadrillion', 'quintillion', 'sextillions', 'septillion', 'octillion', 'nonillion'];
+        const base = 1000;
+        const decimals = 1;
+
+        if (number < base) {
+          return number.toFixed(decimals);
+        }
+
+        const abbreviations = abbrevType === 'long' ? abbreviationsLong : abbreviationsShort;
+        const exponent = Math.min(Math.floor(Math.log10(number) / 3), abbreviations.length - 1);
+        const scaledNumber = number / Math.pow(base, exponent);
+        const formattedNumber = scaledNumber.toFixed(decimals);
+
+        return formattedNumber + " " + abbreviations[exponent];
+      },
+
+      convertToDecimal(value: string): number {
+        return parseFloat(value);
+      },
+
+      getTooltipText(number: number, textType: string) {
+        const roundedNumber = number.toFixed(1);
+        const formattedNumber = parseFloat(roundedNumber).toLocaleString(undefined, { useGrouping: true });
+
+        if (textType === "short") {
+          return formattedNumber;
+        } else if (textType === "long") {
+          return formattedNumber + " (" + this.formatNumber(number, "long") + ")";
+        }
       },
 
       //Compare the cashQuantity and the price 
@@ -523,6 +559,25 @@ export default defineComponent({
   text-align: center;
   background-color: red;
   color: white;
+}
+
+.tooltip {
+  position: relative;
+}
+
+.tooltip-indicator {
+  position: absolute;
+  top: 50%;
+  right: -15px;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  text-align: center;
+  border-radius: 50%;
+  background-color: #f0f0f0;
+  font-weight: bold;
+  font-size: 14px;
 }
 
 </style>

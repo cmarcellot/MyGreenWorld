@@ -20,7 +20,6 @@ import ProgCash from './components/ProgCash.vue';
 import StoreMenu from './components/StoreMenu.vue';
 import {City} from './classes/City';
 import {Living} from './classes/Living';
-import {MainScene} from '@/babylonjs/MainScene';
 
 
 export default defineComponent({
@@ -97,6 +96,10 @@ export default defineComponent({
     left: 50%;
     color: blueviolet;
 
+}
+
+::selection {
+  background-color: transparent;
 }
 
 </style>

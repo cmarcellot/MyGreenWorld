@@ -179,7 +179,7 @@ export class MainScene {
                     }
                     break;
             }
-        });        
+        });
 
         this.CreateGrass();
 
@@ -202,6 +202,7 @@ export class MainScene {
                     if(pickResult.pickedMesh.name == "Object_4" || pickResult.pickedMesh.name == "Object_5" ){
                         city.playTreeSound();
                         city.incrementCashQuantity();
+                        city.playTreeSound();
                     }
                 }
             };

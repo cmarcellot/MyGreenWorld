@@ -61,7 +61,11 @@
             <div class="text-container">
               <p class="box">{{ improvement.desc }}</p>
               <hr class="separator" />
-              <p class="price"> Prix: {{ improvement.price }}</p>
+              <p v-if="Math.ceil(improvement.price * Math.pow(1.15, improvement.boughtNumber)) >= 1000" class="price tooltip" :title="getTooltipText(improvement.price * Math.pow(1.15, improvement.boughtNumber), 'long')"> Prix: {{ formatNumber(Math.ceil(improvement.price * Math.pow(1.15, improvement.boughtNumber)), "short") }}
+                <span class="tooltip-indicator">?</span>
+              </p>
+              <p v-if="Math.ceil(improvement.price * Math.pow(1.15, improvement.boughtNumber)) < 1000" class="price tooltip"> Prix: {{ formatNumber(Math.ceil(improvement.price * Math.pow(1.15, improvement.boughtNumber)), "short") }}
+              </p>
               <hr class="separator" />
               <p class="gainPerSec">Gain par seconde: {{ improvement.gainPerSec }}/sec</p>
               <hr class="separator" />
@@ -568,7 +572,7 @@ export default defineComponent({
 .tooltip-indicator {
   position: absolute;
   top: 50%;
-  right: -15px;
+  right: 0px;
   transform: translateY(-50%);
   width: 20px;
   height: 20px;

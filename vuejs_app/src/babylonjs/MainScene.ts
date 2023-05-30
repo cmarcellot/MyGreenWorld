@@ -108,6 +108,48 @@ export class MainScene {
         ground .checkCollisions = true;
         ground.material = this.CreateGroundMaterial();
 
+        // Create the border
+        const borderHeight = 300; // Height of the border walls
+
+        const borderMaterial = new StandardMaterial("borderMaterial", this.scene);
+        // Color of the border walls
+        borderMaterial.diffuseColor = new Color3(0, 0, 0);
+        // Transparency of the border walls
+        borderMaterial.alpha = 0;
+
+        const borderWidth = this.groundSize + 10; // Width of the border walls (slightly larger than the ground)
+        const borderThickness = 0.1; // Thickness of the border walls
+
+        const borderTop = MeshBuilder.CreateBox("borderTop", { width: borderWidth, height: borderHeight, depth: borderThickness }, this.scene);
+        borderTop.position.y = borderHeight / 2;
+        borderTop.position.z = -this.groundSize / 2 - borderThickness / 2;
+        borderTop.material = borderMaterial;
+        borderTop.checkCollisions = true;
+
+        const borderBottom = MeshBuilder.CreateBox("borderBottom", { width: borderWidth, height: borderHeight, depth: borderThickness }, this.scene);
+        borderBottom.position.y = borderHeight / 2;
+        borderBottom.position.z = this.groundSize / 2 + borderThickness / 2;
+        borderBottom.material = borderMaterial;
+        borderBottom.checkCollisions = true;
+
+        const borderLeft = MeshBuilder.CreateBox("borderLeft", { width: borderThickness, height: borderHeight, depth: this.groundSize }, this.scene);
+        borderLeft.position.y = borderHeight / 2;
+        borderLeft.position.x = -this.groundSize / 2 - borderThickness / 2;
+        borderLeft.material = borderMaterial;
+        borderLeft.checkCollisions = true;
+
+        const borderRight = MeshBuilder.CreateBox("borderRight", { width: borderThickness, height: borderHeight, depth: this.groundSize }, this.scene);
+        borderRight.position.y = borderHeight / 2;
+        borderRight.position.x = this.groundSize / 2 + borderThickness / 2;
+        borderRight.material = borderMaterial;
+        borderRight.checkCollisions = true;
+        
+        // Create ceiling
+        const ceiling = MeshBuilder.CreateBox("ceiling", { width: this.groundSize, height: borderThickness, depth: this.groundSize }, this.scene);
+        ceiling.position.y = borderHeight;
+        ceiling.material = borderMaterial;
+        ceiling.checkCollisions = true;
+
         let supermanMode = false;
         window.addEventListener("keydown", (event) => {
             switch(event.keyCode) {
@@ -214,7 +256,6 @@ export class MainScene {
 
         return groundMat;
     }
- 
 
     // Node material for a grass effect
     CreateGrass(): void {

@@ -2,7 +2,7 @@
     <div class="container">
        
         <b-progress height="20px" :value="value" show-progress class="mb-2"> 
-            {{ value % 1 === 0 ? value : value.toFixed(1) }} </b-progress>
+            {{ getFormatFloat(value) }} </b-progress>
 
     </div>
 </template>
@@ -11,13 +11,36 @@
 import Bootstrap from 'bootstrap-vue';
 
 export default {
-   
-    name: 'ProgCash',
-    props :[
-        "value"
-    ],
-   
+  name: 'ProgCash',
+  props: ["value"],
+  methods: {
+    getFormatFloat(number) {
+      const roundedNumber = number.toFixed(1);
+      let formattedNumber = parseFloat(roundedNumber).toLocaleString(undefined, { useGrouping: true });
 
+      formattedNumber = this.formatNumber(number, 'short');
+
+      return formattedNumber;
+    },
+
+    formatNumber(number, abbrevType) {
+      const abbreviationsShort = ['', '', 'M', 'B', 'T', 'Q', 'Qu', 'Sx', 'Sp', 'O', 'N'];
+      const abbreviationsLong = ['', '', 'million', 'billion', 'trillion', 'quadrillion', 'quintillion', 'sextillions', 'septillion', 'octillion', 'nonillion'];
+      const base = 1000;
+      const decimals = 1;
+
+      if (number < base) {
+        return number.toFixed(decimals);
+      }
+
+      const abbreviations = abbrevType === 'long' ? abbreviationsLong : abbreviationsShort;
+      const exponent = Math.min(Math.floor(Math.log10(number) / 3), abbreviations.length - 1);
+      const scaledNumber = number / Math.pow(base, exponent);
+      const formattedNumber = scaledNumber.toFixed(decimals);
+
+      return formattedNumber + " " + abbreviations[exponent];
+    }
+  }
 }
 </script>
 

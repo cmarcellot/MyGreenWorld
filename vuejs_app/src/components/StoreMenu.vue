@@ -169,7 +169,7 @@ export default defineComponent({
         city.improvements = this.improvements;
         return this.improvements.sort((a, b) => a.price - b.price);
       },
-
+      
       formatNumber(number: number, abbrevType: string) {
         const abbreviationsShort = ['', 'K', 'M', 'B', 'T', 'Q', 'Qu', 'Sx', 'Sp', 'O', 'N'];
         const abbreviationsLong = ['', 'millier', 'million', 'billion', 'trillion', 'quadrillion', 'quintillion', 'sextillions', 'septillion', 'octillion', 'nonillion'];
@@ -207,6 +207,8 @@ export default defineComponent({
       BuyLivingOrCommerce(city : City, livingOrCommerce: any) {
         this.playClickSound();
         city.buyLivingOrCommerce(livingOrCommerce);
+        this.sendData(livingOrCommerce);
+
       },
 
       BuyEnergy(city : City, energy : Energy){
@@ -217,6 +219,11 @@ export default defineComponent({
       BuyImprov (city : City, improvement : Improvement) {
         this.playClickSound();
         city.buyImprov(improvement);
+      },
+
+
+     sendData(living: Living) {
+        this.$emit('achat', living);
       },
 
       Add1000(city : City) {
@@ -314,9 +321,11 @@ export default defineComponent({
       //   }
       // },
 
+
     },
     created(){
       // Create objects from json data
+
       for (const livingData of jsonData.livings) {
         console.log(livingData);
         const savedLiving = this.getSavedElement(livingData.id.toString(), 'living');
@@ -328,7 +337,8 @@ export default defineComponent({
           livingData.price,
           livingData.gainPerSec,
           livingData.ecoBonus,
-          livingData.picture
+          livingData.picture,
+          livingData.modelName
         );
         this.livings.push(living);
       }
@@ -344,7 +354,8 @@ export default defineComponent({
           commerceData.price,
           commerceData.gainPerSec,
           commerceData.ecoBonus,
-          commerceData.picture
+          commerceData.picture,
+          commerceData.modelName
         );
         this.commerces.push(commerce);
       }
@@ -360,6 +371,7 @@ export default defineComponent({
           energyData.ecoBonus
         );
         this.energies.push(energy);
+
       }
 
       for (const improvementData of jsonData.improvements) {

@@ -7,7 +7,8 @@
             "price": 15.00,
             "gainPerSec": 0.1,
             "ecoBonus": -10,
-            "picture": "pic_Caravan.jpg"
+            "picture": "pic_Caravan.jpg",
+            "modelName": "CaravanBuilding.glb"
         },
         {
             "id": 2,
@@ -16,7 +17,8 @@
             "price": 1100.00,
             "gainPerSec": 8.00,
             "ecoBonus": -5,
-            "picture": "pic_LittleHouse.jpg"
+            "picture": "pic_LittleHouse.jpg",
+            "modelName": "HouseBuilding.glb"
         },
         {
             "id": 3,
@@ -26,6 +28,7 @@
             "gainPerSec": 260.00,
             "ecoBonus": -2,
             "picture": "pic_Building1.jpg"
+            "modelName": "ModernBuilding_1.glb"
         },
         {
             "id": 4,
@@ -35,6 +38,7 @@
             "gainPerSec": 7800.00,
             "ecoBonus": -1,
             "picture": "pic_BigHouse.jpg"
+            "modelName": "CottageBuilding.glb"
         },
         {
             "id": 5,
@@ -44,6 +48,7 @@
             "gainPerSec": 260000.00,
             "ecoBonus": 1,
             "picture": "pic_Villa.jpg"
+            "modelName": "ModernHouseBuilding.glb"
         },
         {
             "id": 6,
@@ -53,6 +58,7 @@
             "gainPerSec": 10000000.00,
             "ecoBonus": 2,
             "picture": "pic_Mansion.jpg"
+            "modelName": "PalaceBuilding.glb"
         },
         {
             "id": 7,
@@ -62,6 +68,7 @@
             "gainPerSec": 430000000.00,
             "ecoBonus": 5,
             "picture": "pic_Building2.jpg"
+            "modelName": "ModernBuilding_2.glb"
         },
         {
             "id": 8,
@@ -71,6 +78,7 @@
             "gainPerSec": 21000000000.00,
             "ecoBonus": 10,
             "picture": "pic_Skyscraper.jpg"
+            "modelName": "SkyscraperBuilding.glb"
         }
     ],
     "commerces": [
@@ -82,6 +90,7 @@
             "gainPerSec": 1.0,
             "ecoBonus": -10,
             "picture": "pic_SmallStore.jpg"
+            "modelName": "SmallStore.glb"
         },
         {
             "id": 10,
@@ -91,6 +100,7 @@
             "gainPerSec": 47.00,
             "ecoBonus": -5,
             "picture": "pic_DIYStore.jpg"
+            "modelName": "DIYStore.glb"
         },
         {
             "id": 11,
@@ -100,6 +110,7 @@
             "gainPerSec": 1400.00,
             "ecoBonus": -2,
             "picture": "pic_ClothingStore.jpg"
+            "modelName": "ClothingStore.glb"
         },
         {
             "id": 12,
@@ -109,6 +120,7 @@
             "gainPerSec": 44000.00,
             "ecoBonus": -1,
             "picture": "pic_FastFood.jpg"
+            "modelName": "FastFood.glb"
         },
         {
             "id": 13,
@@ -118,6 +130,7 @@
             "gainPerSec": 100.00,
             "ecoBonus": 1,
             "picture": "pic_Hotel.jpg"
+            "modelName": "Hotel.glb"
         },
         {
             "id": 14,
@@ -127,6 +140,7 @@
             "gainPerSec": 65000000.00,
             "ecoBonus": 2,
             "picture": "pic_SuperMarket.jpg"
+            "modelName": "Supermarket.glb"
         },
         {
             "id": 15,
@@ -136,6 +150,7 @@
             "gainPerSec": 2900000000.00,
             "ecoBonus": 5,
             "picture": "pic_CarStore.jpg"
+            "modelName": "CarStore.glb"
         },
         {
             "id": 16,
@@ -145,6 +160,7 @@
             "gainPerSec": 150000000000.00,
             "ecoBonus": 10,
             "picture": "pic_BigStore.jpg"
+            "modelName": "BigStore.glb"
         }
     ],
     "energies": [

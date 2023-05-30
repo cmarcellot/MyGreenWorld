@@ -245,6 +245,7 @@ export class MainScene {
 
         const buildings = this.city.livings.concat(this.city.commerces);
         let buildingsLength = 0;
+    }
 
 
     // Load all the models
@@ -383,6 +384,7 @@ export class MainScene {
                     mainMesh.rotation = new Vector3(0, 0, 0);
                     mainMesh.scaling.x *= -1;
                     break;
+
         // calculate the number of buildings
         for(let i = 0; i < buildings.length; i++){
             if (buildings[i].boughtNumber > 0){
@@ -425,6 +427,7 @@ export class MainScene {
             store.classList.add('disabled');
         }
     }
+}
 
     // load a model based on its name
     loadLiving = async (modelName: string, length: number): Promise<void> => {
@@ -591,6 +594,7 @@ export class MainScene {
         }
 
     }
+}
 
     CreateArms(camera : FreeCamera): void {
         // Attach arms to camera

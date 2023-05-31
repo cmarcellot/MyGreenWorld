@@ -591,6 +591,7 @@ export default defineComponent({
 
 .spaced-button {
   margin-right: 10px;
+}
 
 .tooltip-indicator {
   position: absolute;

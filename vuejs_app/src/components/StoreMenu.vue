@@ -1,5 +1,5 @@
 <template>
-    <nav class="side-nav col-lg-3">
+    <nav id="menu" class="side-nav col-lg-3">
       <div class="wrapper">
 
         <div class="three-dots-container">
@@ -11,28 +11,32 @@
         <div class="nav nav-bloc" @click="toggleContent1">
           <p class="title-item">HABITATIONS ET COMMERCES</p>  
         </div>
-        <div v-for="(living, index) in sortedLivingsCommerces()" :key="index" class="nav nav-item" v-show="showContent1">
-          <p class="title-bloc">{{ living.name }}</p>
+        <div v-for="(livingOrCommerce, index) in sortedLivingsCommerces(city)" :key="index" class="nav nav-item" v-show="showContent1">
+          <p class="title-bloc">{{ livingOrCommerce.name }}</p>
           <div class="container">
-            <img class="image" :src="require('../../public/images/' + living.picture)" alt="Image habitation ou commerce" />
+            <img class="image" :src="require('../../public/images/' + livingOrCommerce.picture)" alt="Image habitation ou commerce" />
             <div class="text-container">
-              <p class="price"> Prix: {{ living.price }}</p>
+              <p v-if="Math.ceil(livingOrCommerce.price * Math.pow(1.15, livingOrCommerce.boughtNumber)) > 1000" class="price tooltip" :title="getTooltipText(livingOrCommerce.price * Math.pow(1.15, livingOrCommerce.boughtNumber), 'long')"> Prix: {{ formatNumber(Math.ceil(livingOrCommerce.price * Math.pow(1.15, livingOrCommerce.boughtNumber)), "short") }}
+                <span class="tooltip-indicator">?</span>
+              </p>
+              <p v-if="Math.ceil(livingOrCommerce.price * Math.pow(1.15, livingOrCommerce.boughtNumber)) < 1000" class="price tooltip"> Prix: {{ formatNumber(Math.ceil(livingOrCommerce.price * Math.pow(1.15, livingOrCommerce.boughtNumber)), "short") }}
+              </p>
               <hr class="separator" />
-              <p class="gainPerSec">Gain: {{ living.gainPerSec }}/sec</p>
+              <p class="gainPerSec">Gain: {{ getTooltipText(livingOrCommerce.gainPerSec, 'short') }}/sec</p>
               <hr class="separator" />
-              <p class="bonusEco">Écologie: {{ living.ecoBonus }} %</p>
+              <p class="bonusEco">Écologie: {{ livingOrCommerce.ecoBonus }} %</p>
               <hr class="separator" />
-              <p class="livingCount">Nombre achetés : {{ living.boughtNumber }}</p>
+              <p class="livingCount">Nombre achetés : {{ livingOrCommerce.boughtNumber.toLocaleString(undefined, { maximumFractionDigits: 0 }) }}</p>
             </div>
           </div>
           <button class="btn"
-          v-on:click="BuyLiving(city, living)" :class="{ 'disabled': city.cashQuantity < living.price }"> Acheter </button>
+          v-on:click="BuyLivingOrCommerce(city, livingOrCommerce)" :class="{ 'disabled': city.cashQuantity < Math.ceil(livingOrCommerce.price * Math.pow(1.15, livingOrCommerce.boughtNumber)) }"> Acheter </button>
         </div>
 
-        <div class="nav nav-bloc" @click="toggleContent2">
+        <!-- <div class="nav nav-bloc" @click="toggleContent2">
           <p class="title-item">CENTRALES ÉLECTRIQUES</p>      
         </div>
-        <div v-for="(central, index) in sortedEnergies()" :key="index" class="nav nav-item" v-show="showContent2">
+        <div v-for="(central, index) in sortedEnergies(city)" :key="index" class="nav nav-item" v-show="showContent2">
           <p class="title-bloc">{{ central.name }}</p>
           <div class="container">
             <img class="image" src="../../public/images/greenCityTree.jpg" alt="Image de la centrale" />
@@ -46,18 +50,22 @@
           </div>
           <button class="btn"
           v-on:click="BuyEnergy(city, central)" :class="{ 'disabled': city.cashQuantity < central.price }"> Acheter </button>
-        </div>
+        </div> -->
 
         <div class="nav nav-bloc" @click="toggleContent3">
           <p class="title-item">AMÉLIORATIONS</p>      
         </div>
-        <div v-for="(improvement, index) in sortedImprovements()" :key="index" class="nav nav-item" v-show="showContent3">
+        <div v-for="(improvement, index) in sortedImprovements(city)" :key="index" class="nav nav-item" v-show="showContent3">
           <p class="title-bloc">{{ improvement.name }}</p>
           <div class="container">
             <div class="text-container">
               <p class="box">{{ improvement.desc }}</p>
               <hr class="separator" />
-              <p class="price"> Prix: {{ improvement.price }}</p>
+              <p v-if="Math.ceil(improvement.price * Math.pow(1.15, improvement.boughtNumber)) >= 1000" class="price tooltip" :title="getTooltipText(improvement.price * Math.pow(1.15, improvement.boughtNumber), 'long')"> Prix: {{ formatNumber(Math.ceil(improvement.price * Math.pow(1.15, improvement.boughtNumber)), "short") }}
+                <span class="tooltip-indicator">?</span>
+              </p>
+              <p v-if="Math.ceil(improvement.price * Math.pow(1.15, improvement.boughtNumber)) < 1000" class="price tooltip"> Prix: {{ formatNumber(Math.ceil(improvement.price * Math.pow(1.15, improvement.boughtNumber)), "short") }}
+              </p>
               <hr class="separator" />
               <p class="gainPerSec">Gain par seconde: {{ improvement.gainPerSec }}/sec</p>
               <hr class="separator" />
@@ -73,19 +81,43 @@
         </div>
 
         <div class="nav nav-bloc" @click="toggleContent4">
-          <p class="title-item">ADMINTOOLS</p>      
+          <p class="title-item">PARAMÈTRES</p>      
         </div>
         <div class="nav nav-item" v-show="showContent4">
+          <button class="btn btn-red" @click="deleteSave">Supprimer sauvegarde</button>
+        </div>
+
+        <div class="nav nav-bloc" @click="toggleContent5">
+          <p class="title-item">ADMINTOOLS</p>      
+        </div>
+        <div class="nav nav-item" v-show="showContent5">
           <p class="title-bloc">Ajouter argent</p>
           <div class="container">
+            <button class="btn spaced-button"
+              v-on:click="AddMoneyAdmin(city, 1000000)"> + 1 Million </button>
+            <button class="btn spaced-button"
+              v-on:click="AddMoneyAdmin(city, 1000000000)"> + 1 Billion </button>
             <button class="btn"
-              v-on:click="Add1000(city)"> + 1.000 </button>
-            <button class="btn"
-              v-on:click="Add10000(city)"> +10.000 </button>
-            <button class="btn"
-              v-on:click="Add100000(city)"> + 100.000 </button>
+              v-on:click="AddMoneyAdmin(city, 1000000000000)"> + 1 Trillion </button>
           </div>
-          
+          <hr class="separator" />
+          <div class="container">
+            <button class="btn spaced-button"
+              v-on:click="AddMoneyAdmin(city, 1000000000000000)"> + 1 Quadrillion </button>
+            <button class="btn spaced-button"
+              v-on:click="AddMoneyAdmin(city, 1000000000000000000)"> + 1 Quintillion </button>
+            <button class="btn"
+              v-on:click="AddMoneyAdmin(city, 1000000000000000000000)"> + 1 Sextillion </button>
+          </div>
+          <hr class="separator" />
+          <div class="container">
+            <button class="btn spaced-button"
+              v-on:click="AddMoneyAdmin(city, 1000000000000000000000000)"> + 1 Septillion </button>
+            <button class="btn spaced-button"
+              v-on:click="AddMoneyAdmin(city, 1000000000000000000000000000)"> + 1 Octillion </button>
+            <button class="btn"
+              v-on:click="AddMoneyAdmin(city, 1000000000000000000000000000000)"> + 1 Nonillion </button>
+          </div>
         </div>
       </div>
     </nav>
@@ -98,8 +130,8 @@ import { Commerce } from '@/classes/Commerce';
 import { Energy } from '@/classes/Energy';
 import jsonData from '@/assets/storage.json';
 import { City } from '@/classes/City';
-import { float } from '@babylonjs/core/types';
 import { Improvement } from '@/classes/Improvement';
+import { soundManager } from '@/babylonjs/SoundManager';
 
 export default defineComponent({
     name: 'StoreMenu',
@@ -112,12 +144,12 @@ export default defineComponent({
         showContent2: false,
         showContent3: false,
         showContent4: false,
+        showContent5: false,
 
         livings: [] as Living[],
         commerces: [] as Commerce[],
         energies: [] as Energy[],
-        improvements: [] as Improvement[],   
-
+        improvements: [] as Improvement[]
       };
     },
     methods: {
@@ -135,57 +167,148 @@ export default defineComponent({
       toggleContent4() {
         this.showContent4 = !this.showContent4;
       },
+      toggleContent5() {
+        this.showContent5 = !this.showContent5;
+      },
 
       // Sort the list of livings and commerces by price
-      sortedLivingsCommerces() {
+      sortedLivingsCommerces(city : City) {
         const liste = this.livings.concat(this.commerces);
+        city.livings = this.livings;
+        city.commerces = this.commerces;
         return liste.sort((a, b) => a.price - b.price);
       },
-      sortedEnergies() {
+      sortedEnergies(city : City) {
+        city.energies = this.energies;
         return this.energies.sort((a, b) => a.price - b.price);
       },
-      sortedImprovements() {
+      sortedImprovements(city : City) {
+        city.improvements = this.improvements;
         return this.improvements.sort((a, b) => a.price - b.price);
       },
+      
+      formatNumber(number: number, abbrevType: string) {
+        const abbreviationsShort = ['', 'K', 'M', 'B', 'T', 'Q', 'Qu', 'Sx', 'Sp', 'O', 'N'];
+        const abbreviationsLong = ['', 'millier', 'million', 'billion', 'trillion', 'quadrillion', 'quintillion', 'sextillions', 'septillion', 'octillion', 'nonillion'];
+        const base = 1000;
+        const decimals = 1;
 
- //Compare the cashQuantity and the price 
-      BuyLiving(city : City, living: Living) {
+        if (number < base) {
+          return number.toFixed(decimals);
+        }
+
+        const abbreviations = abbrevType === 'long' ? abbreviationsLong : abbreviationsShort;
+        const exponent = Math.min(Math.floor(Math.log10(number) / 3), abbreviations.length - 1);
+        const scaledNumber = number / Math.pow(base, exponent);
+        const formattedNumber = scaledNumber.toFixed(decimals);
+
+        return formattedNumber + " " + abbreviations[exponent];
+      },
+
+      convertToDecimal(value: string): number {
+        return parseFloat(value);
+      },
+
+      getTooltipText(number: number, textType: string) {
+        const roundedNumber = number.toFixed(1);
+        const formattedNumber = parseFloat(roundedNumber).toLocaleString(undefined, { useGrouping: true });
+
+        if (textType === "short") {
+          return formattedNumber;
+        } else if (textType === "long") {
+          return formattedNumber + " (" + this.formatNumber(number, "long") + ")";
+        }
+      },
+
+      //Compare the cashQuantity and the price 
+      BuyLivingOrCommerce(city : City, livingOrCommerce: any) {
         this.playClickSound();
-        city.buyLiv(living);
-        
+        city.buyLivingOrCommerce(livingOrCommerce);
+        this.sendData(livingOrCommerce);
+
       },
 
       BuyEnergy(city : City, energy : Energy){
         this.playClickSound();
         city.buyEco(energy);
-
       },
 
       BuyImprov (city : City, improvement : Improvement) {
         this.playClickSound();
         city.buyImprov(improvement);
-
       },
 
-      Add1000(city : City) {
-        this.playClickSound();
-        city.cashQuantity += 1000;
+
+     sendData(living: Living) {
+        this.$emit('achat', living);
       },
 
-      Add10000(city : City) {
+      AddMoneyAdmin(city : City, money : number) {
         this.playClickSound();
-        city.cashQuantity += 10000;
-      },
-
-      Add100000(city : City) {
-        this.playClickSound();
-        city.cashQuantity += 100000;
+        city.cashQuantity += money;
       },
 
       playClickSound() {
-      const audio = new Audio('/sounds/SonAchat.mp3');
-      audio.play();
-    },
+        soundManager.playSound('/sounds/SonAchat.mp3');
+      },
+
+      deleteSave() {
+        //Request for confirmation of deletion
+        if (confirm("Voulez-vous vraiment supprimer la sauvegarde ?")) {
+          console.log("Suppression de la sauvegarde");
+          localStorage.removeItem('cityData');
+          //Refresh the page
+          window.location.reload();
+        } else {
+          console.log("Annulation de la suppression");
+        }
+      },
+
+      getSavedElement(elementId: string, type: string) {
+        const savedCity = localStorage.getItem("cityData");
+        if (savedCity) {
+          const cityData = JSON.parse(savedCity);
+          const { livings, commerces, energies, improvements } = cityData;
+
+          switch (type) {
+            case "living":
+              for (const living of livings) {
+                if (living.elementId === elementId) {
+                  return living;
+                }
+              }
+              break;
+
+            case "commerce":
+              for (const commerce of commerces) {
+                if (commerce.elementId === elementId) {
+                  return commerce;
+                }
+              }
+              break;
+
+            case "energy":
+              for (const energy of energies) {
+                if (energy.elementId === elementId) {
+                  return energy;
+                }
+              }
+              break;
+
+            case "improvement":
+              for (const improvement of improvements) {
+                if (improvement.elementId === elementId) {
+                  return improvement;
+                }
+              }
+              break;
+
+            default:
+              break;
+          }
+        }
+        return null;
+      }
 
       // buyEnergy(price : float, gainPerSec : number, ecoBonus : number) {
       // if (this.City.cashQuantity > price) {
@@ -204,56 +327,73 @@ export default defineComponent({
       //   }
       // },
 
+
     },
     created(){
       // Create objects from json data
-      for (const living of jsonData.livings) {
-        this.livings.push(new Living(
-          0, 
-          living.id.toString(), 
-          living.name, 
-          living.description, 
-          living.price, 
-          living.gainPerSec, 
-          living.ecoBonus,
-          living.picture
-        ));
-      }
 
-      for (const commerce of jsonData.commerces) {
-        this.commerces.push(new Commerce(
+      for (const livingData of jsonData.livings) {
+        console.log(livingData);
+        const savedLiving = this.getSavedElement(livingData.id.toString(), 'living');
+        const living = savedLiving ? savedLiving : new Living(
           0,
-          commerce.id.toString(),
-          commerce.name,
-          commerce.description,
-          commerce.price,
-          commerce.gainPerSec,
-          commerce.ecoBonus,
-          commerce.picture
-        ));
+          livingData.id.toString(),
+          livingData.name,
+          livingData.description,
+          livingData.price,
+          livingData.gainPerSec,
+          livingData.ecoBonus,
+          livingData.picture,
+          livingData.modelName
+        );
+        this.livings.push(living);
       }
 
-      for (const energy of jsonData.energies) {
-        this.energies.push(new Energy(
-          energy.id.toString(),
-          energy.name,
-          energy.description,
-          energy.price,
-          energy.gainPerSec,
-          energy.ecoBonus));
+      for (const commerceData of jsonData.commerces) {
+        console.log(commerceData);
+        const savedCommerce = this.getSavedElement(commerceData.id.toString(), 'commerce');
+        const commerce = savedCommerce ? savedCommerce : new Commerce(
+          0,
+          commerceData.id.toString(),
+          commerceData.name,
+          commerceData.description,
+          commerceData.price,
+          commerceData.gainPerSec,
+          commerceData.ecoBonus,
+          commerceData.picture,
+          commerceData.modelName
+        );
+        this.commerces.push(commerce);
       }
 
-      for (const improvement of jsonData.improvements) {
-        this.improvements.push(new Improvement(
-          improvement.id.toString(),
-          improvement.name,
-          improvement.desc,
-          improvement.price,
-          improvement.gainPerSec,
-          improvement.ecoBonus,
-          improvement.gainPerClick,
+      for (const energyData of jsonData.energies) {
+        const savedEnergy = this.getSavedElement(energyData.id.toString(), 'energy');
+        const energy = savedEnergy ? savedEnergy : new Energy(
+          energyData.id.toString(),
+          energyData.name,
+          energyData.description,
+          energyData.price,
+          energyData.gainPerSec,
+          energyData.ecoBonus
+        );
+        this.energies.push(energy);
+
+      }
+
+      for (const improvementData of jsonData.improvements) {
+        const savedImprovement = this.getSavedElement(improvementData.id.toString(), 'improvement');
+        const improvement = savedImprovement ? savedImprovement : new Improvement(
+          improvementData.id.toString(),
+          improvementData.name,
+          improvementData.desc,
+          improvementData.price,
+          improvementData.gainPerSec,
+          improvementData.ecoBonus,
+          improvementData.gainPerClick,
           false,
-          0));
+          0
+        );
+        this.improvements.push(improvement);
       }
     }
   });
@@ -428,6 +568,12 @@ export default defineComponent({
   pointer-events: none;
 }
 
+.menu{
+  opacity: 1;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
 .box {
   border: 1px solid rgb(0, 0, 0);
   border-radius: 10px;
@@ -435,6 +581,35 @@ export default defineComponent({
   background-color: #6e6e6e;
   border-bottom: #000;
   overflow: auto;
+}
+
+.btn-red {
+  text-align: center;
+  background-color: red;
+  color: white;
+}
+
+.spaced-button {
+  margin-right: 10px;
+}
+
+.tooltip {
+  position: relative;
+}
+
+.tooltip-indicator {
+  position: absolute;
+  top: 50%;
+  right: 0px;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  text-align: center;
+  border-radius: 50%;
+  background-color: #f0f0f0;
+  font-weight: bold;
+  font-size: 14px;
 }
 
 </style>

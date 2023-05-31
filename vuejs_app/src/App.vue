@@ -1,13 +1,13 @@
 <template>
-  <div id="app"><BabylonScene :city ="city" /></div>
+  <div id="app"><BabylonScene :city ="city" :living="living"/></div>
   <!-- To put the store in the right side we can make a button that shows or hides a div here :
     <div class="store"></div> --> 
-  <div id="store"><StoreMenu :city ="city"  /></div>
+  <div id="store"><StoreMenu :city ="city" @achat="handleEvent"  /></div>
   <!-- prog means progressiv -->
-  <div id="cash" >
+  <div id="cash">
     <ProgCash :value = "city.cashQuantity" />
   </div>
-  <div id="ecology ">
+  <div id="ecology">
     <ProgEcology :value = "city.ecoPourcentage"> </ProgEcology>
   </div>
 </template>
@@ -19,10 +19,11 @@ import ProgEcology from './components/ProgEcology.vue';
 import ProgCash from './components/ProgCash.vue';
 import StoreMenu from './components/StoreMenu.vue';
 import {City} from './classes/City';
+import {Living} from './classes/Living';
+
 
 export default defineComponent({
   name: 'App',
-  
   components: {
     BabylonScene,
     ProgEcology,
@@ -31,9 +32,16 @@ export default defineComponent({
   },
   data() {
     return {
-      city: new City("test",0, 100, 1, 0),
+      living: {},
+      city: new City("MyGreenWorld",0, 100, 1, 0),
     }
   },
+  methods: {
+    handleEvent(living :Living) {
+      this.living= living;
+    }
+   
+  }
 });
 </script>
 
@@ -55,7 +63,6 @@ export default defineComponent({
   background-position: center;
   box-sizing: border-box;
   
-
 }
 
 #store {
@@ -87,6 +94,10 @@ export default defineComponent({
     left: 50%;
     color: blueviolet;
 
+}
+
+::selection {
+  background-color: transparent;
 }
 
 </style>

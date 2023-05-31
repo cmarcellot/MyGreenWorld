@@ -23,7 +23,8 @@ export class Energy extends BuyableElement {
         desc : string,
         price : float, 
         gainPerSec : float,
-        ecoBonus : int){
+        ecoBonus : int
+       ){
         super(elementId,name, desc, price, gainPerSec,ecoBonus);
 
     }

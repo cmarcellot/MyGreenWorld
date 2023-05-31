@@ -93,12 +93,30 @@
         <div class="nav nav-item" v-show="showContent5">
           <p class="title-bloc">Ajouter argent</p>
           <div class="container">
+            <button class="btn spaced-button"
+              v-on:click="AddMoneyAdmin(city, 1000000)"> + 1 Million </button>
+            <button class="btn spaced-button"
+              v-on:click="AddMoneyAdmin(city, 1000000000)"> + 1 Billion </button>
             <button class="btn"
-              v-on:click="Add1000(city)"> + 1.000 </button>
+              v-on:click="AddMoneyAdmin(city, 1000000000000)"> + 1 Trillion </button>
+          </div>
+          <hr class="separator" />
+          <div class="container">
+            <button class="btn spaced-button"
+              v-on:click="AddMoneyAdmin(city, 1000000000000000)"> + 1 Quadrillion </button>
+            <button class="btn spaced-button"
+              v-on:click="AddMoneyAdmin(city, 1000000000000000000)"> + 1 Quintillion </button>
             <button class="btn"
-              v-on:click="Add10000(city)"> +10.000 </button>
+              v-on:click="AddMoneyAdmin(city, 1000000000000000000000)"> + 1 Sextillion </button>
+          </div>
+          <hr class="separator" />
+          <div class="container">
+            <button class="btn spaced-button"
+              v-on:click="AddMoneyAdmin(city, 1000000000000000000000000)"> + 1 Septillion </button>
+            <button class="btn spaced-button"
+              v-on:click="AddMoneyAdmin(city, 1000000000000000000000000000)"> + 1 Octillion </button>
             <button class="btn"
-              v-on:click="Add100000(city)"> + 100.000 </button>
+              v-on:click="AddMoneyAdmin(city, 1000000000000000000000000000000)"> + 1 Nonillion </button>
           </div>
         </div>
       </div>
@@ -225,19 +243,9 @@ export default defineComponent({
         this.$emit('achat', living);
       },
 
-      Add1000(city : City) {
+      AddMoneyAdmin(city : City, money : number) {
         this.playClickSound();
-        city.cashQuantity += 1000;
-      },
-
-      Add10000(city : City) {
-        this.playClickSound();
-        city.cashQuantity += 10000;
-      },
-
-      Add100000(city : City) {
-        this.playClickSound();
-        city.cashQuantity += 100000;
+        city.cashQuantity += money;
       },
 
       playClickSound() {
@@ -581,9 +589,8 @@ export default defineComponent({
   color: white;
 }
 
-.tooltip {
-  position: relative;
-}
+.spaced-button {
+  margin-right: 10px;
 
 .tooltip-indicator {
   position: absolute;

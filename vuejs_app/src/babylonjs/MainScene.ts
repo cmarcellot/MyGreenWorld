@@ -342,26 +342,26 @@ export class MainScene {
         
         switch (modelName) {
             case "CaravanBuilding.glb":
-                mainMesh.position = new Vector3(25, 0.1, -40);
+                mainMesh.position = new Vector3(-50, 0.1, -60);
                 mainMesh.scaling = new Vector3(0.25, 0.25, 0.25);
-                mainMesh.rotation = new Vector3(0, 0, 0);
+                mainMesh.rotation = new Vector3(0, 20, 0);
                 mainMesh.scaling.x *= -1;
                 break;
 
             case "CottageBuilding.glb":
-                mainMesh.position = new Vector3(-80, 0.1, 125);
+                mainMesh.position = new Vector3(-150, 0.1, -30);
                 mainMesh.scaling = new Vector3(2, 2, 2);
                 mainMesh.rotation = new Vector3(0, 0, 0);
                 mainMesh.scaling.x *= -1;
                 break;
             case "HouseBuilding.glb":
-                mainMesh.position = new Vector3(-120,0.1,-75);
+                mainMesh.position = new Vector3(-130, 0.1, -40);
                 mainMesh.scaling = new Vector3(0.1,0.1,0.1);
-                mainMesh.rotation = new Vector3(0, 0, 0);
+                mainMesh.rotation = new Vector3(0, 30, 0);
                 mainMesh.scaling.x *= -1;
                 break;
             case "ModernBuilding_1.glb":
-                mainMesh.position = new Vector3(-700,-0.55,-200);
+                mainMesh.position = new Vector3(-700,-0.55,-250);
                 mainMesh.scaling = new Vector3(5,5,5);
                 mainMesh.rotation = new Vector3(0, 0, 0);
                 mainMesh.scaling.x *= -1;
@@ -373,70 +373,70 @@ export class MainScene {
                 mainMesh.scaling.x *= -1;
                 break;
             case "ModernHouseBuilding.glb":
-                mainMesh.position = new Vector3(-150,-0.1,85);
+                mainMesh.position = new Vector3(-150,-0.1,-100);
                 mainMesh.scaling = new Vector3(3,3,3);
                 mainMesh.rotation = new Vector3(0,0,0);
                 mainMesh.scaling.x *= -1;
                 break;
             case "PalaceBuilding.glb":
-                mainMesh.position = new Vector3(75,0.1,150);
+                mainMesh.position = new Vector3(75,0.1,-150);
                 mainMesh.scaling = new Vector3(1.5,1.5,1.5);
-                mainMesh.rotation = new Vector3(0,0,0);
+                mainMesh.rotation = new Vector3(0,3,0);
                 mainMesh.scaling.x *= -1;
                 break;
             case "SkyscraperBuilding.glb":
-                mainMesh.position = new Vector3(100,0,-150);
+                mainMesh.position = new Vector3(150,0,0);
                 mainMesh.scaling = new Vector3(0.4,0.4,0.4);
                 mainMesh.rotation = new Vector3(0, 0, 0);
                 mainMesh.scaling.x *= -1;
                 break;
             case "SmallStore.glb":
-                mainMesh.position = new Vector3(80, 0.1, -30);
+                mainMesh.position = new Vector3(-150, 0.1, 25);
                 mainMesh.scaling = new Vector3(0.25, 0.25, 0.25);
-                mainMesh.rotation = new Vector3(0, 0, 0);
+                mainMesh.rotation = new Vector3(0, 2, 0);
                 mainMesh.scaling.x *= -1;
                 break;
 
             case "DIYStore.glb":
-                mainMesh.position = new Vector3(-40, 0.1, 75);
+                mainMesh.position = new Vector3(-177, 0.1, 70);
                 mainMesh.scaling = new Vector3(0.5, 0.5, 0.5);
-                mainMesh.rotation = new Vector3(0, 0, 0);
+                mainMesh.rotation = new Vector3(0, 5, 0);
                 mainMesh.scaling.x *= -1;
                 break;
             case "ClothingStore.glb":
-                mainMesh.position = new Vector3(-85,0.1,-25);
+                mainMesh.position = new Vector3(-177,0.1,125);
                 mainMesh.scaling = new Vector3(0.5,0.5,0.5);
-                mainMesh.rotation = new Vector3(0, 0, 0);
+                mainMesh.rotation = new Vector3(0, 5, 0);
                 mainMesh.scaling.x *= -1;
                 break;
             case "FastFood.glb":
-                mainMesh.position = new Vector3(-30,3,-75);
+                mainMesh.position = new Vector3(-100,3,110);
                 mainMesh.scaling = new Vector3(3,3,3);
-                mainMesh.rotation = new Vector3(0, 0, 0);
+                mainMesh.rotation = new Vector3(0, 4, 0);
                 mainMesh.scaling.x *= -1;
                 break;
             case "Hotel.glb":
-                mainMesh.position = new Vector3(20,0.1,-100);
+                mainMesh.position = new Vector3(0,0.1,-150);
                 mainMesh.scaling = new Vector3(2,2,2);
                 mainMesh.rotation = new Vector3(0, 0, 0);
                 mainMesh.scaling.x *= -1;
                 break;
             case "Supermarket.glb":
-                mainMesh.position = new Vector3(-105,0.1,30);
+                mainMesh.position = new Vector3(-40,0.1,150);
                 mainMesh.scaling = new Vector3(0.5,0.5,0.5);
-                mainMesh.rotation = new Vector3(0,Math.PI*1.5,0);
+                mainMesh.rotation = new Vector3(0,6,0);
                 mainMesh.scaling.x *= -1;
                 break;
             case "CarStore.glb":
-                mainMesh.position = new Vector3(20,0.1,100);
+                mainMesh.position = new Vector3(20,0.1,150);
                 mainMesh.scaling = new Vector3(0.5,0.5,0.5);
-                mainMesh.rotation = new Vector3(0,Math.PI/2,0);
+                mainMesh.rotation = new Vector3(0,6,0);
                 mainMesh.scaling.x *= -1;
                 break;
             case "BigStore.glb":
-                mainMesh.position = new Vector3(100,2.5,30);
+                mainMesh.position = new Vector3(150,2.5,200);
                 mainMesh.scaling = new Vector3(1.2,1.2,1.2);
-                mainMesh.rotation = new Vector3(0, 0, 0);
+                mainMesh.rotation = new Vector3(0, 3, 0);
                 mainMesh.scaling.x *= -1;
                 break;
         }

@@ -11,7 +11,6 @@ export class Living extends BuyableElement {
     boughtNumber : int;
     modelName : string;
     picture : string;
-
      /** the constructor method calls the super() method : constructor of the parent class BuyableElement
      * Arguments
      * 
@@ -23,7 +22,6 @@ export class Living extends BuyableElement {
     ecoBonus : the ecological bonus provided by the element
     boughtNumber: number of livings bought by the player
     */
-
 
     constructor(boughtNumber : int, elementId: string, name : string, desc : string, price : float, gainPerSec : float, ecoBonus : int, picture : string, modelName : string){
         super(elementId, name, desc, price, gainPerSec, ecoBonus);

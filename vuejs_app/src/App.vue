@@ -24,7 +24,6 @@ import {Living} from './classes/Living';
 
 export default defineComponent({
   name: 'App',
-
   components: {
     BabylonScene,
     ProgEcology,
@@ -64,7 +63,6 @@ export default defineComponent({
   background-position: center;
   box-sizing: border-box;
   
-
 }
 
 #store {

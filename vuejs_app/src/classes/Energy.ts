@@ -6,8 +6,6 @@ import {BuyableElement} from "./BuyableElement";
  * 
 */
 export class Energy extends BuyableElement {
-
-
     // the constructor method calls the super() method : constructor of the parent class BuyableElement
     
     /** 
@@ -28,7 +26,6 @@ export class Energy extends BuyableElement {
         ecoBonus : int
        ){
         super(elementId,name, desc, price, gainPerSec,ecoBonus);
-
 
     }
 }

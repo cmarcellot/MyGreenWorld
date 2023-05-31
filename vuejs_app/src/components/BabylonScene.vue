@@ -18,6 +18,7 @@ import {Living} from '../classes/Living';
 import { sceneUboDeclaration } from '@babylonjs/core/Shaders/ShadersInclude/sceneUboDeclaration';
 
 
+
 export default defineComponent({
   name: 'BabylonScene',
   data() {

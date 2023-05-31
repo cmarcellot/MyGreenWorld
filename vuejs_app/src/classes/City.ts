@@ -63,8 +63,8 @@ export class City {
 
 
     buyLivingOrCommerce(livingOrCommerce: any) {
-      if (this.cashQuantity >= livingOrCommerce.price) {
-        this.cashQuantity -= livingOrCommerce.price;
+      if (this.cashQuantity >= Math.ceil(livingOrCommerce.price * Math.pow(1.15, livingOrCommerce.boughtNumber))) {
+        this.cashQuantity -= Math.ceil(livingOrCommerce.price * Math.pow(1.15, livingOrCommerce.boughtNumber));
         console.log('Produit acheté avec succès !');
         console.log('modif' + this.cashQuantity);
 

@@ -33,7 +33,7 @@
           v-on:click="BuyLivingOrCommerce(city, livingOrCommerce)" :class="{ 'disabled': city.cashQuantity < Math.ceil(livingOrCommerce.price * Math.pow(1.15, livingOrCommerce.boughtNumber)) }"> Acheter </button>
         </div>
 
-        <div class="nav nav-bloc" @click="toggleContent2">
+        <!-- <div class="nav nav-bloc" @click="toggleContent2">
           <p class="title-item">CENTRALES ÉLECTRIQUES</p>      
         </div>
         <div v-for="(central, index) in sortedEnergies(city)" :key="index" class="nav nav-item" v-show="showContent2">
@@ -50,7 +50,7 @@
           </div>
           <button class="btn"
           v-on:click="BuyEnergy(city, central)" :class="{ 'disabled': city.cashQuantity < central.price }"> Acheter </button>
-        </div>
+        </div> -->
 
         <div class="nav nav-bloc" @click="toggleContent3">
           <p class="title-item">AMÉLIORATIONS</p>      

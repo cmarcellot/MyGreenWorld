@@ -593,6 +593,10 @@ export default defineComponent({
   margin-right: 10px;
 }
 
+.tooltip {
+  position: relative;
+}
+
 .tooltip-indicator {
   position: absolute;
   top: 50%;

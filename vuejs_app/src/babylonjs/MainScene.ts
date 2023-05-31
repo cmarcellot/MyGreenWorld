@@ -351,13 +351,13 @@ export class MainScene {
             case "CottageBuilding.glb":
                 mainMesh.position = new Vector3(-80, 0.1, 125);
                 mainMesh.scaling = new Vector3(2, 2, 2);
-                mainMesh.rotation = new Vector3(0, 0, 0);
+                mainMesh.rotation = new Vector3(0, Math.PI/1, 0);
                 mainMesh.scaling.x *= -1;
                 break;
             case "HouseBuilding.glb":
                 mainMesh.position = new Vector3(-120,0.1,-75);
                 mainMesh.scaling = new Vector3(0.1,0.1,0.1);
-                mainMesh.rotation = new Vector3(0, 0, 0);
+                mainMesh.rotation = new Vector3(0, -(Math.PI/2), 0);
                 mainMesh.scaling.x *= -1;
                 break;
             case "ModernBuilding_1.glb":
@@ -393,7 +393,7 @@ export class MainScene {
             case "SmallStore.glb":
                 mainMesh.position = new Vector3(80, 0.1, -30);
                 mainMesh.scaling = new Vector3(0.25, 0.25, 0.25);
-                mainMesh.rotation = new Vector3(0, 0, 0);
+                mainMesh.rotation = new Vector3(0, -(Math.PI/2), 0);
                 mainMesh.scaling.x *= -1;
                 break;
 
@@ -406,19 +406,19 @@ export class MainScene {
             case "ClothingStore.glb":
                 mainMesh.position = new Vector3(-85,0.1,-25);
                 mainMesh.scaling = new Vector3(0.5,0.5,0.5);
-                mainMesh.rotation = new Vector3(0, 0, 0);
+                mainMesh.rotation = new Vector3(0, -(Math.PI/2), 0);
                 mainMesh.scaling.x *= -1;
                 break;
             case "FastFood.glb":
                 mainMesh.position = new Vector3(-30,3,-75);
                 mainMesh.scaling = new Vector3(3,3,3);
-                mainMesh.rotation = new Vector3(0, 0, 0);
+                mainMesh.rotation = new Vector3(0, Math.PI/2, 0);
                 mainMesh.scaling.x *= -1;
                 break;
             case "Hotel.glb":
                 mainMesh.position = new Vector3(20,0.1,-100);
                 mainMesh.scaling = new Vector3(2,2,2);
-                mainMesh.rotation = new Vector3(0, 0, 0);
+                mainMesh.rotation = new Vector3(0, Math.PI/2, 0);
                 mainMesh.scaling.x *= -1;
                 break;
             case "Supermarket.glb":
@@ -430,13 +430,13 @@ export class MainScene {
             case "CarStore.glb":
                 mainMesh.position = new Vector3(20,0.1,100);
                 mainMesh.scaling = new Vector3(0.5,0.5,0.5);
-                mainMesh.rotation = new Vector3(0,Math.PI/2,0);
+                mainMesh.rotation = new Vector3(0,0,0);
                 mainMesh.scaling.x *= -1;
                 break;
             case "BigStore.glb":
                 mainMesh.position = new Vector3(100,2.5,30);
                 mainMesh.scaling = new Vector3(1.2,1.2,1.2);
-                mainMesh.rotation = new Vector3(0, 0, 0);
+                mainMesh.rotation = new Vector3(0, -(Math.PI/2), 0);
                 mainMesh.scaling.x *= -1;
                 break;
         }

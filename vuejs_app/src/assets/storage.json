@@ -6,7 +6,7 @@
             "description": "Caravane description",
             "price": 15.00,
             "gainPerSec": 0.1,
-            "ecoBonus": -10,
+            "ecoBonus": 1,
             "picture": "pic_Caravan.jpg",
             "modelName": "CaravanBuilding.glb"
         },
@@ -16,7 +16,7 @@
             "description": "Maison simple description",
             "price": 1100.00,
             "gainPerSec": 8.00,
-            "ecoBonus": -5,
+            "ecoBonus": -2,
             "picture": "pic_LittleHouse.jpg",
             "modelName": "HouseBuilding.glb"
         },
@@ -26,7 +26,7 @@
             "description": "Appartements description",
             "price": 130000.00,
             "gainPerSec": 260.00,
-            "ecoBonus": -2,
+            "ecoBonus": -6,
             "picture": "pic_Building1.jpg",
             "modelName": "ModernBuilding_1.glb"
         },
@@ -36,7 +36,7 @@
             "description": "Maison avec étages description",
             "price": 20000000.00,
             "gainPerSec": 7800.00,
-            "ecoBonus": -1,
+            "ecoBonus": -3,
             "picture": "pic_BigHouse.jpg",
             "modelName": "CottageBuilding.glb"
         },
@@ -46,7 +46,7 @@
             "description": "Villa description",
             "price": 5100000000.00,
             "gainPerSec": 260000.00,
-            "ecoBonus": 1,
+            "ecoBonus": -5,
             "picture": "pic_Villa.jpg",
             "modelName": "ModernHouseBuilding.glb"
         },
@@ -56,7 +56,7 @@
             "description": "Manoir description",
             "price": 1000000000000.00,
             "gainPerSec": 10000000.00,
-            "ecoBonus": 2,
+            "ecoBonus": 3,
             "picture": "pic_Mansion.jpg",
             "modelName": "PalaceBuilding.glb"
         },
@@ -66,7 +66,7 @@
             "description": "Tour d’immeuble description",
             "price": 170000000000000.00,
             "gainPerSec": 430000000.00,
-            "ecoBonus": 5,
+            "ecoBonus": -10,
             "picture": "pic_Building2.jpg",
             "modelName": "ModernBuilding_2.glb"
         },
@@ -76,7 +76,7 @@
             "description": "Gratte-ciel description",
             "price": 26000000000000000.00,
             "gainPerSec": 21000000000.00,
-            "ecoBonus": 10,
+            "ecoBonus": -15,
             "picture": "pic_Skyscraper.jpg",
             "modelName": "SkyscraperBuilding.glb"
         }
@@ -88,7 +88,7 @@
             "description": "Marché description",
             "price": 100.00,
             "gainPerSec": 1.0,
-            "ecoBonus": -10,
+            "ecoBonus": 5,
             "picture": "pic_SmallStore.jpg",
             "modelName": "SmallStore.glb"
         },
@@ -98,7 +98,7 @@
             "description": "Magasin de bricolage description",
             "price": 12000.00,
             "gainPerSec": 47.00,
-            "ecoBonus": -5,
+            "ecoBonus": 2,
             "picture": "pic_DIYStore.jpg",
             "modelName": "DIYStore.glb"
         },
@@ -108,7 +108,7 @@
             "description": "Magasin de vêtements description",
             "price": 1400000.00,
             "gainPerSec": 1400.00,
-            "ecoBonus": -2,
+            "ecoBonus": -4,
             "picture": "pic_ClothingStore.jpg",
             "modelName": "ClothingStore.glb"
         },
@@ -118,7 +118,7 @@
             "description": "FastFood description",
             "price": 330000000.00,
             "gainPerSec": 44000.00,
-            "ecoBonus": -1,
+            "ecoBonus": -5,
             "picture": "pic_FastFood.jpg",
             "modelName": "FastFood.glb"
         },
@@ -148,7 +148,7 @@
             "description": "Concessionnaire description",
             "price": 2100000000000000.00,
             "gainPerSec": 2900000000.00,
-            "ecoBonus": 5,
+            "ecoBonus": -10,
             "picture": "pic_CarStore.jpg",
             "modelName": "CarStore.glb"
         },
@@ -158,7 +158,7 @@
             "description": "Centre commercial description",
             "price": 310000000000000000.00,
             "gainPerSec": 150000000000.00,
-            "ecoBonus": 10,
+            "ecoBonus": -15,
             "picture": "pic_BigStore.jpg",
             "modelName": "BigStore.glb"
         }
